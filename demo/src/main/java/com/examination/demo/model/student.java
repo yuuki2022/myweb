@@ -1,16 +1,16 @@
 package com.examination.demo.model;
 
 
-public class student {
-    String userName;
+public class Student {
+    String studentName;
     String saltPassword;
     String email;
     Integer isActive;
-    public String getUserName() {
-        return userName;
+    public String getStudentName() {
+        return studentName;
     }
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
     }
     public String getSaltPassword() {
         return saltPassword;

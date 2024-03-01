@@ -7,9 +7,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.examination.demo.dataobject.AdminDO;
 import com.examination.demo.model.Admin;
 import com.examination.demo.model.Result;
 import com.examination.demo.service.AdminService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class AdminControl {
@@ -68,4 +71,12 @@ public class AdminControl {
         result.setData(admin);
         return mapper.writeValueAsString(result);
     }
+
+    @GetMapping("/getAdmins")
+    @ResponseBody
+    public String getMethodName() {
+        adminService.getAllAdmins();
+        return "getAdmins";
+    }
+    
 }
