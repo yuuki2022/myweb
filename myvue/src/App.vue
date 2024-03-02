@@ -15,8 +15,12 @@ export default {
 
 <style>
 body{
-  width: 100%;
-  height: 100%;
+  /*取消body标签的默认样式*/
+  margin: 0;
+  padding: 0;
+  /*body的大小就是浏览器的全屏*/
+  width: 100vh;
+  height: 80vh;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -26,6 +30,6 @@ body{
   color: #2c3e50;
   margin:auto;
   width:100%;
-  
+  height: 100%;
 }
 </style>

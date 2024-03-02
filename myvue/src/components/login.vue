@@ -1,9 +1,9 @@
 <template>
   <div id="login">
     <h1>考试系统登录</h1>
-    <form method="post">
-      <input type="text" value="账号" id="account">
-      <input type="password" value="密码" id="password">
+    <form @submit.prevent="submitForm">
+      <input type="text" placeholder="账号" id="account" v-model="account">
+      <input type="password" placeholder="密码" id="password" v-model="password">
       <button type="submit">确认</button>
       <p>密码重设</p>
     </form>
@@ -13,6 +13,35 @@
 <script>
 export default {
   name: 'TestComponent',
+  data() {
+    return {
+      account: '',
+      password: ''
+    }
+  },
+  methods: {
+    submitForm() {
+    fetch('http://localhost:8081/authentication', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        adminName: this.account,
+        saltPassword: this.password
+      })
+    })
+    .then(res => res.json())
+    .then(res => {
+      console.log(res)
+      if (res.code === '200') {
+        alert(res['message'])
+      } else {
+        alert(res['message'])
+      }
+    })
+  }
+  }
 }
 </script>
 
@@ -30,35 +59,64 @@ h1{
 }
 
 #login{ 
-  top: 50%;
+  margin-top: 30%;
+  margin-left: 70%;
+  width: 50.667%;
+  height: 45.556%;
+
 }
 form {
-  width: 41.667%;
-  height: 80.556%;
+  width: 90.667%;
+  height: 90.556%;
   border-radius: 50px;
   margin: 0 auto;
-  border: 3px;
+  border: 3px solid #000;
   /*所有元素锤子居中*/
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 0%;
-  
+  background-color:  #F5F5F3;
+
 }
 input {
-  width: 35%;
-  height: 85%;
+  width: 85%;
+  height: 15%;
   border-radius: 20px;
   border: 1px solid #000;
   display: block;
   text-align: center;
+  /*设置字体大小 */
+  font-size: 20px;
 }
 #account{
   margin-bottom: 3%;
 }
 #password{
   margin-bottom: 3%;
+}
+button {
+  width: 85%;
+  height: 15%;
+  border-radius: 20px;
+  border: 1px solid #000;
+  display: block;
+  text-align: center;
+  /*设置字体大小 */
+  font-size: 20px;
+  background-color: #D9D9D9;
+  width: 20%;
+}
+button:hover{
+  background-color: #BEBEBE;
+}
+button:active{
+  background-color: #A9A9A9;
+}
+
+p{
+  margin-top: 3%;
 }
 
 </style>

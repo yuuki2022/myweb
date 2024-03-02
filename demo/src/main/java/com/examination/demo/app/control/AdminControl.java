@@ -2,16 +2,17 @@ package com.examination.demo.app.control;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.examination.demo.dataobject.AdminDO;
+import com.examination.demo.common.Constant;
 import com.examination.demo.model.Admin;
 import com.examination.demo.model.Result;
 import com.examination.demo.service.AdminService;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @Controller
@@ -21,6 +22,7 @@ public class AdminControl {
     AdminService adminService;
 
     @GetMapping("/index")
+    @CrossOrigin
     @ResponseBody
     public String index() {
         String a = "Hello world";
@@ -28,27 +30,36 @@ public class AdminControl {
     }
 
     @PostMapping("/authentication")
+    @CrossOrigin
     @ResponseBody
     public String postMethodName(@RequestBody String json) throws Exception{
-        System.out.println(json);
         ObjectMapper mapper = new ObjectMapper();
         Admin admin = null;
+        Result<Admin> result = new Result<>();
         
         admin = mapper.readValue(json, Admin.class);
         
         Admin adminTemp = adminService.login(admin.getAdminName(), admin.getSaltPassword());
-        if(adminTemp == null){
-            return "用户名或密码错误";
-        }
         
-        Result<Admin> result = new Result<>();
-        result.setCode("200");
+        if(adminTemp == null){
+            result.setCode(Constant.CODE_401);
+            result.setMessage("用户名或密码错误");
+
+            return mapper.writeValueAsString(result);
+        }
+
+        adminTemp.setSaltPassword("");
+        
+        
+        result.setCode(Constant.CODE_200);
         result.setMessage("登录成功");
         result.setData(adminTemp);
+        System.out.println(result.toString());
         return mapper.writeValueAsString(result);
     }
 
     @PostMapping("/register")
+    @CrossOrigin
     @ResponseBody
     public String register(@RequestBody String json) throws Exception{
         System.out.println(json);
@@ -72,11 +83,6 @@ public class AdminControl {
         return mapper.writeValueAsString(result);
     }
 
-    @GetMapping("/getAdmins")
-    @ResponseBody
-    public String getMethodName() {
-        adminService.getAllAdmins();
-        return "getAdmins";
-    }
+
     
 }

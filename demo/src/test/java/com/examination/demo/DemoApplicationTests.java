@@ -17,10 +17,5 @@ class DemoApplicationTests {
 	void contextLoads() {
 	}
 
-	@Test
-	public void testDatabase(){
-		System.out.println("Test database");
-        adminDAO.selectList(null).forEach(System.out::println);
-	}
-
+	
 }
