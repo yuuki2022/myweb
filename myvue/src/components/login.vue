@@ -2,10 +2,13 @@
   <div id="login">
     <h1>考试系统登录</h1>
     <form @submit.prevent="submitForm">
+      <br>
       <input type="text" placeholder="账号" id="account" v-model="account">
       <input type="password" placeholder="密码" id="password" v-model="password">
-      <button type="submit">确认</button>
-      <p>密码重设</p>
+      <br>
+      <button type="submit">登录</button>
+      <br>
+      <p><a href="">重设密码</a></p>
     </form>
   </div>
 </template>
@@ -59,8 +62,8 @@ h1{
 }
 
 #login{ 
-  margin-top: 30%;
-  margin-left: 70%;
+  margin-top: 20%;
+  margin-left: 72%;
   width: 50.667%;
   height: 45.556%;
 
@@ -68,7 +71,7 @@ h1{
 form {
   width: 90.667%;
   height: 90.556%;
-  border-radius: 50px;
+  border-radius: 30px;
   margin: 0 auto;
   border: 3px solid #000;
   /*所有元素锤子居中*/
@@ -83,7 +86,7 @@ form {
 input {
   width: 85%;
   height: 15%;
-  border-radius: 20px;
+  border-radius: 10px;
   border: 1px solid #000;
   display: block;
   text-align: center;
