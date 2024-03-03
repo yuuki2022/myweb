@@ -77,8 +77,8 @@ public class StudentServiceImpl implements StudentService{
         studentDAO.insertStudent(new StudentDO(studentId, studentName, saltPassword));
     }
 
-    public void updatePassword(String studentName, String saltPassword) {
-        studentDAO.updatePassword(studentName, saltPassword);
+    public void updatePassword(String studentId, String saltPassword) {
+        studentDAO.updatePassword(studentId, saltPassword);
     }
 
     public List<Student> getAllStudent(){

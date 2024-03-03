@@ -18,8 +18,9 @@ public interface StudentDAO{
     @Select("select student_id as studentId, student_name as studentName, salt_password as saltPassword from student where student_id = #{studentId}")
     StudentDO getStudentById(String studentId);
 
-    @Select("select * from student where student_name = #{studentName}")
+    @Select("select * from student where student_name = #{studentName} limit 1")
     StudentDO getStudentByName(String studentName);
+
 
     @Insert("insert into student(student_id, student_name, salt_password) values(#{studentId}, #{studentName}, #{saltPassword})")
     void insertStudent(StudentDO studentDO);

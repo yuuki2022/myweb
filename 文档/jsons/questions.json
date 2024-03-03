@@ -1,655 +1,658 @@
 {
-    "questions": [
-      {
-        "questionId": 63,
-        "courseId": 1,
-        "content": "Internet采用了目前在分布式网络中最流行的()模式，大大增强了网络信息服务的灵活性。",
-        "answer": [
-          "主机/终端 ",
-          "拨号PPP",
-          "客户/服务器",
-          "仿真终端 "
-        ],
-        "rightAnswer": null,
-        "hard": 1
-      },
-      {
-        "questionId": 82,
-        "courseId": 1,
-        "content": "ADSL的下行速率可达()",
-        "answer": [
-          "2Mbps ",
-          "64Kbps ",
-          "144Kbps ",
-          "8Mbps"
-        ],
-        "rightAnswer": null,
-        "hard": 1
-      },
-      {
-        "questionId": 23,
-        "courseId": 1,
-        "content": "下列哪个不是电子邮件服务的优点()",
-        "answer": [
-          "费用低廉 ",
-          "时实性强",
-          "传输信息量大",
-          "方便迅捷 "
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 50,
-        "courseId": 1,
-        "content": "环型拓扑最适合的传输介质是()",
-        "answer": [
-          "同轴电缆 ",
-          "光纤 ",
-          "双绞线 ",
-          "无线电"
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 35,
-        "courseId": 1,
-        "content": "采用100BASE-T物理层媒体规范，其数据速率及每段长度分别为()",
-        "answer": [
-          "100Mbps, 200m ",
-          "100Mbps, 100m",
-          "200Mbps, 200m ",
-          "200Mbps, 100m"
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 34,
-        "courseId": 1,
-        "content": "在Internet中，ISP的接入方式有帧中继方式、专线方式及()",
-        "answer": [
-          "广域网连接方式",
-          "局域网连接方式 ",
-          "ISDN方式 ",
-          "仿真终端方式"
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 77,
-        "courseId": 1,
-        "content": "()服务用来确认网络中信息传送的源结点与目的结点的用户身份是否真实",
-        "answer": [
-          "防抵赖 ",
-          "数据完整性 ",
-          "认证 ",
-          "访问控制"
-        ],
-        "rightAnswer": null,
-        "hard": 1
-      },
-      {
-        "questionId": 67,
-        "courseId": 1,
-        "content": "在以下几种传输媒体中，哪种传输速率最高()",
-        "answer": [
-          "通信卫星",
-          "光纤 ",
-          "同轴电缆 ",
-          "双绞线 "
-        ],
-        "rightAnswer": null,
-        "hard": 1
-      },
-      {
-        "questionId": 10,
-        "courseId": 1,
-        "content": "两个中继器连接的10BASE2网络结构中网络最长布线长度为()。",
-        "answer": [
-          "740m ",
-          "1500m",
-          "555m ",
-          "2000m "
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 48,
-        "courseId": 1,
-        "content": "下列不是TC/PIP协议层次的是()",
-        "answer": [
-          "会话层 ",
-          "互联网层",
-          "物理层 ",
-          "应用层"
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 30,
-        "courseId": 1,
-        "content": "因特网的起源可追溯到它的前身()",
-        "answer": [
-          "ARPANET ",
-          "DECnet",
-          "NSFNET ",
-          "Ethernet"
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 44,
-        "courseId": 1,
-        "content": "以综合化和高速化为最主要特点的计算机网络是()",
-        "answer": [
-          "第四代计算机网络",
-          "第一代计算机网络 ",
-          "第二代计算机网络",
-          "第三代计算机网络 "
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 43,
-        "courseId": 1,
-        "content": "OSI/RM产生之后开始的计算机网络称为()",
-        "answer": [
-          "第一代计算机网络 ",
-          "第三代计算机网络 ",
-          "第二代计算机网络",
-          "第四代计算机网络"
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 1,
-        "courseId": 1,
-        "content": "Internet中发送邮件协议是()。",
-        "answer": [
-          "POP",
-          "HTTP　 ",
-          "SMTP　",
-          "FTP "
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 90,
-        "courseId": 1,
-        "content": "下列协议中不属于应用层协议的是()。",
-        "answer": [
-          "ICMP ",
-          "TELNET ",
-          "FTP",
-          "SMTP "
-        ],
-        "rightAnswer": null,
-        "hard": 2
-      },
-      {
-        "questionId": 47,
-        "courseId": 1,
-        "content": "物理层的重要特性不包括()",
-        "answer": [
-          "功能特性",
-          "电气特性 ",
-          "结构特性",
-          "机械特性 "
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 25,
-        "courseId": 1,
-        "content": "下列哪个不是电子邮件系统提供的服务功能：()",
-        "answer": [
-          "帐号、邮箱管理",
-          "创建与发送电子邮件 ",
-          "通知电子邮件到达 ",
-          "接收电子邮件"
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 76,
-        "courseId": 1,
-        "content": "IP地址能够唯一地确定Internet上每台计算机与每个用户的()",
-        "answer": [
-          "网络位置 ",
-          "时间 ",
-          "费用",
-          "距离 "
-        ],
-        "rightAnswer": null,
-        "hard": 1
-      },
-      {
-        "questionId": 26,
-        "courseId": 1,
-        "content": "完成远程登录的TCP/IP协议是：()",
-        "answer": [
-          "TELNET",
-          "SMTP ",
-          "FTP ",
-          "SNMP "
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 11,
-        "courseId": 1,
-        "content": "下列设备中，可隔绝广播风暴的是()。",
-        "answer": [
-          "网桥 ",
-          "路由器",
-          "交换器 ",
-          "MODEM "
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 24,
-        "courseId": 1,
-        "content": "下列哪个是正确的电子邮件地址：()",
-        "answer": [
-          "wangxing、inhe、net",
-          "inhe、net@wangxing ",
-          "inhe、net、wangxing ",
-          "wangxing@inhe、net"
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 53,
-        "courseId": 1,
-        "content": "传送速率单位“b/s”代表()",
-        "answer": [
-          "billion per second",
-          "bytes per second ",
-          "baud per second ",
-          "bits per second"
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 58,
-        "courseId": 1,
-        "content": "下列不属于广域网的是()",
-        "answer": [
-          "以太网 ",
-          "X、25分组交换公用数据网",
-          "ISDN",
-          "电话网 "
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 4,
-        "courseId": 1,
-        "content": "传输速率为()的以太网称为传统以太网",
-        "answer": [
-          "100M bps ",
-          "1M bps ",
-          "1000M bps",
-          "10M bps"
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 54,
-        "courseId": 1,
-        "content": "下列不是光缆的特点是()",
-        "answer": [
-          "抗雷电和电磁干扰性能好",
-          "适合远距离传输 ",
-          "保密性差",
-          "传输损耗小 "
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 12,
-        "courseId": 1,
-        "content": "关于数据交换，下列叙述不正确的是()",
-        "answer": [
-          "分组交换比报文交换具有更好的网络响应速度；",
-          "分组交换有存储转发过程；",
-          "报文交换无存储转发过程；",
-          "电路交换是面向连接的；"
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 74,
-        "courseId": 1,
-        "content": "如果一台Netware节点主机要与SNA网中的一台大型机通信，那么用来互联Netware与SNA的设备应该选择()",
-        "answer": [
-          "网桥 ",
-          "路由器 ",
-          "中继器",
-          "网关 "
-        ],
-        "rightAnswer": null,
-        "hard": 1
-      },
-      {
-        "questionId": 3,
-        "courseId": 1,
-        "content": "早期的计算机网络是由()组成系统。",
-        "answer": [
-          "PC机-通信线路-PC机",
-          "终端-通信线路-终端",
-          "计算机-通信线路-终端",
-          "计算机-通信线路-计算机"
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 38,
-        "courseId": 1,
-        "content": "Internet所采用的远程登录服务协议为()",
-        "answer": [
-          "Telnet ",
-          "R-Login",
-          "FTP",
-          "Remote-Login "
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 78,
-        "courseId": 1,
-        "content": "在OSI参考模型的层次中，()的数据传送单位是分组",
-        "answer": [
-          "数据链路层 ",
-          "网络层 ",
-          "运输层",
-          "物理层 "
-        ],
-        "rightAnswer": null,
-        "hard": 1
-      },
-      {
-        "questionId": 95,
-        "courseId": 1,
-        "content": "中心结点出现故障造成全网瘫痪的网络是()",
-        "answer": [
-          " 总线 ",
-          " 球型",
-          " 星型 ",
-          " 树型 "
-        ],
-        "rightAnswer": null,
-        "hard": 2
-      },
-      {
-        "questionId": 40,
-        "courseId": 1,
-        "content": "完成文件传输服务的TCP/IP协议是()",
-        "answer": [
-          "SNMP ",
-          "SMTP ",
-          "FTP",
-          "Telnet"
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 61,
-        "courseId": 1,
-        "content": "IP协议提供的服务类型是()",
-        "answer": [
-          "无连接的数据报服务",
-          "面向连接的数据报服务 ",
-          "无连接的虚电路服务",
-          "面向连接的虚电路服务 "
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 92,
-        "courseId": 1,
-        "content": "对局域网来说，网络控制的核心是()",
-        "answer": [
-          "工作站 ",
-          "网络互连设备",
-          "网络服务器 ",
-          "网卡 "
-        ],
-        "rightAnswer": null,
-        "hard": 2
-      },
-      {
-        "questionId": 33,
-        "courseId": 1,
-        "content": "在TCP/IP体系结构中，TCP和IP所提供的服务层次分别为()",
-        "answer": [
-          "应用层和运输层 ",
-          "链路层和物理层",
-          "运输层和网络层",
-          "网络层和链路层 "
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 96,
-        "courseId": 1,
-        "content": "在总线型拓扑结构网络中，每次可传输信号的设备数目为()",
-        "answer": [
-          "三个 ",
-          "一个 ",
-          "任意多个",
-          "两个 "
-        ],
-        "rightAnswer": null,
-        "hard": 2
-      },
-      {
-        "questionId": 39,
-        "courseId": 1,
-        "content": "每一个Web页面，包括主页都有一个唯一的地址，通常称该地址为()",
-        "answer": [
-          "Web页面地址 ",
-          "统一资源定位器URL",
-          "主页地址",
-          "网页搜索地址 "
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 14,
-        "courseId": 1,
-        "content": "路由选择是()的功能。",
-        "answer": [
-          "传输层 ",
-          "应用层 ",
-          "数据链路层",
-          "网络层 "
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 17,
-        "courseId": 1,
-        "content": "电子邮件能传送的信息()。",
-        "answer": [
-          "只能是文本格式的文件",
-          "是文字、声音和图形图像信息",
-          "是压缩的文字和图像信息 ",
-          "是标准ASCII字符 "
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 20,
-        "courseId": 1,
-        "content": "下列那个不是局域网的特点()",
-        "answer": [
-          "所有的站共享较高的总带宽",
-          "较低的时延和较低的误码率",
-          "各站为主从关系",
-          "为一个单位所拥有，且地理范围和站点数目均有限"
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 28,
-        "courseId": 1,
-        "content": "如果访问Internet时只能使用IP地址，是因为没有配置TCP/IP的()",
-        "answer": [
-          "IP地址 ",
-          "子网掩码",
-          "DNS",
-          "默认网关 "
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 41,
-        "courseId": 1,
-        "content": "面向终端的计算机网络称为()",
-        "answer": [
-          "第二代计算机网络",
-          "第一代计算机网络 ",
-          "第四代计算机网络",
-          "第三代计算机网络 "
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 32,
-        "courseId": 1,
-        "content": "从互联网络的结构看，网桥属于DCE级的端到端的连接，从协议层次看，网桥工作于()",
-        "answer": [
-          "物理层范畴 ",
-          "网络层范畴",
-          "传输层范畴",
-          "链路层范畴"
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 81,
-        "courseId": 1,
-        "content": "RS-232-C是()接口规范。",
-        "answer": [
-          "数据链路层 ",
-          "网络层 ",
-          "运输层",
-          "物理层 "
-        ],
-        "rightAnswer": null,
-        "hard": 1
-      },
-      {
-        "questionId": 2,
-        "courseId": 1,
-        "content": "在 OSI模型中，第 N层和其上的 N＋ l层的关系是()",
-        "answer": [
-          "N层为N十1层提供服务",
-          "N层对N＋1层没有任何作用",
-          "N十1层将从N层接收的信息增加了一个头",
-          "N层利用N十1层提供的服务"
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 69,
-        "courseId": 1,
-        "content": "集线器是工作在()的设备",
-        "answer": [
-          "网络层 ",
-          "运输层",
-          "链路层 ",
-          "物理层 "
-        ],
-        "rightAnswer": null,
-        "hard": 1
-      },
-      {
-        "questionId": 80,
-        "courseId": 1,
-        "content": "无线信道的传输媒体不包括()",
-        "answer": [
-          "红外线 ",
-          "微波 ",
-          "光纤",
-          "激光 "
-        ],
-        "rightAnswer": null,
-        "hard": 1
-      },
-      {
-        "questionId": 36,
-        "courseId": 1,
-        "content": "WWW网页文件的编写语言及相应的支持协议分别为()",
-        "answer": [
-          "HTML，HTPT ",
-          "HTTL，HTTP",
-          "以上均不对",
-          "HTML，HTTP "
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 55,
-        "courseId": 1,
-        "content": "LAN是的英文缩写()",
-        "answer": [
-          "网络操作系统 ",
-          "网络 ",
-          "实时操作系统",
-          "局域网 "
-        ],
-        "rightAnswer": null,
-        "hard": 0
-      },
-      {
-        "questionId": 84,
-        "courseId": 1,
-        "content": "综合业务数字网的缩写是()",
-        "answer": [
-          "ISDN ",
-          "PSDN ",
-          "ADSL",
-          "DDN "
-        ],
-        "rightAnswer": null,
-        "hard": 2
-      }
-    ],
-    "time": 30 ///倒计时(分钟)
-  }
+  "studentId": "1kYNJPW6XE",
+  "course_id": 1,
+  "studentName": "白宇",
+  "questions": [
+    {
+      "questionId": 45,
+      "courseId": 1,
+      "content": "网络体系结构不包括()",
+      "answer": [
+        "物理结构 ",
+        "逻辑结构 ",
+        "功能结构 ",
+        "软件结构"
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 7,
+      "courseId": 1,
+      "content": "在OSI参考模型中，负责提供可靠的端到端数据传输的是()的功能。",
+      "answer": [
+        "应用层 ",
+        "网络层 ",
+        "数据链路层",
+        "传输层 "
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 55,
+      "courseId": 1,
+      "content": "LAN是的英文缩写()",
+      "answer": [
+        "局域网 ",
+        "网络 ",
+        "实时操作系统",
+        "网络操作系统 "
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 10,
+      "courseId": 1,
+      "content": "两个中继器连接的10BASE2网络结构中网络最长布线长度为()。",
+      "answer": [
+        "2000m ",
+        "555m ",
+        "1500m",
+        "740m "
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 53,
+      "courseId": 1,
+      "content": "传送速率单位“b/s”代表()",
+      "answer": [
+        "bits per second",
+        "billion per second",
+        "bytes per second ",
+        "baud per second "
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 21,
+      "courseId": 1,
+      "content": "IPv6地址的长度为()",
+      "answer": [
+        "32 bits ",
+        "48 bits ",
+        "128 bits",
+        "64 bits "
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 43,
+      "courseId": 1,
+      "content": "OSI/RM产生之后开始的计算机网络称为()",
+      "answer": [
+        "第三代计算机网络 ",
+        "第四代计算机网络",
+        "第二代计算机网络",
+        "第一代计算机网络 "
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 16,
+      "courseId": 1,
+      "content": "计算机网络的目的是()。",
+      "answer": [
+        "实现分布处理",
+        "共享软、硬件和数据资源 ",
+        "提高计算机运行速度 ",
+        "连接多台计算机"
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 5,
+      "courseId": 1,
+      "content": "Ethernet以太网结点最多可达()个",
+      "answer": [
+        "512",
+        "1024",
+        "4098",
+        "2048"
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 20,
+      "courseId": 1,
+      "content": "下列那个不是局域网的特点()",
+      "answer": [
+        "为一个单位所拥有，且地理范围和站点数目均有限",
+        "所有的站共享较高的总带宽",
+        "较低的时延和较低的误码率",
+        "各站为主从关系"
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 29,
+      "courseId": 1,
+      "content": "局域网LAN所采用的传输方式为()",
+      "answer": [
+        "电路交换式 ",
+        "“存储–转发”式 ",
+        "广播式",
+        "分散控制式"
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 41,
+      "courseId": 1,
+      "content": "面向终端的计算机网络称为()",
+      "answer": [
+        "第二代计算机网络",
+        "第三代计算机网络 ",
+        "第一代计算机网络 ",
+        "第四代计算机网络"
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 13,
+      "courseId": 1,
+      "content": "关于微波通信,下列叙述正确的是()。",
+      "answer": [
+        "易受恶劣气候影响； ",
+        "具有较高的带宽和抗干扰性； ",
+        "易受地表障碍物限制；",
+        "隐蔽性好,不易被窃取。"
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 8,
+      "courseId": 1,
+      "content": "在实际使用的IP地址中，主机号不能为全“0”和全“1”，那么一个C类IP地址，最多能容纳的主机数目为()。",
+      "answer": [
+        "254",
+        "256",
+        "64516",
+        "64518"
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 58,
+      "courseId": 1,
+      "content": "下列不属于广域网的是()",
+      "answer": [
+        "ISDN",
+        "以太网 ",
+        "电话网 ",
+        "X、25分组交换公用数据网"
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 12,
+      "courseId": 1,
+      "content": "关于数据交换，下列叙述不正确的是()",
+      "answer": [
+        "报文交换无存储转发过程；",
+        "电路交换是面向连接的；",
+        "分组交换比报文交换具有更好的网络响应速度；",
+        "分组交换有存储转发过程；"
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 42,
+      "courseId": 1,
+      "content": "以通信子网为中心的计算机网络称为()",
+      "answer": [
+        "第三代计算机网络 ",
+        "第二代计算机网络",
+        "第四代计算机网络",
+        "第一代计算机网络 "
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 57,
+      "courseId": 1,
+      "content": "C类IP地址的最高三个比特位，从高到低依次是()",
+      "answer": [
+        "110",
+        "100",
+        "101",
+        "10"
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 36,
+      "courseId": 1,
+      "content": "WWW网页文件的编写语言及相应的支持协议分别为()",
+      "answer": [
+        "HTTL，HTTP",
+        "HTML，HTPT ",
+        "以上均不对",
+        "HTML，HTTP "
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 49,
+      "courseId": 1,
+      "content": "下列那个不是共享介质局域网的特点()",
+      "answer": [
+        "工作站可以独占较高的总带宽",
+        "能进行广播或组播",
+        "较低的时延和较低的误码率",
+        "为一个单位所拥有，且地理范围和站点数目均有限"
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 51,
+      "courseId": 1,
+      "content": "域名服务系统中，域名采用分层次的命名方法，其中顶级域名EDU代表的是 ()",
+      "answer": [
+        "国家代码",
+        "教育机构 ",
+        "政府机构 ",
+        "商业组织 "
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 44,
+      "courseId": 1,
+      "content": "以综合化和高速化为最主要特点的计算机网络是()",
+      "answer": [
+        "第四代计算机网络",
+        "第三代计算机网络 ",
+        "第二代计算机网络",
+        "第一代计算机网络 "
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 54,
+      "courseId": 1,
+      "content": "下列不是光缆的特点是()",
+      "answer": [
+        "抗雷电和电磁干扰性能好",
+        "保密性差",
+        "适合远距离传输 ",
+        "传输损耗小 "
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 28,
+      "courseId": 1,
+      "content": "如果访问Internet时只能使用IP地址，是因为没有配置TCP/IP的()",
+      "answer": [
+        "IP地址 ",
+        "子网掩码",
+        "默认网关 ",
+        "DNS"
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 14,
+      "courseId": 1,
+      "content": "路由选择是()的功能。",
+      "answer": [
+        "传输层 ",
+        "应用层 ",
+        "数据链路层",
+        "网络层 "
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 17,
+      "courseId": 1,
+      "content": "电子邮件能传送的信息()。",
+      "answer": [
+        "是标准ASCII字符 ",
+        "是文字、声音和图形图像信息",
+        "只能是文本格式的文件",
+        "是压缩的文字和图像信息 "
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 11,
+      "courseId": 1,
+      "content": "下列设备中，可隔绝广播风暴的是()。",
+      "answer": [
+        "MODEM ",
+        "交换器 ",
+        "路由器",
+        "网桥 "
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 46,
+      "courseId": 1,
+      "content": "为应用程序之间的数据传送提供可靠连接的TCP/IP协议是()",
+      "answer": [
+        "UDP协议",
+        "TCP协议 ",
+        "ICMP协议 ",
+        "IP协议"
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 15,
+      "courseId": 1,
+      "content": "关于DNS下列叙述错误的是()。",
+      "answer": [
+        "域名不能反映计算机所在的物理地址",
+        "DNS采用客户服务器工作模式",
+        "域名的命名原则是采用层次结构的命名树",
+        "子节点能识别父节点的IP地址"
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 59,
+      "courseId": 1,
+      "content": "局域网中的MAC与OSI参考模型()相对应",
+      "answer": [
+        "网络层 ",
+        "数据链路层 ",
+        "物理层 ",
+        "传输层"
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 1,
+      "courseId": 1,
+      "content": "Internet中发送邮件协议是()。",
+      "answer": [
+        "POP",
+        "SMTP　",
+        "FTP ",
+        "HTTP　 "
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 50,
+      "courseId": 1,
+      "content": "环型拓扑最适合的传输介质是()",
+      "answer": [
+        "光纤 ",
+        "无线电",
+        "同轴电缆 ",
+        "双绞线 "
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 37,
+      "courseId": 1,
+      "content": "下列IP地址中属于B类地址的是()",
+      "answer": [
+        "130.53.42.10",
+        "98.62.53.6 ",
+        "221.121.16.12",
+        "200.245.20.11 "
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 9,
+      "courseId": 1,
+      "content": "下列叙述不正确的是()。",
+      "answer": [
+        "以太网无法保证发送时延的准确性",
+        "令牌总线网的协议较复杂",
+        "令牌环网易用光纤实现",
+        "三种局域网标准互相兼容"
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 60,
+      "courseId": 1,
+      "content": "IEEE802标准中，规定了CSMA/CD访问控制方法和物理层技术规范的是：()",
+      "answer": [
+        "802.3",
+        "802.4",
+        "802.2",
+        "802.5"
+      ],
+      "rightAnswer": null,
+      "hard": 0
+    },
+    {
+      "questionId": 80,
+      "courseId": 1,
+      "content": "无线信道的传输媒体不包括()",
+      "answer": [
+        "激光 ",
+        "微波 ",
+        "红外线 ",
+        "光纤"
+      ],
+      "rightAnswer": null,
+      "hard": 1
+    },
+    {
+      "questionId": 65,
+      "courseId": 1,
+      "content": "哪种物理拓扑将工作站连接到一台中央设备？()",
+      "answer": [
+        "环形 ",
+        "总线 ",
+        "树形",
+        "星形 "
+      ],
+      "rightAnswer": null,
+      "hard": 1
+    },
+    {
+      "questionId": 70,
+      "courseId": 1,
+      "content": "下面哪个协议运行在网络层()",
+      "answer": [
+        "TCP ",
+        "IP",
+        "SMTP ",
+        "HTTP "
+      ],
+      "rightAnswer": null,
+      "hard": 1
+    },
+    {
+      "questionId": 73,
+      "courseId": 1,
+      "content": "在TCP/IP参考模型中，与OSI参考模型的网络层对应的是()",
+      "answer": [
+        "主机——网络层 ",
+        "应用层 ",
+        "传输层",
+        "互联层 "
+      ],
+      "rightAnswer": null,
+      "hard": 1
+    },
+    {
+      "questionId": 72,
+      "courseId": 1,
+      "content": "在OSI参考模型中,数据链路层的数据服务单元是()",
+      "answer": [
+        "报文 ",
+        "比特流",
+        "分组 ",
+        "帧 "
+      ],
+      "rightAnswer": null,
+      "hard": 1
+    },
+    {
+      "questionId": 68,
+      "courseId": 1,
+      "content": "目前普通家庭连接因特网，以下几种方式哪种传输速率最高()",
+      "answer": [
+        "调制解调器 ",
+        "局域网",
+        "ISDN ",
+        "ADSL "
+      ],
+      "rightAnswer": null,
+      "hard": 1
+    },
+    {
+      "questionId": 71,
+      "courseId": 1,
+      "content": "100Base-T 使用()作为传输媒体",
+      "answer": [
+        "光纤 ",
+        "同轴电缆 ",
+        "双绞线 ",
+        "红外线"
+      ],
+      "rightAnswer": null,
+      "hard": 1
+    },
+    {
+      "questionId": 78,
+      "courseId": 1,
+      "content": "在OSI参考模型的层次中，()的数据传送单位是分组",
+      "answer": [
+        "物理层 ",
+        "网络层 ",
+        "运输层",
+        "数据链路层 "
+      ],
+      "rightAnswer": null,
+      "hard": 1
+    },
+    {
+      "questionId": 62,
+      "courseId": 1,
+      "content": "超文本的含义是()",
+      "answer": [
+        "该文本中含有图像",
+        "该文本中含有链接到其他文本的连接点",
+        "该文本中含有声音",
+        "该文本中含有二进制数"
+      ],
+      "rightAnswer": null,
+      "hard": 1
+    },
+    {
+      "questionId": 74,
+      "courseId": 1,
+      "content": "如果一台Netware节点主机要与SNA网中的一台大型机通信，那么用来互联Netware与SNA的设备应该选择()",
+      "answer": [
+        "路由器 ",
+        "中继器",
+        "网关 ",
+        "网桥 "
+      ],
+      "rightAnswer": null,
+      "hard": 1
+    },
+    {
+      "questionId": 83,
+      "courseId": 1,
+      "content": "采用ADSL上网，除需要用专用的ADSL Modem外，在计算机中还需要()",
+      "answer": [
+        "网卡 ",
+        "什么都不需要",
+        "集线器 ",
+        "PAD "
+      ],
+      "rightAnswer": null,
+      "hard": 2
+    },
+    {
+      "questionId": 94,
+      "courseId": 1,
+      "content": "在Foxmail中添加一个abc@163.com的帐号，则发送邮件服务器的配置为()",
+      "answer": [
+        "smtp.163.com ",
+        "POP3.163.com",
+        "smtp.abc.com ",
+        "POP3.abc.com"
+      ],
+      "rightAnswer": null,
+      "hard": 2
+    },
+    {
+      "questionId": 85,
+      "courseId": 1,
+      "content": "()是一种总线或星型结构的局域网技术",
+      "answer": [
+        "ATM ",
+        "DQDB",
+        "FDDI ",
+        "以太网 "
+      ],
+      "rightAnswer": null,
+      "hard": 2
+    },
+    {
+      "questionId": 89,
+      "courseId": 1,
+      "content": "文件传输协议是()上的协议。",
+      "answer": [
+        "运输层 ",
+        "网络层 ",
+        "应用层 ",
+        "会话层"
+      ],
+      "rightAnswer": null,
+      "hard": 2
+    },
+    {
+      "questionId": 86,
+      "courseId": 1,
+      "content": "Ethernet局域网采用的媒体访问控制方式为()。",
+      "answer": [
+        "CSMA/CD ",
+        "CSMA ",
+        "CSMA/CA",
+        "CDMA "
+      ],
+      "rightAnswer": null,
+      "hard": 2
+    }
+  ],
+  "testMinutes": 40
+}

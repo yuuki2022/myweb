@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.examination.demo.dao.PaperDAO;
 import com.examination.demo.dataobject.PaperDO;
 import com.examination.demo.model.Paper;
+import com.examination.demo.model.Question;
 import com.examination.demo.service.PaperService;
 
 // public void insertPaperQuestion(Integer paperId, Integer questionId);
@@ -28,12 +29,13 @@ public class PaperServiceImpl implements PaperService{
     private PaperDAO paperDAO;
 
     @Override
-    public void insertPaperQuestion(Integer paperId, Integer questionId) {
+    public void insertPaperQuestion(Integer paperId, Long questionId) {
         paperDAO.insertPaperQuestion(paperId, questionId);
     }
 
     @Override
-    public void insertPaper(Integer courseId, String studentId, Integer score) {
+    public void insertPaper(Integer courseId, String studentId) {
+        Integer score = 0;
         paperDAO.insertPaper(courseId, studentId, score);
     }
 
@@ -59,5 +61,7 @@ public class PaperServiceImpl implements PaperService{
 
         return papers;
     }
+
+
     
 }

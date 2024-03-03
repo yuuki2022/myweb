@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.examination.demo.dataobject.PaperDO;
 import com.examination.demo.model.Paper;
+import com.examination.demo.model.Question;
 
 // @Insert("insert into paper_question(paper_id, question_id) values(#{paperId}, #{questionId})")
 // void insertPaperQuestion(Integer paperId, Integer questionId);
@@ -24,9 +25,9 @@ import com.examination.demo.model.Paper;
 // @Select("select * from paper where student_id = #{studentId}")
 // List<PaperDO> getPaperById(Integer studentId);
 public interface PaperService {
-    public void insertPaperQuestion(Integer paperId, Integer questionId);
+    public void insertPaperQuestion(Integer paperId, Long questionId);
 
-    public void insertPaper(Integer courseId, String studentId, Integer score);
+    public void insertPaper(Integer courseId, String studentId);
 
     public void updatePaperScore(Integer paperId, Integer score);
 
@@ -44,5 +45,7 @@ public interface PaperService {
         paper.setScore(paperDO.getScore());
         return paper;
     }
+
+   
     
 } 
