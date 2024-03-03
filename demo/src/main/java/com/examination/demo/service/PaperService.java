@@ -33,7 +33,11 @@ public interface PaperService {
 
     public void deletePaper(Integer paperId);
 
-    public List<Paper> getPaperById(Integer studentId);
+    public List<Paper> getPaperByStudentId(String studentId);
+
+    public Paper getPaperByStudentIdAndCourseId(String studentId, Integer courseId);
+
+    public void updatePaperValidateTime(Integer paperId);
 
     public static Paper toModel(PaperDO paperDO){
         Paper paper = new Paper();

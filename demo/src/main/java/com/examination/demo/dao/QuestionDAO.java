@@ -31,6 +31,9 @@ public interface QuestionDAO {
 
     @Select("select question_id as questionId, course_id as courseId, content, answer1,answer2,answer3,answer4, hard from question where course_id = #{courseId} and hard = 2 order by rand() limit 5")
     List<QuestionDO> getQuestionsByCourseIdAndHard2(@Param("courseId") Integer courseId);
+    
+    @Select("select count(*) from question where question_id = #{questionId} and right_answer = #{rightAnswer}")
+    Integer getRightAnswer(@Param("questionId") Long questionId, @Param("rightAnswer") String rightAnswer);
 
     @Delete("delete from question where question_id = #{questionId}")
     void deleteQuestion(@Param("questionId") Long questionId);

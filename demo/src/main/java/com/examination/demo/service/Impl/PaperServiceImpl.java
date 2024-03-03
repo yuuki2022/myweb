@@ -51,8 +51,8 @@ public class PaperServiceImpl implements PaperService{
     }
 
     @Override
-    public List<Paper> getPaperById(Integer studentId) {
-        List<PaperDO> paperDOs = paperDAO.getPaperById(studentId);
+    public List<Paper> getPaperByStudentId(String studentId) {
+        List<PaperDO> paperDOs = paperDAO.getPaperByStudentId(studentId);
         List<Paper> papers = new ArrayList<>();
         for(PaperDO paperDO : paperDOs) {
             Paper paper = PaperService.toModel(paperDO);
@@ -60,6 +60,17 @@ public class PaperServiceImpl implements PaperService{
         }
 
         return papers;
+    }
+
+    @Override
+    public Paper getPaperByStudentIdAndCourseId(String studentId, Integer courseId) {
+        PaperDO paperDO = paperDAO.getPaperByStudentIdAndCourseId(studentId, courseId);
+        return PaperService.toModel(paperDO);
+    }
+
+    @Override
+    public void updatePaperValidateTime(Integer paperId) {
+        paperDAO.updatePaperValidateTime(paperId);
     }
 
 

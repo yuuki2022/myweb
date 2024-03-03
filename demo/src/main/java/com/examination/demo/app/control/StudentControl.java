@@ -1,5 +1,7 @@
 package com.examination.demo.app.control;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,8 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.examination.demo.common.Constant;
+import com.examination.demo.model.Course;
+import com.examination.demo.model.Paper;
 import com.examination.demo.model.Result;
 import com.examination.demo.model.Student;
+import com.examination.demo.service.CourseService;
+import com.examination.demo.service.PaperService;
 import com.examination.demo.service.StudentService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +31,12 @@ public class StudentControl {
 
     @Autowired
     private StudentService studentService;
+
+    @Autowired
+    private PaperService paperService;
+    
+    @Autowired
+    private CourseService courseService;
 
     @GetMapping("/students")
     @ResponseBody
@@ -115,6 +127,46 @@ public String postMethodName(@RequestBody String changInformation) {
     responseBody.setMessage("error");
     return responseBody.toString();
 }
+
+@GetMapping("/student/exams")
+@ResponseBody
+public String getStudentExams(@RequestParam String studentId) {
+    System.out.println(studentId);
+    String studentName = studentService.getStudentById(studentId).getStudentName();
+    List<Paper> exams = paperService.getPaperByStudentId(studentId);
+
+    Map<String,Object> studentMap = new HashMap<>();
+    studentMap.put("studentId", studentId);
+    studentMap.put("studentName", studentName);
+    List<Map<String,Integer>> examList = new ArrayList<>();
+
+    for(int i = 0 ; i < exams.size(); i++){
+        Paper exam = exams.get(i);
+        Map<String, Integer> examMap = new HashMap<>();
+        examMap.put("courseId", exam.getScore());
+        examMap.put("score", exam.getScore());
+        examList.add(examMap);
+    }
+    studentMap.put("exams", examList);
+
+    ObjectMapper mapper = new ObjectMapper();
+    Result<String> responseBody = new Result<>();
+    try {
+        responseBody.setCode("200");
+        responseBody.setMessage("success");
+        responseBody.setData(mapper.writeValueAsString(studentMap));
+        return mapper.writeValueAsString(responseBody);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    responseBody.setCode("500");
+    responseBody.setMessage("error");
+    return responseBody.toString();
+
+
+}
+
 
     
 }

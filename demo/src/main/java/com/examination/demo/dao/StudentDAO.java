@@ -42,4 +42,6 @@ public interface StudentDAO{
     @Select("select student_id as studentId, student_name as studentName, salt_password as saltPassword from student")
     List<StudentDO> getAllStudent();
 
+   
+
 }
