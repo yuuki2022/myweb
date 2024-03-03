@@ -13,6 +13,9 @@ public class CourseDO {
 
     List<QuestionDO> questionList;
     
+    public CourseDO() {
+        
+    }
     public CourseDO(Integer courseId, String courseName, List<QuestionDO> questionList) {
         this.courseId = courseId;
         this.courseName = courseName;

@@ -2,6 +2,7 @@ package com.examination.demo.dataobject;
 
 import java.util.List;
 
+
 import lombok.Data;
 
 @Data
@@ -11,17 +12,22 @@ public class StudentDO {
     private String studentName;
 
     private String saltPassword;
+   
+    private List<CourseDO> courseList;
 
-    List<CourseDO> courseList;
+    private List<PaperDO> paperList;
 
-    List<PaperDO> paperList;
+    public StudentDO() {
+        
+    }
 
-    public StudentDO(String studentId, String studentName, String saltPassword, List<CourseDO> courseList) {
+    public StudentDO(String studentId, String studentName, String saltPassword) {
         this.studentId = studentId;
         this.studentName = studentName;
         this.saltPassword = saltPassword;
-        this.courseList = courseList;
     }
+
+   
 
   
     

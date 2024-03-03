@@ -3,7 +3,6 @@ package com.examination.demo.service.Impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.examination.demo.dao.AdminDAO;
 import com.examination.demo.dataobject.AdminDO;
 import com.examination.demo.model.Admin;
