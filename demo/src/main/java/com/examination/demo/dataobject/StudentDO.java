@@ -9,9 +9,9 @@ import lombok.Data;
 public class StudentDO {
     private String studentId;
 
-    private String studentName;
-
     private String saltPassword;
+
+    private String studentName;
    
     private List<CourseDO> courseList;
 

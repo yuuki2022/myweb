@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.examination.demo.dao.PaperDAO;
 import com.examination.demo.dataobject.PaperDO;
 import com.examination.demo.model.Paper;
-import com.examination.demo.model.Question;
 import com.examination.demo.service.PaperService;
 
 // public void insertPaperQuestion(Integer paperId, Integer questionId);

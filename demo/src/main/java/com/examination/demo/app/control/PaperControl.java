@@ -38,6 +38,12 @@ public class PaperControl {
 
     @Autowired
     private StudentService studentService;
+
+    @GetMapping("/findOnePaper")
+    public String getMethodName(@RequestParam Integer courseId, @RequestParam String studentId) {
+        return new String();
+    }
+    
     
 
     @GetMapping("/getPaper")

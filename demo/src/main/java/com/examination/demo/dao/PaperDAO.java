@@ -10,6 +10,8 @@ import org.apache.ibatis.annotations.Update;
 
 import com.examination.demo.dataobject.PaperDO;
 
+import io.lettuce.core.dynamic.annotation.Param;
+
 @Mapper
 public interface PaperDAO {
     ///////有一个表，试卷表，还有一个试题表，它们之间有一个试卷与试题多对多关系表，将一组选择到题目插入到试卷与试题多对多关系表
@@ -33,8 +35,9 @@ public interface PaperDAO {
     void deletePaper(Integer paperId);
 
 
-    @Select("select * from paper where student_id = #{studentId}")
-    List<PaperDO> getPaperByStudentId(String studentId);
+    // @Select("select paper_id as paperId, course_id as courseId, student_id as studentId, create_time as createTime, validate_time as validateTime, score from paper where student_id = #{studentId}")
+    @Select("select paper_id as paperId, course_id as courseId, student_id as studentId, score from paper where student_id = #{studentId}")
+    List<PaperDO> getPaperByStudentId(@Param("studentId")String studentId);
 
     @Select("select * from paper where student_id = #{studentId} and course_id = #{courseId}")
     PaperDO getPaperByStudentIdAndCourseId(String studentId, Integer courseId);

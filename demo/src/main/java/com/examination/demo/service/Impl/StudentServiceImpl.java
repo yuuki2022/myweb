@@ -9,6 +9,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.examination.demo.dao.CourseDAO;
+import com.examination.demo.dao.PaperDAO;
 import com.examination.demo.dao.StudentDAO;
 import com.examination.demo.dataobject.CourseDO;
 import com.examination.demo.dataobject.PaperDO;
@@ -24,6 +26,12 @@ public class StudentServiceImpl implements StudentService{
     //////////根据上面的dao层的方法，实现学生的增删改查
     @Autowired
     private StudentDAO studentDAO;
+
+    @Autowired
+    private CourseDAO courseDAO;
+
+    @Autowired
+    private PaperDAO paperDAO;
 
     public Student getStudentById(String studentId) {
         StudentDO studentDO = studentDAO.getStudentById(studentId);
@@ -87,7 +95,19 @@ public class StudentServiceImpl implements StudentService{
             System.out.println("没有学生信息");
             return null;
         }
+
+        for (StudentDO studentDO : studentDOList){
+            List<CourseDO> courseDOList = courseDAO.getCoursesByStudentId(studentDO.getStudentId());
+            studentDO.setCourseList(courseDOList);
+        }
+
+        for (StudentDO studentDO : studentDOList){
+            List<PaperDO> paperDOList = paperDAO.getPaperByStudentId(studentDO.getStudentId());
+            studentDO.setPaperList(paperDOList);
+        }
+
         List<Student> studentList = new ArrayList<>();
+
         for(StudentDO studentDO : studentDOList){
             Student student = StudentService.toModel(studentDO);
             studentList.add(student);
@@ -95,7 +115,12 @@ public class StudentServiceImpl implements StudentService{
         return studentList;
     }
 
+    @Override
+    public void insertCourseStudent(String studentId, Integer courseId) {
+        studentDAO.insertCourseStudent(studentId, courseId);
+    }
 
+    
     public Student toModel(StudentDO studentDO){
         Student student = new Student();
         student.setStudentId(studentDO.getStudentId());
@@ -123,9 +148,7 @@ public class StudentServiceImpl implements StudentService{
                 paper.setCourseId(paperDO.getCourseId());
                 paper.setStudentId(paperDO.getStudentId());
                 paper.setScore(paperDO.getScore());
-                paper.setCreateTime(paperDO.getCreateTime());
-                paper.setValidateTime(paperDO.getValidateTime());
-                
+               
                 paperList.add(paper);
             }
         }

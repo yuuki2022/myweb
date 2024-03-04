@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.examination.demo.dataobject.PaperDO;
 import com.examination.demo.model.Paper;
-import com.examination.demo.model.Question;
+
 
 // @Insert("insert into paper_question(paper_id, question_id) values(#{paperId}, #{questionId})")
 // void insertPaperQuestion(Integer paperId, Integer questionId);
@@ -44,8 +44,8 @@ public interface PaperService {
         paper.setPaperId(paperDO.getPaperId());
         paper.setCourseId(paperDO.getCourseId());
         paper.setStudentId(paperDO.getStudentId());
-        paper.setCreateTime(paperDO.getCreateTime());
-        paper.setValidateTime(paperDO.getValidateTime());
+        // paper.setCreateTime(paperDO.getCreateTime());
+        // paper.setValidateTime(paperDO.getValidateTime());
         paper.setScore(paperDO.getScore());
         return paper;
     }

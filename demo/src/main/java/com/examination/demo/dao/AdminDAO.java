@@ -1,5 +1,6 @@
 package com.examination.demo.dao;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -23,5 +24,6 @@ public interface AdminDAO {
     @Select("select * from admin where admin_name = #{adminName} and salt_password = #{saltPassword}")
     AdminDO login(String adminName, String saltPassword);
 
-    
+    @Delete("delete from admin where admin_name = #{adminName}")
+    void deleteStudent(String adminName);
 }
