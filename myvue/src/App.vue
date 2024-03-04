@@ -5,7 +5,7 @@
 <script>
 
 // import router from './router';
-import login from './components/login.vue'
+import login from './components/GradeLookup.vue'
 
 export default {
   name: 'App',
