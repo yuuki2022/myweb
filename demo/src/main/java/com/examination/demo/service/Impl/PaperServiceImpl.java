@@ -27,7 +27,7 @@ public class PaperServiceImpl implements PaperService{
     @Autowired
     private PaperDAO paperDAO;
 
-    @Override
+    @Override 
     public void insertPaperQuestion(Integer paperId, Long questionId) {
         paperDAO.insertPaperQuestion(paperId, questionId);
     }
