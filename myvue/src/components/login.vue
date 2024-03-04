@@ -74,7 +74,7 @@ form {
   border-radius: 30px;
   margin: 0 auto;
   border: 3px solid #000;
-  /*所有元素锤子居中*/
+  /*所有元素垂直居中*/
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -102,7 +102,7 @@ input {
 button {
   width: 85%;
   height: 15%;
-  border-radius: 20px;
+  border-radius:10px;
   border: 1px solid #000;
   display: block;
   text-align: center;

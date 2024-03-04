@@ -3,6 +3,8 @@
 </template>
 
 <script>
+
+// import router from './router';
 import login from './components/login.vue'
 
 export default {
