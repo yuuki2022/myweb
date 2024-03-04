@@ -5,6 +5,10 @@
 </template>
 
 <script>
+
+// import router from './router';
+import login from './components/GradeLookup.vue'
+
 export default {
   name: 'App',
   components: {
