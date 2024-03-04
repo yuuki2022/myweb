@@ -13,24 +13,14 @@ public class PaperDO {
     private Integer courseId;
     
     private String studentId;
-    
-    private LocalDateTime createTime;
-    
-    private LocalDateTime validateTime;
-    
+
     private Integer score;
 
-    List<QuestionDO> questionList;
 
-    
-
-    public PaperDO(Integer paperId, Integer courseId, String studentId, LocalDateTime createTime, LocalDateTime validateTime, Integer score, List<QuestionDO> questionList) {
+    public PaperDO(Integer paperId, Integer courseId, String studentId, Integer score) {
         this.paperId = paperId;
         this.courseId = courseId;
         this.studentId = studentId;
-        this.createTime = createTime;
-        this.validateTime = validateTime;
         this.score = score;
-        this.questionList = questionList;
     }
 }

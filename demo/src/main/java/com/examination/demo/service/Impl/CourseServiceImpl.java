@@ -20,7 +20,7 @@ public class CourseServiceImpl implements CourseService {
     private CourseDAO courseDAO;
 
     @Override
-    public Course getCourseById(String courseId) {
+    public Course getCourseById(Integer courseId) {
         CourseDO courseDO = courseDAO.getCourseById(courseId);
         return CourseService.toModel(courseDO);
     }

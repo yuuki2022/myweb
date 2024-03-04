@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: 'TestComponent',
+  name: 'LoginComponent',
   data() {
     return {
       account: '',

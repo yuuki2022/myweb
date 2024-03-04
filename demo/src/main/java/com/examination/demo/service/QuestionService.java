@@ -15,6 +15,8 @@ public interface QuestionService {
 
     public List<Question> createOnePaper(Integer courseId);
 
+    public Integer getRightAnswer(Long questionId, String rightAnswer);
+
 
     public static QuestionDO toDataObject(Question question){
         QuestionDO questionDO = new QuestionDO();

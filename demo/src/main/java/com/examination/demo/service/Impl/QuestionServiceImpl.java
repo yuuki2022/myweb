@@ -49,6 +49,13 @@ public class QuestionServiceImpl implements QuestionService {
         return questionList;
     }
 
+    @Override
+    public Integer getRightAnswer(Long questionId, String rightAnswer) {
+        return questionDAO.getRightAnswer(questionId, rightAnswer);
+    }
+
+    
+
     
     
 }

@@ -8,7 +8,7 @@ import com.examination.demo.model.Course;
 public interface CourseService {
     public void insertCourse(String courseName);
     
-    public Course getCourseById(String courseId);
+    public Course getCourseById(Integer courseId);
     
     public List<Course> getCoursesByStudentId(String studentId);    
 

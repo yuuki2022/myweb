@@ -1,5 +1,6 @@
 package com.examination.demo.app.control;
 
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -7,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.examination.demo.common.Constant;
 import com.examination.demo.model.Admin;
@@ -29,7 +32,7 @@ public class AdminControl {
         return a;
     }
 
-    @PostMapping("/authentication")
+    @PostMapping("/admin/authentication")
     @CrossOrigin
     @ResponseBody
     public String postMethodName(@RequestBody String json) throws Exception{
@@ -58,7 +61,7 @@ public class AdminControl {
         return mapper.writeValueAsString(result);
     }
 
-    @PostMapping("/register")
+    @PostMapping("/admin/register")
     @CrossOrigin
     @ResponseBody
     public String register(@RequestBody String json) throws Exception{
@@ -81,6 +84,12 @@ public class AdminControl {
         result.setMessage("注册成功");
         result.setData(admin);
         return mapper.writeValueAsString(result);
+    }
+
+    @Delete("/admin/delete")
+    @ResponseBody
+    public String deleteAdmin(@RequestParam String adminName){
+        
     }
 
 

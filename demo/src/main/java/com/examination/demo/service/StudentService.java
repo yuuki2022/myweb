@@ -28,6 +28,8 @@ public interface StudentService {
 
     public void deleteStudent(String studentId);
 
+    public void insertCourseStudent(String studentId, Integer courseId);
+
     public List<Student> getAllStudent();
     
     public static Student toModel(StudentDO studentDO){

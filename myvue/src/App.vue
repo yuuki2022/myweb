@@ -1,5 +1,7 @@
 <template>
-  <login></login>
+  <router-link to="/login">Login</router-link>
+  <router-link to="/student">Student</router-link>
+  <router-view></router-view>
 </template>
 
 <script>
@@ -10,7 +12,7 @@ import login from './components/GradeLookup.vue'
 export default {
   name: 'App',
   components: {
-    login
+   
   }
 }
 </script>

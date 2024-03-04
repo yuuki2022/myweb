@@ -5,6 +5,7 @@ import java.util.List;
 import com.examination.demo.dataobject.PaperDO;
 import com.examination.demo.model.Paper;
 
+
 // @Insert("insert into paper_question(paper_id, question_id) values(#{paperId}, #{questionId})")
 // void insertPaperQuestion(Integer paperId, Integer questionId);
 
@@ -24,25 +25,31 @@ import com.examination.demo.model.Paper;
 // @Select("select * from paper where student_id = #{studentId}")
 // List<PaperDO> getPaperById(Integer studentId);
 public interface PaperService {
-    public void insertPaperQuestion(Integer paperId, Integer questionId);
+    public void insertPaperQuestion(Integer paperId, Long questionId);
 
-    public void insertPaper(Integer courseId, String studentId, Integer score);
+    public void insertPaper(Integer courseId, String studentId);
 
     public void updatePaperScore(Integer paperId, Integer score);
 
     public void deletePaper(Integer paperId);
 
-    public List<Paper> getPaperById(Integer studentId);
+    public List<Paper> getPaperByStudentId(String studentId);
+
+    public Paper getPaperByStudentIdAndCourseId(String studentId, Integer courseId);
+
+    public void updatePaperValidateTime(Integer paperId);
 
     public static Paper toModel(PaperDO paperDO){
         Paper paper = new Paper();
         paper.setPaperId(paperDO.getPaperId());
         paper.setCourseId(paperDO.getCourseId());
         paper.setStudentId(paperDO.getStudentId());
-        paper.setCreateTime(paperDO.getCreateTime());
-        paper.setValidateTime(paperDO.getValidateTime());
+        // paper.setCreateTime(paperDO.getCreateTime());
+        // paper.setValidateTime(paperDO.getValidateTime());
         paper.setScore(paperDO.getScore());
         return paper;
     }
+
+   
     
 } 

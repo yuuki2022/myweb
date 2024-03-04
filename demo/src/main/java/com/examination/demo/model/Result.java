@@ -41,4 +41,14 @@ public class Result <D>{
     public void setSuccess(boolean success) {
         isSuccess = success;
     }
+
+    @Override
+    public String toString() {
+        return "Result{" +
+                "code='" + code + '\'' +
+                ", message='" + message + '\'' +
+                ", isSuccess=" + isSuccess +
+                ", data=" + data +
+                '}';
+    }
 }
