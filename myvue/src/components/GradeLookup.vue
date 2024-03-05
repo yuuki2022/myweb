@@ -1,5 +1,4 @@
 <template>
-
     <el-container>
         <el-aside width=150px>
             <div class="username">10086</div>
@@ -23,7 +22,10 @@
             <el-main>
                 <div class="score">
                     <el-input v-model="searchText" placeholder="搜索" @input="handleSearch"></el-input>
-                    <el-table :data="filteredData" width="85%" height="630" border=true>
+                    <el-table :data="examers.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+                              :header-cell-style="{background:'#D9D9D9'}" 
+                               border=true
+                               stripe>
                         <!-- 表格列 -->
                         <el-table-column prop="id" label="考生号" class="id"></el-table-column>
                         <el-table-column prop="name" label="姓名 "></el-table-column>
@@ -50,7 +52,7 @@
                                 {{ row.ds || '未参加考试' }}
                             </template>
                         </el-table-column>
-                        <el-table-column fixed="right" label="操作" width="120">
+                        <el-table-column fixed="right" label="操作" width="100">
 
                             <template v-slot="scope">
                                 <el-button @click.prevent="deleteRow(scope.$index, tableData)" type="text" size="small">
@@ -60,8 +62,15 @@
                         </el-table-column>
                     </el-table>
                     <div style="text-align:center">
-                        <el-pagination hide-on-single-page background layout="prev, pager, next,total" :total="total"
-                            :page-size="pagesize" @current-change="current_change"></el-pagination>
+                        <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page = "currentPage"
+                        :page-sizes="[10,20,30,40]"
+                        :page-size="pageSize"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="examers.length"
+                        ></el-pagination>
                     </div>
 
                 </div>
@@ -76,6 +85,8 @@ export default {
     name: "App",
     data() {
         return {
+            currentPage: 1,
+            pageSize: 10,
             examers: [
                 {
                     id: 1213278912,
@@ -1179,6 +1190,12 @@ export default {
         }
     },
     methods: {
+        handleSizeChange(val) {
+            this.pageSize = val;
+        },
+        handleCurrentChange(val) {
+            this.currentPage = val;
+        },
         Togradelookup() {
             this.$router.push('/gradelookup');
         },
@@ -1313,10 +1330,6 @@ interface User {
     font-size: 18px;
 }
 
-.tableheader {
-    background-color: rgb(231, 231, 231);
-}
-
 .buttons {
     display: flex;
     align-items: center;
@@ -1336,19 +1349,6 @@ interface User {
     font-size: 20px;
 } */
 
-.red {
-    background-color: red;
-}
-
-.green {
-    background-color: green;
-}
-
-.purple {
-    background-color: purple;
-}
-
-
 .el-table th {
     padding: 10px;
     border: 1px solid #0c090977;
@@ -1362,14 +1362,17 @@ interface User {
     background-color: #D9D9D9;
 }
 
-
+.el-table th{
+    width: 176px;
+    height: 80px;
+}
 .el-table td {
     padding: 10px;
     border: 1px solid #0c090977;
     text-align: center;
     background-color: #F8F9FB;
     width: 176px;
-    width: 100px;
+    height: 60px;
 }
 
 .el-table td>.cell {
