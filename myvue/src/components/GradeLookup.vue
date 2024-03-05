@@ -1260,7 +1260,9 @@ interface User {
     background-color: #FF2424;
 
 }
-
+.el-button{
+    width:100px;
+}
 .el-container {
     width: 180%;
 }
