@@ -5,7 +5,7 @@
   <p></p>
   <router-link to="/student">学生个人主页</router-link>
   <p></p>
-  <router-link to="/gardelookup">查成绩</router-link>
+  <router-link to="/gradelookup">查成绩</router-link>
   <p></p>
   <router-view></router-view>
 </template>

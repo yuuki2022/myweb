@@ -8,7 +8,7 @@ import Register from './components/Register.vue';
 
 const routes = [
     {
-      path: '/gardelookup',
+      path: '/gradelookup',
       name: 'gradelookup',
       component: GradeLookup
     },

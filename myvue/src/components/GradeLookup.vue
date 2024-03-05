@@ -1201,7 +1201,7 @@ export default {
     },
     methods: {
         Togradelookup() {
-            this.$router.push('/Gradelookup');
+            this.$router.push('/gradelookup');
         },
         logout() {
             this.$router.push('/');
