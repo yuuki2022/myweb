@@ -1,5 +1,4 @@
 <template>
-
     <el-container>
         <el-aside width=150px>
             <div class="username">10086</div>
@@ -23,7 +22,11 @@
             <el-main>
                 <div class="score">
                     <el-input v-model="searchText" placeholder="搜索" @input="handleSearch"></el-input>
-                    <el-table :data="filteredData" height="800" border=true>
+                    <el-table :data="examers.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+                              :header-cell-style="{background:'#D9D9D9'}" 
+                               height="800" 
+                               border=true
+                               stripe>
                         <!-- 表格列 -->
                         <el-table-column prop="id" label="考生号" class="id"></el-table-column>
                         <el-table-column prop="name" label="姓名 "></el-table-column>
@@ -60,8 +63,15 @@
                         </el-table-column>
                     </el-table>
                     <div style="text-align:center">
-                        <el-pagination hide-on-single-page background layout="prev, pager, next,total" :total="total"
-                            :page-size="pagesize" @current-change="current_change"></el-pagination>
+                        <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :current-page = "currentPage"
+                        :page-sizes="[10,20,30,40]"
+                        :page-size="pageSize"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="examers.length"
+                        ></el-pagination>
                     </div>
 
                 </div>
@@ -76,6 +86,8 @@ export default {
     name: "App",
     data() {
         return {
+            currentPage: 1,
+            pageSize: 10,
             examers: [
                 {
                     id: 1213278912,
@@ -1179,6 +1191,12 @@ export default {
         }
     },
     methods: {
+        handleSizeChange(val) {
+            this.pageSize = val;
+        },
+        handleCurrentChange(val) {
+            this.currentPage = val;
+        },
         Togradelookup() {
             this.$router.push('/gradelookup');
         },
@@ -1309,10 +1327,6 @@ interface User {
     background-color: red;
     color: white;
     font-size: 18px;
-}
-
-.tableheader {
-    background-color: rgb(231, 231, 231);
 }
 
 .buttons {
