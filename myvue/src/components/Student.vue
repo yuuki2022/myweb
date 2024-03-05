@@ -1,31 +1,35 @@
 <template>
     <div id="Student">
-        <div class="header">
-            <div class="title">选择科目</div>
-        </div>
+
 
         <div class="student-info">
             <p style="font-size: 20px;">学号</p>
             <p id="studentId"> 123456789</p>
-            <button id="exit-button">退出</button>
+            <el-button @click="exit"  type="danger" id="exit-button">退出</el-button>
         </div>
 
-        <div class="subject-list">
-            <div class="subject-item">
-                <span style="font-size: 25px;">计算机网络</span>
-                <button class="exam-button" style="font-size: 15px;">参加考试</button>
+
+        <div>
+            <div class="header">
+                <div class="title">选择科目</div>
             </div>
-            <div class="subject-item">
-                <span style="font-size: 25px;">计算机操作系统</span>
-                <button class="exam-button" style="font-size: 15px;">参加考试</button>
-            </div>
-            <div class="subject-item">
-                <span style="font-size: 25px;">计算机组成原理</span>
-                <button class="exam-button" style="font-size: 15px;">参加考试</button>
-            </div>
-            <div class="subject-item">
-                <span style="font-size: 25px;">数据结构</span>
-                <button class="exam-button" style="font-size: 15px;">参加考试</button>
+            <div class="subject-list">
+                <div class="subject-item">
+                    <span style="font-size: 25px;">计算机网络</span>
+                    <el-button class="exam-button" type="success" style="font-size: 16px;" >参加考试</el-button>
+                </div>
+                <div class="subject-item">
+                    <span style="font-size: 25px;">计算机操作系统</span>
+                    <el-button class="exam-button" type="success"  style="font-size: 16px;">参加考试</el-button>
+                </div>
+                <div class="subject-item">
+                    <span style="font-size: 25px;">计算机组成原理</span>
+                    <el-button class="exam-button" type="success" style="font-size: 16px;">参加考试</el-button>
+                </div>
+                <div class="subject-item">
+                    <span style="font-size: 25px;">数据结构</span>
+                    <el-button class="exam-button"  type="success" style="font-size: 16px;">参加考试</el-button>
+                </div>
             </div>
         </div>
     </div>
@@ -51,7 +55,7 @@ export default {
 
 
 <style scoped>
-p{
+p {
     /*取消p标签的默认样式*/
     margin: 0;
     padding: 0;
@@ -59,7 +63,7 @@ p{
     font-weight: bold;
 }
 
-#studentId{
+#studentId {
     margin-top: 5%;
 }
 
@@ -71,9 +75,9 @@ p{
 }
 
 .title {
-    font-size: 80px;
+    font-size: 64px;
     font-weight: bold;
-    margin-left:80%;
+    margin-left: 80%;
     width: 300%;
 
 }
@@ -83,8 +87,9 @@ p{
     width: 10%;
     position: fixed;
     padding: 1%;
-    left:2%;
+    left: 2%;
     top: 10%;
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -95,10 +100,10 @@ p{
     margin-top: 10px;
     background-color: red;
     color: white;
-    padding: 10px 20px;
+    /* padding: 10px 20px;
     border: none;
-    cursor: pointer;
-    width: 80%;
+    cursor: pointer;*/
+    width: 80%; 
 }
 
 .subject-list {
@@ -119,7 +124,8 @@ p{
     height: 60px;
     padding: 30px;
     border: 2px;
-    border-radius: 25px;;
+    border-radius: 15px;
+    ;
     background-color: #F8F9FB;
     /* 文字垂直居中*/
     box-sizing: border-box;
@@ -128,11 +134,13 @@ p{
 }
 
 .exam-button {
-    background-color:#40CD70;
+    background-color: #40CD70;
     color: white;
     padding: 10px 5px;
     border: none;
     cursor: pointer;
     float: right;
+    width:15%;
+height: 10%;
 }
 </style>
