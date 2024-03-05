@@ -5,7 +5,6 @@
     </div>
 
     <div class="student-info">
-        
         <span style="font-size: 20px;">学号<br></span>
         <span id = "studentId"> 123456789</span>
         <button class="exit-button">退出</button>

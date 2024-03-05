@@ -3,8 +3,6 @@ import App from './App.vue';
 import router from './router'; // Import your router configuration
 
 
-
-
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 

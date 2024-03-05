@@ -96,9 +96,6 @@
 
 <script>
 export default {
-
-
-
     name: "App",
     data() {
         return {
@@ -1327,11 +1324,19 @@ interface User {
     border-collapse: collapse;
 }
 
-.table th,
-.table td {
+.colgroup{
     padding: 10px;
     border: 1px solid black;
     text-align: center;
+    background-color: #D9D9D9;
+;
+
+}
+.el-table__row{
+    padding: 10px;
+    border: 1px solid black;
+    text-align: center;
+    background-color: #F8F9FB;
 }
 
 .confirm {

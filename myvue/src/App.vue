@@ -1,21 +1,18 @@
 <template>
-  <router-link to="/login">Login</router-link>
-  <router-link to="/student">Student</router-link>
+  <router-link to="/">登录</router-link>
+  <p></p>
+  <router-link to="/register">注册</router-link>
+  <p></p>
+  <router-link to="/student">学生个人主页</router-link>
+  <p></p>
+  <router-link to="/gardelookup">查成绩</router-link>
+  <p></p>
   <router-view></router-view>
-  <login></login>
 </template>
 
 <script>
-
 // import router from './router';
-import login from './components/login.vue'
 
-export default {
-  name: 'App',
-  components: {
-    login
-  }
-}
 </script>
 
 <style>
