@@ -21,34 +21,33 @@
                 <el-main>
                     <div class="score">
                         <el-input v-model="searchText" placeholder="搜索" @input="handleSearch"></el-input>
-                        <el-table :data="filteredData" height="600" border=true style="width: 200%">
+                        <el-table :data="filteredData" height="600" border=true >
                             <!-- 表格列 -->
-                            <el-table-column prop="id" label="考生号" width="200"></el-table-column>
-                            <el-table-column prop="name" label="姓名 " width="200"></el-table-column>
-                            <el-table-column prop="net" label="计算机网络" width="200">
+                            <el-table-column prop="id" label="考生号" ></el-table-column>
+                            <el-table-column prop="name" label="姓名 " ></el-table-column>
+                            <el-table-column prop="net" label="计算机网络" >
                                 <template #default="{ row }">
                                     {{ row.net || '未参加考试' }}
                                 </template>
                             </el-table-column>
-                            <el-table-column prop="os" label="计算机操作系统" width="200">
+                            <el-table-column prop="os" label="计算机操作系统" >
 
                                 <template #default="{ row }">
                                     {{ row.os || '未参加考试' }}
                                 </template>
                             </el-table-column>
-                            <el-table-column prop="compo" label="计算机组成原理" width="200">
+                            <el-table-column prop="compo" label="计算机组成原理" >
 
                                 <template #default="{ row }">
                                     {{ row.compo || '未参加考试' }}
                                 </template>
                             </el-table-column>
-                            <el-table-column prop="ds" label="数据结构" width="200">
+                            <el-table-column prop="ds" label="数据结构" >
 
                                 <template #default="{ row }">
                                     {{ row.ds || '未参加考试' }}
                                 </template>
                             </el-table-column>
-
 
                         </el-table>
                     </div>
