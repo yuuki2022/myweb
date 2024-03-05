@@ -1,12 +1,12 @@
 <template>
-  <router-link to="/">登录</router-link>
-  <p></p>
-  <router-link to="/register">注册</router-link>
-  <p></p>
-  <router-link to="/student">学生个人主页</router-link>
-  <p></p>
+  <router-link to="/">登录  </router-link>
+
+  <router-link to="/register">注册  </router-link>
+
+  <router-link to="/student">学生个人主页  </router-link>
+
   <router-link to="/gradelookup">查成绩</router-link>
-  <p></p>
+
   <router-view></router-view>
 </template>
 

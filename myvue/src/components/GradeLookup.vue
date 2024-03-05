@@ -1,100 +1,99 @@
 <template>
-    <div class="common-layout">
+
+    <el-container>
+        <el-aside width=150px>
+
+
+
+
+
+
+
+
+
+
+
+
+            <div class="username">10086</div>
+            <!-- <button @click="logout" class="logout">退出</button> -->
+            <el-button type="danger" @click="logout" size="large">退出</el-button>
+            <hr>
+            <div class="buttons">
+                <el-button type="primary" size="large">出试卷</el-button>
+                <br>
+                <el-button type="primary" @click="Togradelookup" size="large">查询成绩</el-button>
+                <br>
+                <!-- <button class="purple">检查结果</button> -->
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </el-aside>
         <el-container>
-            <el-aside width=150px>
+            <el-header>
+                <h1>考试成绩</h1>
+            </el-header>
+            <el-main>
+                <div class="score">
+                    <el-input v-model="searchText" placeholder="搜索" @input="handleSearch"></el-input>
+                    <el-table :data="filteredData" height="600" border=true>
+                        <!-- 表格列 -->
+                        <el-table-column prop="id" label="考生号"></el-table-column>
+                        <el-table-column prop="name" label="姓名 "></el-table-column>
+                        <el-table-column prop="net" label="计算机网络">
+                            <template #default="{ row }">
+                                {{ row.net || '未参加考试' }}
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="os" label="计算机操作系统">
 
+                            <template #default="{ row }">
+                                {{ row.os || '未参加考试' }}
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="compo" label="计算机组成原理">
 
+                            <template #default="{ row }">
+                                {{ row.compo || '未参加考试' }}
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="ds" label="数据结构">
 
+                            <template #default="{ row }">
+                                {{ row.ds || '未参加考试' }}
+                            </template>
+                        </el-table-column>
 
-
-
-
-
-
-
-
-
-                <div class="username">10086</div>
-                <!-- <button @click="logout" class="logout">退出</button> -->
-                <el-button plain @click="logout" size="large">退出</el-button>
-                <hr>
-                <div class="buttons">
-                    <el-button plain size="large">出试卷</el-button>
-                    <br>
-                    <el-button @click="Togradelookup" class="green" size="large">查询成绩</el-button>
-                    <br>
-                    <!-- <button class="purple">检查结果</button> -->
+                    </el-table>
                 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            </el-aside>
-            <el-container>
-                <el-header>
-                    <h1>考试成绩</h1>
-                </el-header>
-                <el-main>
-                    <div class="score">
-                        <el-input v-model="searchText" placeholder="搜索" @input="handleSearch"></el-input>
-                        <el-table :data="filteredData" height="600" border=true>
-                            <!-- 表格列 -->
-                            <el-table-column prop="id" label="考生号"></el-table-column>
-                            <el-table-column prop="name" label="姓名 "></el-table-column>
-                            <el-table-column prop="net" label="计算机网络">
-                                <template #default="{ row }">
-                                    {{ row.net || '未参加考试' }}
-                                </template>
-                            </el-table-column>
-                            <el-table-column prop="os" label="计算机操作系统">
-
-                                <template #default="{ row }">
-                                    {{ row.os || '未参加考试' }}
-                                </template>
-                            </el-table-column>
-                            <el-table-column prop="compo" label="计算机组成原理">
-
-                                <template #default="{ row }">
-                                    {{ row.compo || '未参加考试' }}
-                                </template>
-                            </el-table-column>
-                            <el-table-column prop="ds" label="数据结构">
-
-                                <template #default="{ row }">
-                                    {{ row.ds || '未参加考试' }}
-                                </template>
-                            </el-table-column>
-
-                        </el-table>
-                    </div>
-                </el-main>
-            </el-container>
+            </el-main>
         </el-container>
-    </div>
+    </el-container>
 
 
-
+<!-- 
     <div id="app">
 
 
-        <!-- <table class="table">
+        <table class="table">
             <thead>
                 <tr class="tableheader">
                     <th>考生号</th>
@@ -115,12 +114,12 @@
                     <td>{{ examer.ds !== null ? examer.ds : '未考试' }}</td>
                 </tr>
             </tbody>
-        </table> -->
+        </table>
 
 
 
 
-    </div>
+    </div> -->
 
 
 
@@ -1272,7 +1271,9 @@ interface User {
     padding: 0;
     box-sizing: border-box;
 } */
-
+.el-container{
+    width: 180%;
+}
 .title {
     margin-top: 30px;
     text-align: center;
@@ -1281,7 +1282,7 @@ interface User {
 }
 
 .el-header {
-    margin-left: 50%;
+    /* margin-left: 50%; */
     size: 40pt;
 }
 
@@ -1296,8 +1297,8 @@ interface User {
 }
 
 .el-main {
-    width: 150%;
-    margin: 0% 150px;
+    width: 90%;
+    margin-left: 150px;
     border-collapse: collapse;
 }
 
