@@ -22,10 +22,8 @@
             <el-main>
                 <div class="score">
                     <el-input v-model="searchText" placeholder="搜索" @input="handleSearch"></el-input>
-                    <el-table :data="examers.slice((currentPage-1)*pageSize,currentPage*pageSize)"
-                              :header-cell-style="{background:'#D9D9D9'}" 
-                               border=true
-                               stripe>
+                    <el-table :data="examers.slice((currentPage - 1) * pageSize, currentPage * pageSize)"
+                        :header-cell-style="{ background: '#D9D9D9' }" border=true stripe>
                         <!-- 表格列 -->
                         <el-table-column prop="id" label="考生号" class="id"></el-table-column>
                         <el-table-column prop="name" label="姓名 "></el-table-column>
@@ -52,7 +50,7 @@
                                 {{ row.ds || '未参加考试' }}
                             </template>
                         </el-table-column>
-                        <el-table-column fixed="right" label="操作" width="100">
+                        <el-table-column fixed="right" label="操作">
 
                             <template v-slot="scope">
                                 <el-button @click.prevent="deleteRow(scope.$index, tableData)" type="text" size="small">
@@ -62,15 +60,9 @@
                         </el-table-column>
                     </el-table>
                     <div style="text-align:center">
-                        <el-pagination
-                        @size-change="handleSizeChange"
-                        @current-change="handleCurrentChange"
-                        :current-page = "currentPage"
-                        :page-sizes="[10,20,30,40]"
-                        :page-size="pageSize"
-                        layout="total, sizes, prev, pager, next, jumper"
-                        :total="examers.length"
-                        ></el-pagination>
+                        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange"
+                            :current-page="currentPage" :page-sizes="[10, 20, 30, 40]" :page-size="pageSize"
+                            layout="total, sizes, prev, pager, next, jumper" :total="examers.length"></el-pagination>
                     </div>
 
                 </div>
@@ -1277,9 +1269,11 @@ interface User {
     background-color: #FF2424;
 
 }
-.el-button{
-    width:100px;
+
+.el-button {
+    width: 100px;
 }
+
 .el-container {
     width: 180%;
 }
@@ -1308,7 +1302,7 @@ interface User {
 
 .el-main {
     width: 90%;
-    margin-left: 100px;
+    margin-left: 5%;
     border-collapse: collapse;
 }
 
@@ -1339,6 +1333,10 @@ interface User {
 
 }
 
+.el-button {
+    width: 100px;
+}
+
 /* 
 .buttons button {
     width: 120px;
@@ -1362,10 +1360,11 @@ interface User {
     background-color: #D9D9D9;
 }
 
-.el-table th{
+.el-table th {
     width: 176px;
     height: 80px;
 }
+
 .el-table td {
     padding: 10px;
     border: 1px solid #0c090977;
