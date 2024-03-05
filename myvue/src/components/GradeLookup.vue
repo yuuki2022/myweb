@@ -2,50 +2,19 @@
 
     <el-container>
         <el-aside width=150px>
-
-
-
-
-
-
-
-
-
-
-
-
             <div class="username">10086</div>
             <!-- <button @click="logout" class="logout">退出</button> -->
-            <el-button type="danger" @click="logout" size="large">退出</el-button>
+            <el-button type="danger" @click="logout" size="large" id="quit">退出</el-button>
             <hr>
             <div class="buttons">
-                <el-button type="primary" size="large">出试卷</el-button>
+                <el-button type="primary" size="large" id="createPaper">出试卷</el-button>
                 <br>
-                <el-button type="primary" @click="Togradelookup" size="large">查询成绩</el-button>
+                <el-button type="primary" @click="Togradelookup" size="large" id="lookgrade">查询成绩</el-button>
+                <br>
+                <el-button type="primary" @click="Togradelookup" size="large" id="organizeStudent">管理学生</el-button>
                 <br>
                 <!-- <button class="purple">检查结果</button> -->
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </el-aside>
         <el-container>
             <el-header>
@@ -54,9 +23,9 @@
             <el-main>
                 <div class="score">
                     <el-input v-model="searchText" placeholder="搜索" @input="handleSearch"></el-input>
-                    <el-table :data="filteredData" height="600" border=true>
+                    <el-table :data="filteredData" height="800" border=true>
                         <!-- 表格列 -->
-                        <el-table-column prop="id" label="考生号"></el-table-column>
+                        <el-table-column prop="id" label="考生号" class="id"></el-table-column>
                         <el-table-column prop="name" label="姓名 "></el-table-column>
                         <el-table-column prop="net" label="计算机网络">
                             <template #default="{ row }">
@@ -81,47 +50,24 @@
                                 {{ row.ds || '未参加考试' }}
                             </template>
                         </el-table-column>
+                        <el-table-column fixed="right" label="操作" width="120">
 
+                            <template v-slot="scope">
+                                <el-button @click.prevent="deleteRow(scope.$index, tableData)" type="text" size="small">
+                                    移除
+                                </el-button>
+                            </template>
+                        </el-table-column>
                     </el-table>
+                    <div style="text-align:center">
+                        <el-pagination hide-on-single-page background layout="prev, pager, next,total" :total="total"
+                            :page-size="pagesize" @current-change="current_change"></el-pagination>
+                    </div>
+
                 </div>
             </el-main>
         </el-container>
     </el-container>
-
-
-<!-- 
-    <div id="app">
-
-
-        <table class="table">
-            <thead>
-                <tr class="tableheader">
-                    <th>考生号</th>
-                    <th>姓名</th>
-                    <th>计算机网络</th>
-                    <th>计算机操作系统</th>
-                    <th>计算机组成原理</th>
-                    <th>数据结构</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="examer in examers" :key="examer.id">
-                    <td>{{ examer.id }}</td>
-                    <td>{{ examer.name }}</td>
-                    <td>{{ examer.net !== null ? examer.net : '未考试' }}</td>
-                    <td>{{ examer.os !== null ? examer.os : '未考试' }}</td>
-                    <td>{{ examer.compo !== null ? examer.compo : '未考试' }}</td>
-                    <td>{{ examer.ds !== null ? examer.ds : '未考试' }}</td>
-                </tr>
-            </tbody>
-        </table>
-
-
-
-
-    </div> -->
-
-
 
 </template>
 
@@ -1271,20 +1217,65 @@ interface User {
     padding: 0;
     box-sizing: border-box;
 } */
-.el-container{
+.buttons {
+    display: flex;
+    flex-direction: column;
+    /*元素之间不要留空隙 */
+    /* 设置元素居中 */
+
+}
+
+.el-container {
+    margin-left: 5%;
+}
+
+#createPaper {
+    width: 150%;
+    height: 80px;
+    background-color: #AD0000;
+    color: #000000;
+    font-size: 30px;
+}
+
+#organizeStudent {
+    width: 150%;
+    height: 80px;
+    background-color: #BD73E0;
+    color: #FFFFFF;
+    font-size: 30px;
+}
+
+#lookgrade {
+    margin-top: 0;
+    width: 150%;
+    height: 80px;
+    background-color: #67C3E1;
+    color: #000000;
+    font-size: 30px;
+}
+
+#quit {
+    width: 50%;
+    height: 40px;
+    background-color: #FF2424;
+
+}
+
+.el-container {
     width: 180%;
 }
+
 .title {
     margin-top: 30px;
     text-align: center;
     /* Center the text horizontally */
-
 }
 
 .el-header {
     /* margin-left: 50%; */
     size: 40pt;
 }
+
 
 .header {
     display: flex;
@@ -1301,6 +1292,8 @@ interface User {
     margin-left: 150px;
     border-collapse: collapse;
 }
+
+/*设置el-table第一列的样式*/
 
 .username {
     font-size: 24px;
@@ -1353,26 +1346,36 @@ interface User {
     background-color: purple;
 }
 
-.table {
-    width: 80%;
-    margin: 100px 200px;
-    border-collapse: collapse;
-}
 
-.colgroup {
+.el-table th {
     padding: 10px;
-    border: 1px solid black;
+    border: 2px solid black;
     text-align: center;
     background-color: #D9D9D9;
-    ;
-
+    width: 176px;
 }
 
-.el-table__row {
+.id {
+    width: 100px;
+    background-color: #D9D9D9;
+}
+
+
+.el-table td {
     padding: 10px;
-    border: 1px solid black;
+    border: 2px solid black;
     text-align: center;
     background-color: #F8F9FB;
+    width: 176px;
+    width: 100px;
+}
+
+.el-table td>.cell {
+    text-align: center;
+}
+
+.el-table th>.cell {
+    text-align: center;
 }
 
 .confirm {
