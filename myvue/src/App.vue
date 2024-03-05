@@ -1,12 +1,4 @@
 <template>
-  <router-link to="/">登录</router-link>
-  <p></p>
-  <router-link to="/register">注册</router-link>
-  <p></p>
-  <router-link to="/student">学生个人主页</router-link>
-  <p></p>
-  <router-link to="/gardelookup">查成绩</router-link>
-  <p></p>
   <router-view></router-view>
 </template>
 
@@ -16,15 +8,13 @@
 </script>
 
 <style>
-body {
-  /*取消body标签的默认样式*/
+html,body,#app{
+  height: 100vh;
+  width: 100vh;
   margin: 0;
   padding: 0;
-  /*body的大小就是浏览器的全屏*/
-  width: 100vh;
-  height: 80vh;
+  font-family: Arial, sans-serif;
 }
-
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -32,7 +22,5 @@ body {
   text-align: center;
   color: #2c3e50;
   margin: auto;
-  width: 100%;
-  height: 100%;
 }
 </style>

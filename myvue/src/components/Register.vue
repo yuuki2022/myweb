@@ -4,9 +4,9 @@
     <form @submit.prevent="submitForm">
       <br>
       <input type="text" placeholder="账号" id="account" v-model="account">
-      <input type="password" placeholder="旧密码" id="password" v-model="password">
-      <input type="text" placeholder="新密码" id="password" v-model="password">
-      <input type="text" placeholder="确认新密码" id="password" v-model="password">
+      <input type="password" placeholder="旧密码" id="oldPassword" v-model="oldPassword">
+      <input type="text" placeholder="新密码" id="newPassword" v-model="newPassword">
+      <input type="text" placeholder="确认新密码" id="ensureNewPassword" v-model="ensureNewPassword">
       <button type="submit">确认</button>
     </form>
   </div>
@@ -18,11 +18,17 @@ export default {
   data() {
     return {
       account: '',
-      password: ''
+      oldPassword: '',
+      newPassword:'',
+      ensureNewPassword:''
     }
   },
   methods: {
     submitForm() {
+      if(this.newPassword !== this.ensureNewPassword){
+        alert('两次输入的新密码不一致')
+        return
+      }
       fetch('http://localhost:8081/authentication', {
         method: 'POST',
         headers: {
@@ -30,7 +36,8 @@ export default {
         },
         body: JSON.stringify({
           adminName: this.account,
-          saltPassword: this.password
+          oldPassword: this.oldPassword,
+          newPassword: this.newPassword,
         })
       })
         .then(res => res.json())
@@ -93,6 +100,7 @@ input {
   text-align: center;
   /*设置字体大小 */
   font-size: 20px;
+  margin-bottom: 3%;
 }
 
 #account {

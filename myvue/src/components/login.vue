@@ -6,9 +6,9 @@
       <input type="text" placeholder="账号" id="account" v-model="account">
       <input type="password" placeholder="密码" id="password" v-model="password">
       <br>
-      <button type="submit">登录</button>
+      <button type="submit">登录</button> 
       <br>
-      <p><a href="">重设密码</a></p>
+      <p><a href="./register">重设密码</a></p>
     </form>
   </div>
 </template>
@@ -63,7 +63,7 @@ h1{
 
 #login{ 
   margin-top: 20%;
-  margin-left: 72%;
+  margin-left: 70%;
   width: 50.667%;
   height: 45.556%;
 
@@ -100,16 +100,14 @@ input {
   margin-bottom: 3%;
 }
 button {
-  width: 85%;
   height: 15%;
   border-radius:10px;
   border: 1px solid #000;
-  display: block;
   text-align: center;
   /*设置字体大小 */
   font-size: 20px;
   background-color: #D9D9D9;
-  width: 20%;
+  width: 40%;
 }
 button:hover{
   background-color: #BEBEBE;
