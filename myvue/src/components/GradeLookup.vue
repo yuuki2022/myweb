@@ -24,7 +24,6 @@
                     <el-input v-model="searchText" placeholder="搜索" @input="handleSearch"></el-input>
                     <el-table :data="examers.slice((currentPage-1)*pageSize,currentPage*pageSize)"
                               :header-cell-style="{background:'#D9D9D9'}" 
-                               height="800" 
                                border=true
                                stripe>
                         <!-- 表格列 -->
@@ -53,7 +52,7 @@
                                 {{ row.ds || '未参加考试' }}
                             </template>
                         </el-table-column>
-                        <el-table-column fixed="right" label="操作" width="120">
+                        <el-table-column fixed="right" label="操作" width="100">
 
                             <template v-slot="scope">
                                 <el-button @click.prevent="deleteRow(scope.$index, tableData)" type="text" size="small">
@@ -1348,19 +1347,6 @@ interface User {
     font-size: 20px;
 } */
 
-.red {
-    background-color: red;
-}
-
-.green {
-    background-color: green;
-}
-
-.purple {
-    background-color: purple;
-}
-
-
 .el-table th {
     padding: 10px;
     border: 1px solid #0c090977;
@@ -1374,14 +1360,17 @@ interface User {
     background-color: #D9D9D9;
 }
 
-
+.el-table th{
+    width: 176px;
+    height: 80px;
+}
 .el-table td {
     padding: 10px;
     border: 1px solid #0c090977;
     text-align: center;
     background-color: #F8F9FB;
     width: 176px;
-    width: 100px;
+    height: 60px;
 }
 
 .el-table td>.cell {
