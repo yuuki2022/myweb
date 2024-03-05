@@ -1247,7 +1247,7 @@ interface User {
     margin-left: 5%;
 }
 
-#createPaper {
+/* #createPaper {
     width: 150%;
     height: 80px;
     background-color: #AD0000;
@@ -1270,7 +1270,7 @@ interface User {
     background-color: #67C3E1;
     color: #000000;
     font-size: 30px;
-}
+} */
 
 #quit {
     width: 50%;
@@ -1307,7 +1307,7 @@ interface User {
 
 .el-main {
     width: 90%;
-    margin-left: 150px;
+    margin-left: 100px;
     border-collapse: collapse;
 }
 
@@ -1363,7 +1363,7 @@ interface User {
 
 .el-table th {
     padding: 10px;
-    border: 2px solid black;
+    border: 1px solid #0c090977;
     text-align: center;
     background-color: #D9D9D9;
     width: 176px;
@@ -1377,7 +1377,7 @@ interface User {
 
 .el-table td {
     padding: 10px;
-    border: 2px solid black;
+    border: 1px solid #0c090977;
     text-align: center;
     background-color: #F8F9FB;
     width: 176px;
@@ -1415,6 +1415,7 @@ interface User {
 }
 
 .el-table-column {
-    width: 100px;
+    width: 90px;
+
 }
 </style>
