@@ -1,18 +1,51 @@
 <template>
     <div class="common-layout">
         <el-container>
-            <el-aside width="200px">
-                <span class="username">10086</span>
-                <hr>
-                <button @click="logout" class="logout">退出</button>
+            <el-aside width=150px>
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="username">10086</div>
+                <!-- <button @click="logout" class="logout">退出</button> -->
+                <el-button plain @click="logout" size="large">退出</el-button>
                 <hr>
                 <div class="buttons">
-                    <button class="red">出试卷</button>
+                    <el-button plain size="large">出试卷</el-button>
                     <br>
-                    <button @click="Togradelookup" class="green">查询成绩</button>
+                    <el-button @click="Togradelookup" class="green" size="large">查询成绩</el-button>
                     <br>
                     <!-- <button class="purple">检查结果</button> -->
                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </el-aside>
             <el-container>
                 <el-header>
@@ -21,28 +54,28 @@
                 <el-main>
                     <div class="score">
                         <el-input v-model="searchText" placeholder="搜索" @input="handleSearch"></el-input>
-                        <el-table :data="filteredData" height="600" border=true >
+                        <el-table :data="filteredData" height="600" border=true>
                             <!-- 表格列 -->
-                            <el-table-column prop="id" label="考生号" ></el-table-column>
-                            <el-table-column prop="name" label="姓名 " ></el-table-column>
-                            <el-table-column prop="net" label="计算机网络" >
+                            <el-table-column prop="id" label="考生号"></el-table-column>
+                            <el-table-column prop="name" label="姓名 "></el-table-column>
+                            <el-table-column prop="net" label="计算机网络">
                                 <template #default="{ row }">
                                     {{ row.net || '未参加考试' }}
                                 </template>
                             </el-table-column>
-                            <el-table-column prop="os" label="计算机操作系统" >
+                            <el-table-column prop="os" label="计算机操作系统">
 
                                 <template #default="{ row }">
                                     {{ row.os || '未参加考试' }}
                                 </template>
                             </el-table-column>
-                            <el-table-column prop="compo" label="计算机组成原理" >
+                            <el-table-column prop="compo" label="计算机组成原理">
 
                                 <template #default="{ row }">
                                     {{ row.compo || '未参加考试' }}
                                 </template>
                             </el-table-column>
-                            <el-table-column prop="ds" label="数据结构" >
+                            <el-table-column prop="ds" label="数据结构">
 
                                 <template #default="{ row }">
                                     {{ row.ds || '未参加考试' }}
@@ -1189,6 +1222,7 @@ export default {
         };
 
     },
+
     computed: {
         filteredData() {
             return this.examers.filter(item => {
@@ -1246,7 +1280,7 @@ interface User {
 
 }
 
-.el-header{
+.el-header {
     margin-left: 50%;
     size: 40pt;
 }
@@ -1261,16 +1295,16 @@ interface User {
 
 }
 
-.el-main{
+.el-main {
     width: 150%;
-    margin: 0% 25%;
+    margin: 0% 150px;
     border-collapse: collapse;
 }
 
 .username {
     font-size: 24px;
     font-weight: bold;
-    padding: 10px;
+    padding: 20px;
 }
 
 .logout {
@@ -1296,6 +1330,7 @@ interface User {
 
 }
 
+/* 
 .buttons button {
     width: 120px;
     height: 60px;
@@ -1303,7 +1338,7 @@ interface User {
     border-radius: 15px;
     color: white;
     font-size: 20px;
-}
+} */
 
 .red {
     background-color: red;
@@ -1323,15 +1358,16 @@ interface User {
     border-collapse: collapse;
 }
 
-.colgroup{
+.colgroup {
     padding: 10px;
     border: 1px solid black;
     text-align: center;
     background-color: #D9D9D9;
-;
+    ;
 
 }
-.el-table__row{
+
+.el-table__row {
     padding: 10px;
     border: 1px solid black;
     text-align: center;
