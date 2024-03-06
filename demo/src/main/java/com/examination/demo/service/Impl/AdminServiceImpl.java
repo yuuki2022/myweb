@@ -56,4 +56,10 @@ public class AdminServiceImpl implements AdminService{
         //adminDAO.update(null, Wrappers.<AdminDO>lambdaUpdate().eq(AdminDO::getAdminName, adminName).set(AdminDO::getSaltPassword, saltPassword));
     }
 
+    @Override
+    public void deleteStudent(String adminName) {
+        adminDAO.deleteStudent(adminName);
+        //adminDAO.delete(Wrappers.<AdminDO>lambdaQuery().eq(AdminDO::getAdminName, adminName));
+    }
+
 }

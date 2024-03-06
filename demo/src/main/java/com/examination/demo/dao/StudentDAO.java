@@ -33,8 +33,8 @@ public interface StudentDAO{
     @Delete("delete from student where student_id = #{studentId}")
     void deleteStudent(String studentId);
 
-    @Select("select * from student where student_Id = #{studentId} and salt_password = #{saltPassword}")
-    StudentDO login(String studentName, String saltPassword);
+    @Select("select student_id as studentId, student_name as studentName from student where student_id = #{studentId} and salt_password = #{saltPassword}")
+    StudentDO login(String studentId, String saltPassword);
 
 
     @Update("update student set salt_password = #{saltPassword} where student_id = #{studentId}")

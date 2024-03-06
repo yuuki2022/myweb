@@ -14,6 +14,11 @@
 </template>
 
 <script>
+import axios from 'axios';
+import { ElMessage } from 'element-plus'
+import {useStore} from 'vuex'
+
+
 export default {
   name: 'LoginComponent',
   data() {
@@ -22,25 +27,30 @@ export default {
       password: ''
     }
   },
+  setup() {
+    const store = useStore()
+    return { store }
+  },
   methods: {
     submitForm() {
-    fetch('http://localhost:8081/authentication', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        adminName: this.account,
-        saltPassword: this.password
-      })
+    axios.post('http://localhost:8081/authentication', {
+      adminName: this.account,
+      saltPassword: this.password
     })
-    .then(res => res.json())
     .then(res => {
       console.log(res)
-      if (res.code === '200') {
-        alert(res['message'])
+      if (res.data['code'] === '200') {
+        if (res.data['message'] === 'student') {
+          ElMessage.success('学生登录成功')
+          this.store.commit('setUserName', this.account)
+          this.$router.push('/Student')
+        } else {
+          ElMessage.success('管理员登录成功')
+          this.store.commit('setUserName', this.account)
+          this.$router.push('/GradeLookup')
+        }
       } else {
-        alert(res['message'])
+        ElMessage.error(res.data['message'])
       }
     })
   }

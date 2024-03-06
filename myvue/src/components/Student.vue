@@ -3,9 +3,9 @@
 
 
         <div class="student-info">
-            <p style="font-size: 20px;">学号</p>
-            <p id="studentId"> 123456789</p>
-            <el-button @click="exit"  type="danger" id="exit-button">退出</el-button>
+            <p style="font-size: 20px;">{{ studentId }}</p>
+            <p id="studentId">{{ studentName }}</p>
+            <el-button @click="exit" type="danger" id="exit-button">退出</el-button>
         </div>
 
 
@@ -16,19 +16,19 @@
             <div class="subject-list">
                 <div class="subject-item">
                     <span style="font-size: 25px;">计算机网络</span>
-                    <el-button class="exam-button" type="success" style="font-size: 16px;" >参加考试</el-button>
+                    <el-button class="exam-button" type="success" style="font-size: 16px;" >{{ testState[0] }}</el-button>
                 </div>
                 <div class="subject-item">
                     <span style="font-size: 25px;">计算机操作系统</span>
-                    <el-button class="exam-button" type="success"  style="font-size: 16px;">参加考试</el-button>
+                    <el-button class="exam-button" type="success" style="font-size: 16px;">{{ testState[1] }}</el-button>
                 </div>
                 <div class="subject-item">
                     <span style="font-size: 25px;">计算机组成原理</span>
-                    <el-button class="exam-button" type="success" style="font-size: 16px;">参加考试</el-button>
+                    <el-button class="exam-button" type="success" style="font-size: 16px;">{{ testState[2] }}</el-button>
                 </div>
                 <div class="subject-item">
                     <span style="font-size: 25px;">数据结构</span>
-                    <el-button class="exam-button"  type="success" style="font-size: 16px;">参加考试</el-button>
+                    <el-button class="exam-button" type="success" style="font-size: 16px;">{{ testState[3] }}</el-button>
                 </div>
             </div>
         </div>
@@ -38,19 +38,49 @@
 
 
 <script>
+import { useStore } from 'vuex';
+import axios from 'axios';
+import { onMounted, ref } from 'vue';
+
+
 export default {
     name: 'StudentComponent',
-    data() {
-        return {
-            studentId: ''
-        }
-    },
-    methods: {
-        exit() {
+    setup() {
+        const store = useStore()
+        let studentId = ref('')
+        let studentName = ref('')
+        let testState = ['参加考试']*4;
+        console.log(store)
+        
+        onMounted(() => {
+            console.log(store)
+            axios.get('http://localhost:8081/student/exams', {
+                params: {
+                    studentId: store.state.userName
+                }
+            }).then(res => {
+                console.log("res",res.data['data'])
+                let student = JSON.parse(res.data['data'])
+                console.log(student)
+                studentId.value = student['studentId']
+                studentName.value = student['studentName']
+                let exams = student['exams']
+                for (let i = 0; i < exams.length; i++) {
+                    testState[exams[i]['subjectId'] - 1] = '已参加'
+                }
+
+            })
+        })
+
+        const exit = () => {
+            store.commit('setUserName', '')
             this.$router.push('/')
         }
-    }
+
+        return {studentId,studentName,exit,store }
+    },
 }
+
 </script>
 
 
@@ -103,7 +133,7 @@ p {
     /* padding: 10px 20px;
     border: none;
     cursor: pointer;*/
-    width: 80%; 
+    width: 80%;
 }
 
 .subject-list {
@@ -140,7 +170,7 @@ p {
     border: none;
     cursor: pointer;
     float: right;
-    width:15%;
-height: 10%;
+    width: 15%;
+    height: 10%;
 }
 </style>

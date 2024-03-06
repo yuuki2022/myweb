@@ -5,8 +5,8 @@
       <br>
       <input type="text" placeholder="账号" id="account" v-model="account">
       <input type="password" placeholder="旧密码" id="oldPassword" v-model="oldPassword">
-      <input type="text" placeholder="新密码" id="newPassword" v-model="newPassword">
-      <input type="text" placeholder="确认新密码" id="ensureNewPassword" v-model="ensureNewPassword">
+      <input type="password" placeholder="新密码" id="newPassword" v-model="newPassword">
+      <input type="password" placeholder="确认新密码" id="ensureNewPassword" v-model="ensureNewPassword">
       <button type="submit">确认</button>
     </form>
   </div>
@@ -14,6 +14,7 @@
 
 <script>
 import axios from 'axios'
+import { ElMessage } from 'element-plus'
 
 export default {
   name: 'RegisterComponent',
@@ -21,30 +22,31 @@ export default {
     return {
       account: '',
       oldPassword: '',
-      newPassword:'',
-      ensureNewPassword:''
+      newPassword: '',
+      ensureNewPassword: ''
     }
   },
   methods: {
     submitForm() {
-      if(this.newPassword !== this.ensureNewPassword){
-        alert('两次输入的新密码不一致')
+      if (this.newPassword !== this.ensureNewPassword) {
+        ElMessage.error('您的新密码两次输入不一致')
         return
       }
-      axios.post('http://localhost:8081/resetPassword', {
+      axios.post('http://localhost:8081/changePassword', {
         adminName: this.account,
         oldPassword: this.oldPassword,
         newPassword: this.newPassword
       })
-      .then(res => {
-        console.log(res)
-        if (res.data.code === '200') {
-          alert(res.data['message'])
-        } else {
-          alert(res.data['message'])
-        }
-      })
-      
+        .then(res => {
+          console.log(res)
+          if (res.data.code === '200') {
+            ElMessage.success('您的密码修改成功')
+            this.$router.push('/')
+          } else {
+            ElMessage.error(res.data.message)
+          }
+        })
+
     }
   }
 }

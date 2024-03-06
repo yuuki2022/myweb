@@ -39,6 +39,12 @@ public class StudentServiceImpl implements StudentService{
         if (studentDO == null) {
             return null;
         }
+        List<CourseDO> courseDOList = courseDAO.getCoursesByStudentId(studentDO.getStudentId());
+        studentDO.setCourseList(courseDOList);
+
+        List<PaperDO> paperDOList = paperDAO.getPaperByStudentId(studentDO.getStudentId());
+        studentDO.setPaperList(paperDOList);
+        
         Student student = StudentService.toModel(studentDO);
 
         return student;
@@ -71,13 +77,14 @@ public class StudentServiceImpl implements StudentService{
         studentDAO.deleteStudent(studentId);
     }
 
-    public Student login(String studentName, String saltPassword) {
-        StudentDO studentDO = studentDAO.login(studentName, saltPassword);
+    public Student login(String studentId, String saltPassword) {
+      
+        StudentDO studentDO = studentDAO.login(studentId, saltPassword);
         if(studentDO == null){
             return null;
         }
-        Student student = new Student();
-        BeanUtils.copyProperties(studentDO, student);
+        Student student = StudentService.toModel(studentDO);
+        
         return student;
     }
 
