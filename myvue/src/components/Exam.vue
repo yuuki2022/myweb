@@ -130,9 +130,9 @@ export default {
 
 <style scoped>
 #test{
-  width: 1850px;
-  height: 1500px;
-  margin-top: 100px;
+  width: 180%;
+  height: 100%;
+  margin-top: 5%;
 }
 .el-row {
   margin-bottom: 20px;
