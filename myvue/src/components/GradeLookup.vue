@@ -50,11 +50,7 @@
                                 {{ row.ds || '未参加考试' }}
                             </template>
                         </el-table-column>
-<<<<<<< HEAD
-                        <el-table-column fixed="right" label="操作" width="100" >
-=======
                         <el-table-column fixed="right" label="操作">
->>>>>>> 6c55d0cc7640219499858e856a96bff0bf32e746
 
                             <template v-slot="scope">
                                 <el-button @click.prevent="deleteRow(scope.$index, tableData)" type="text" size="small">
