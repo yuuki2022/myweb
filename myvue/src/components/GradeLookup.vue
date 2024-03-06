@@ -52,7 +52,7 @@
                                 {{ row.ds || '未参加考试' }}
                             </template>
                         </el-table-column>
-                        <el-table-column fixed="right" label="操作" width="100">
+                        <el-table-column fixed="right" label="操作" width="100" >
 
                             <template v-slot="scope">
                                 <el-button @click.prevent="deleteRow(scope.$index, tableData)" type="text" size="small">
@@ -1347,22 +1347,14 @@ interface User {
     font-size: 20px;
 } */
 
-.el-table th {
+.el-table th{
+    width: 176px;
+    height: 80px;
     padding: 10px;
     border: 1px solid #0c090977;
     text-align: center;
     background-color: #D9D9D9;
     width: 176px;
-}
-
-.id {
-    width: 100px;
-    background-color: #D9D9D9;
-}
-
-.el-table th{
-    width: 176px;
-    height: 80px;
 }
 .el-table td {
     padding: 10px;

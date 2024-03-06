@@ -3,6 +3,7 @@ import login from './components/login.vue';
 import GradeLookup from './components/GradeLookup.vue';
 import Student from './components/Student.vue';
 import Register from './components/Register.vue';
+import CreateQuestion from './components/CreateQuestion.vue';
 
 
 
@@ -26,6 +27,11 @@ const routes = [
       path:"/register",
       name:"register",
       component: Register
+    },
+    {
+      path: '/createQuestion',
+      name:'CreateQuestion',
+      component: CreateQuestion
     }
   ];
   

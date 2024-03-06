@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'RegisterComponent',
   data() {
@@ -29,26 +31,20 @@ export default {
         alert('两次输入的新密码不一致')
         return
       }
-      fetch('http://localhost:8081/authentication', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          adminName: this.account,
-          oldPassword: this.oldPassword,
-          newPassword: this.newPassword,
-        })
+      axios.post('http://localhost:8081/resetPassword', {
+        adminName: this.account,
+        oldPassword: this.oldPassword,
+        newPassword: this.newPassword
       })
-        .then(res => res.json())
-        .then(res => {
-          console.log(res)
-          if (res.code === '200') {
-            alert(res['message'])
-          } else {
-            alert(res['message'])
-          }
-        })
+      .then(res => {
+        console.log(res)
+        if (res.data.code === '200') {
+          alert(res.data['message'])
+        } else {
+          alert(res.data['message'])
+        }
+      })
+      
     }
   }
 }
