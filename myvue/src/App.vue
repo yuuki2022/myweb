@@ -22,6 +22,7 @@ export default {
 </script>
 
 <style>
+
 html,
 body,
 #app {
@@ -39,5 +40,5 @@ body,
   text-align: center;
   color: #2c3e50;
   margin: auto;
-}
+}  
 </style>
