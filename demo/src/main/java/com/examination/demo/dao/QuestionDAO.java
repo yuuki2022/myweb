@@ -38,4 +38,6 @@ public interface QuestionDAO {
     @Delete("delete from question where question_id = #{questionId}")
     void deleteQuestion(@Param("questionId") Long questionId);
 
+    
+
 }

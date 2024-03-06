@@ -73,6 +73,7 @@
 </template>
 
 <script>
+
 export default {
     name: "App",
     data() {
@@ -1172,13 +1173,7 @@ export default {
     },
 
     computed: {
-        filteredData() {
-            return this.examers.filter(item => {
-                return Object.values(item).some(value => {
-                    return String(value).toLowerCase().includes(this.searchText.toLowerCase());
-                });
-            });
-        }
+    
     },
     methods: {
         handleSizeChange(val) {
