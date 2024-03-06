@@ -9,11 +9,15 @@ export default createStore({
             "计算机组成原理":3,
             "数据结构":4,
         },
-        course:['参加考试','计算机网络','计算机操作系统','计算机组成原理','数据结构']
+        course:['参加考试','计算机网络','计算机操作系统','计算机组成原理','数据结构'],
+        testCourse:''
     },
     mutations:{
         setUserName(state, userName){
             state.userName = userName
+        },
+        setTestCourse(state, testCourse){
+            state.testCourse = testCourse
         }
     },
     actions:{

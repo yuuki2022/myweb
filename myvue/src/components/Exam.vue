@@ -1,10 +1,3 @@
-<!-- 
-TODO
--[] 提交
--[] 获取题库
-
- -->
-
 
 <template>
   <div id="test">
@@ -134,6 +127,11 @@ export default {
 </script>
 
 <style scoped>
+#test{
+  width: 1850px;
+  height: 1500px;
+  margin-top: 100px;
+}
 .el-row {
   margin-bottom: 20px;
 }

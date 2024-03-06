@@ -16,19 +16,23 @@
             <div class="subject-list">
                 <div class="subject-item">
                     <span style="font-size: 25px;">计算机网络</span>
-                    <el-button class="exam-button" type="success" style="font-size: 16px;" >{{ testState[0] }}</el-button>
+                    <el-button class="exam-button" type="testStateColor(0)" style="font-size: 16px;"
+                        @click="handleClick(0)">{{ testState[0] }}</el-button>
                 </div>
                 <div class="subject-item">
                     <span style="font-size: 25px;">计算机操作系统</span>
-                    <el-button class="exam-button" type="success" style="font-size: 16px;">{{ testState[1] }}</el-button>
+                    <el-button class="exam-button" type="testStateColor(1)" style="font-size: 16px;"
+                        @click="handleClick(1)">{{ testState[1] }}</el-button>
                 </div>
                 <div class="subject-item">
                     <span style="font-size: 25px;">计算机组成原理</span>
-                    <el-button class="exam-button" type="success" style="font-size: 16px;">{{ testState[2] }}</el-button>
+                    <el-button class="exam-button" type="testStateColor(2)" style="font-size: 16px;"
+                        @click="handleClick(2)">{{ testState[2] }}</el-button>
                 </div>
                 <div class="subject-item">
                     <span style="font-size: 25px;">数据结构</span>
-                    <el-button class="exam-button" type="success" style="font-size: 16px;">{{ testState[3] }}</el-button>
+                    <el-button class="exam-button" type="testStateColor(3)" style="font-size: 16px;"
+                        @click="handleClick(3)">{{ testState[3] }}</el-button>
                 </div>
             </div>
         </div>
@@ -41,17 +45,19 @@
 import { useStore } from 'vuex';
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 
 export default {
     name: 'StudentComponent',
     setup() {
         const store = useStore()
+        const router = useRouter()
         let studentId = ref('')
         let studentName = ref('')
-        let testState = ['参加考试']*4;
+        let testState = ref(['参加考试', '参加考试', '参加考试', '参加考试'])
         console.log(store)
-        
+
         onMounted(() => {
             console.log(store)
             axios.get('http://localhost:8081/student/exams', {
@@ -59,25 +65,46 @@ export default {
                     studentId: store.state.userName
                 }
             }).then(res => {
-                console.log("res",res.data['data'])
+                console.log("res", res.data['data'])
                 let student = JSON.parse(res.data['data'])
                 console.log(student)
                 studentId.value = student['studentId']
                 studentName.value = student['studentName']
+
                 let exams = student['exams']
+
                 for (let i = 0; i < exams.length; i++) {
-                    testState[exams[i]['subjectId'] - 1] = '已参加'
+                    if (exams[i]['courseId'] != 0) {
+                        testState.value[exams[i]['courseId'] - 1] = exams[i]['score']
+                    }
                 }
+
 
             })
         })
-
-        const exit = () => {
+        const testStateColor = (index) => {
+            if (testState.value[index] == '参加考试') {
+                return 'success'
+            } else {
+                return 'danger'
+            }
+        }
+        const exitQuit = () => {
             store.commit('setUserName', '')
-            this.$router.push('/')
+            router.push('/Exam')
         }
 
-        return {studentId,studentName,exit,store }
+        const handleClick = (courseId) => {
+            if (testState.value[courseId] === '参加考试') {
+                console.log(courseId)
+                store.commit('setTestCourse', courseId + 1)
+                router.push('/Exam')
+            } else {
+                console.log(courseId)
+            }
+        }
+
+        return { studentId, studentName, exitQuit, store, testState, handleClick, testStateColor }
     },
 }
 
