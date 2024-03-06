@@ -18,6 +18,9 @@
 
         <el-container>
 
+            <el-header>
+                <h1>出试卷</h1>
+            </el-header>
             <el-main>
 
                 <el-form label-width="80px">
@@ -176,8 +179,7 @@ p {
 
 .el-main {
     width: 1100px;
-    height: 880px;
-    margin-top: 5%;
+    height:auto;
     left: 409px;
     border-radius: 15px;
     background-color: #F8F9FB;
