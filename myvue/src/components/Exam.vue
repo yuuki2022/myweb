@@ -86,7 +86,7 @@ export default {
       studentId: questionData.studentId,
       course_id: questionData.course_id,
       studentName: questionData.studentName,
-      courseName: "sb",
+      courseName: "陈光柱子",
       visible: true,
       questions: questionData.questions.map(question => ({
         ...question,
