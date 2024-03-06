@@ -8,6 +8,8 @@
       <input type="password" placeholder="新密码" id="newPassword" v-model="newPassword">
       <input type="password" placeholder="确认新密码" id="ensureNewPassword" v-model="ensureNewPassword">
       <button type="submit">确认</button>
+      <p><a href="./">返回登录</a></p>
+<br>
     </form>
   </div>
 </template>
@@ -75,7 +77,7 @@ h1 {
 
 form {
   width: 90.667%;
-  height: 90.556%;
+  height: 93.556%;
   border-radius: 30px;
   margin: 0 auto;
   border: 3px solid #000;
