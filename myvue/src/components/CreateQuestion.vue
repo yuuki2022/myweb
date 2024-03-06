@@ -1,7 +1,7 @@
 <template>
     <el-container>
         <el-aside width=150px>
-            <div class="username">10086</div>
+            <div class="username">{{ username }}</div>
             <!-- <button @click="logout" class="logout">退出</button> -->
             <el-button type="danger" @click="$root.logout" size="large" id="quit">退出</el-button>
             <hr>
@@ -25,7 +25,7 @@
 
                 <el-form label-width="80px">
                     <div>
-                        <el-select v-model="value" placeholder="选择科目" class="chooseSubject" style="width: 180px">
+                        <el-select v-model="course" placeholder="选择科目" class="chooseSubject" style="width: 180px">
                             <el-option v-for="item in options" :key="item.value" :label="item.label"
                                 :value="item.value" />
                         </el-select>
@@ -35,34 +35,33 @@
                         placeholder="输入题目" />
                     <p style="font-weight: 400; font-weight: bold; font-size: 30px;">输入选项</p>
                     <el-form-item label="选项A">
-                        <el-input v-model="optionA" placeholder="请输入选项A"></el-input>
+                        <el-input v-model="answer[0]" placeholder="请输入选项A"></el-input>
                     </el-form-item>
                     <el-form-item label="选项B">
-                        <el-input v-model="optionB" placeholder="请输入选项B"></el-input>
+                        <el-input v-model="answer[1]" placeholder="请输入选项B"></el-input>
                     </el-form-item>
                     <el-form-item label="选项C">
-                        <el-input v-model="optionC" placeholder="请输入选项C"></el-input>
+                        <el-input v-model="answer[2]" placeholder="请输入选项C"></el-input>
                     </el-form-item>
                     <el-form-item label="选项D">
-                        <el-input v-model="optionD" placeholder="请输入选项D"></el-input>
+                        <el-input v-model="answer[3]" placeholder="请输入选项D"></el-input>
                     </el-form-item>
                     <el-form-item label="正确答案">
-                        <el-radio-group v-model="answer">
+                        <el-radio-group v-model="rightAnswer">
                             <el-radio :value=0>A</el-radio>
                             <el-radio :value=1>B</el-radio>
                             <el-radio :value=2>C</el-radio>
                             <el-radio :value=3>D</el-radio>
-
                         </el-radio-group>
                     </el-form-item>
                     <el-form-item label="难度等级">
-                        <el-radio-group v-model="difficulty">
+                        <el-radio-group v-model="hard">
                             <el-radio :value=0>简单</el-radio>
                             <el-radio :value=1>中等</el-radio>
                             <el-radio :value=2>困难</el-radio>
                         </el-radio-group>
                     </el-form-item>
-                    <el-button type="success" class="save" size="large" round>保存</el-button>
+                    <el-button type="success" class="save" size="large" @click="submitCreateQuestion" round>保存</el-button>
 
                 </el-form>
             </el-main>
@@ -91,44 +90,64 @@ export default {
 
 
     }
-}</script>
+}
+</script>
 
 <script setup>
 
-import { ref } from 'vue'
 
-const value = ref('')
+import { ref } from 'vue'
+import {useStore} from 'vuex'
+import axios from 'axios'
+import { ElMessage } from 'element-plus'
+
+
+const store = useStore()
 
 const options = [
     {
-        value: 'net',
+        value: 1,
         label: '计算机网络',
     },
     {
-        value: 'os',
+        value: 2,
         label: '计算机操作系统',
     },
     {
-        value: 'compo',
+        value: 3,
         label: '计算机组成原理',
     },
     {
-        value: 'ds',
+        value: 4,
         label: '数据结构',
     },
 
 ]
+let course = ref('')
+let rightAnswer = ref('')
 
-const answer = ref('1')
+let hard = ref('')
 
-const difficulty = ref('1')
+let question = ref('')
 
-const question = ref('')
+let answer = ref(['', '', '', ''])
+let username = ref(store.state.username)
 
-const optionA = ref('')
-const optionB = ref('')
-const optionC = ref('')
-const optionD = ref('')
+const submitCreateQuestion = () => {
+
+    axios.post('http://localhost:8081/createQuestion', {
+        courseId: course.value,
+        content: question.value,
+        answer:[answer.value[0], answer.value[1], answer.value[2], answer.value[3]],
+        rightAnswer: answer.value[rightAnswer.value],
+        hard: hard.value
+    }).then(res => {
+       console.log(res)
+       ElMessage.success("题目已进入题库")
+    }).catch(err => {
+        console.log(err)
+    })
+}
 
 </script>
 
