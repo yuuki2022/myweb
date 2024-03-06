@@ -78,7 +78,7 @@ import axios from 'axios'
 import questionData from '../../../文档/jsons/questions.json'
 export default {
   name: 'ExamComponent',
-   data() {
+  data() {
     return {
       studentId: questionData.studentId,
       course_id: questionData.course_id,
@@ -125,6 +125,8 @@ export default {
 
 }
 </script>
+
+
 
 <style scoped>
 #test{
@@ -226,12 +228,4 @@ export default {
   color: #fff;
 }
 
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
