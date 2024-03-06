@@ -5,8 +5,8 @@
         <el-row gutter="20">
           <div class="msgDisplay" style="height:140px">
             <el-col>
-              <h2 style="margin-bottom: 15px;">考生</h2>
-              <h3 style="margin-bottom: 5px;">{{ studentName }}</h3>
+              <!-- <h2 style="margin-bottom: 15px;">考生</h2> -->
+              <h2 style="margin-bottom: 5px;">{{ studentName }}</h2>
               <h4>{{ studentId }}</h4>
             </el-col>
 
@@ -15,6 +15,7 @@
         <el-row gutter="20">
           <div class="buttonContainer buttons">
             <el-scrollbar height="400px">
+              <br>
               <el-button v-for="(question, index) in questions" :key="question.questionId"
                 @click="scrollToQuestion(question.questionId)" circle size="mini"
                 :class="{ 'selected': question.choice !== null }">{{ index + 1 }}</el-button>
