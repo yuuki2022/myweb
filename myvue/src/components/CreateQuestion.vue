@@ -3,7 +3,7 @@
         <el-aside width=150px>
             <div class="username">10086</div>
             <!-- <button @click="logout" class="logout">退出</button> -->
-            <el-button type="danger" @click="logout" size="large" id="quit">退出</el-button>
+            <el-button type="danger" @click="$root.logout" size="large" id="quit">退出</el-button>
             <hr>
             <div class="buttons">
                 <el-button type="primary" @click="$root.CreateQuestion" size="large" id="createPaper">出试卷</el-button>
