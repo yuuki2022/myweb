@@ -1,4 +1,3 @@
-
 <template>
   <div id="test">
     <el-row>
@@ -57,16 +56,19 @@
           <!--el-card shadow="hover" style="width: 100%;margin-top: 20px; display: flex; flex-direction: column; align-items: center; height:80%"-->
           <div
             style="width: 100%; background: #F8F9FB; height:140px ;display: flex;flex-direction: column; align-items: center;">
-            <h3 style="color: red; margin-bottom: 0px;" v-show="visible">考试剩余时间</h3>
-            <el-countdown v-show="visible" format="HH:mm:ss" :value="value1"
-              value-style="color:red ; font-size:40px ;font-weight:bold" />
-            <el-button class="countdown-footer" type="primary" @click="visible = !visible">{{ visible ? '隐藏' : '显示'
+
+            <el-button style="margin-top:10px;" class="countdown-footer" type="primary" @click="visible = !visible">{{ visible ? '隐藏' : '显示'
               }}考试剩余时间</el-button>
+
+            <h3 style="color: red; margin-bottom: 0px;" v-show="visible">考试剩余时间</h3>
+            <el-countdown v-show="visible" format="HH:mm:ss" :value="timer"
+              value-style="color:red ; font-size:40px ;font-weight:bold" />
+
           </div>
           <!--/el-card-->
         </el-row>
         <el-row>
-          <textarea class="text" wrap="soft"></textarea>
+          <textarea placeholder="草稿区域" class="text" wrap="soft"></textarea>
         </el-row>
       </el-col>
     </el-row>
@@ -89,7 +91,7 @@ export default {
         ...question,
         choice: null // 添加 choice 属性，默认值为 null
       })),
-      value1: Date.now() + 1000 * 60 * 60 * 24 * 2
+      timer: Date.now() + 1000 * 60 * 60 * 24 * 2
     }
   },
   methods: {
@@ -129,11 +131,12 @@ export default {
 
 
 <style scoped>
-#test{
+#test {
   width: 180%;
   height: 100%;
   margin-top: 5%;
 }
+
 .el-row {
   margin-bottom: 20px;
 }
@@ -163,6 +166,7 @@ export default {
   height: 450px;
   width: 233px;
   resize: none;
+  border: none;
 }
 
 .p {
@@ -209,6 +213,7 @@ export default {
 }
 
 .el-button {
+  width: 150px;
   margin: 0 5px;
   /* 设置按钮之间的水平间距 */
 }
@@ -227,5 +232,4 @@ export default {
   background-color: #409EFF;
   color: #fff;
 }
-
 </style>
