@@ -9,21 +9,23 @@
               <h2 style="margin-bottom: 5px;">{{ studentName }}</h2>
               <h4>{{ studentId }}</h4>
             </el-col>
-
           </div>
         </el-row>
-        <el-row gutter="20">
-          <div class="buttonContainer buttons">
+        <el-row gutter="50">
+          <div class="buttons">
             <el-scrollbar height="400px">
-              <br>
-              <el-button v-for="(question, index) in questions" :key="question.questionId"
-                @click="scrollToQuestion(question.questionId)" circle size="mini"
-                :class="{ 'selected': question.choice !== null }">{{ index + 1 }}</el-button>
+              <el-button 
+              v-for="(question, index) in questions" 
+              :key="question.questionId"
+                @click="scrollToQuestion(question.questionId)" 
+                circle 
+                size="mini"
+                :class="{ 'selected': question.choice !== null } " >{{ index + 1 }}</el-button>
             </el-scrollbar>
           </div>
         </el-row>
         <el-row class="rowCenter">
-          <div class="buttonContainer">
+          <div >
             <el-button type="success" size="medium" style="text-align:center">提交</el-button>
           </div>
         </el-row>
@@ -199,6 +201,7 @@ export default {
   align-items: center;
   /* 垂直居中对齐 */
   background: #F2F6FE;
+
 }
 
 .button-container {
@@ -215,7 +218,7 @@ export default {
 
 .el-button {
   width: 150px;
-  margin: 0 5px;
+  margin: 3px 5px 3px 12px;
   /* 设置按钮之间的水平间距 */
 }
 
