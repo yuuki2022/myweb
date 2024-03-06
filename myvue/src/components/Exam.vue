@@ -1,4 +1,3 @@
-
 <template>
   <div id="test">
     <el-row>
@@ -6,8 +5,8 @@
         <el-row gutter="20">
           <div class="msgDisplay" style="height:140px">
             <el-col>
-              <h2 style="margin-bottom: 15px;">考生</h2>
-              <h3 style="margin-bottom: 5px;">{{ studentName }}</h3>
+              <!-- <h2 style="margin-bottom: 15px;">考生</h2> -->
+              <h2 style="margin-bottom: 5px;">{{ studentName }}</h2>
               <h4>{{ studentId }}</h4>
             </el-col>
 
@@ -16,6 +15,7 @@
         <el-row gutter="20">
           <div class="buttonContainer buttons">
             <el-scrollbar height="400px">
+              <br>
               <el-button v-for="(question, index) in questions" :key="question.questionId"
                 @click="scrollToQuestion(question.questionId)" circle size="mini"
                 :class="{ 'selected': question.choice !== null }">{{ index + 1 }}</el-button>
@@ -23,8 +23,8 @@
           </div>
         </el-row>
         <el-row class="rowCenter">
-          <div class="buttons buttonContainer">
-            <el-button type="submit" size="medium" style="text-align:center">提交</el-button>
+          <div class="buttonContainer">
+            <el-button type="success" size="medium" style="text-align:center">提交</el-button>
           </div>
         </el-row>
       </el-col>
@@ -57,16 +57,19 @@
           <!--el-card shadow="hover" style="width: 100%;margin-top: 20px; display: flex; flex-direction: column; align-items: center; height:80%"-->
           <div
             style="width: 100%; background: #F8F9FB; height:140px ;display: flex;flex-direction: column; align-items: center;">
-            <h3 style="color: red; margin-bottom: 0px;" v-show="visible">考试剩余时间</h3>
-            <el-countdown v-show="visible" format="HH:mm:ss" :value="value1"
-              value-style="color:red ; font-size:40px ;font-weight:bold" />
-            <el-button class="countdown-footer" type="primary" @click="visible = !visible">{{ visible ? '隐藏' : '显示'
+
+            <el-button style="margin-top:10px;" class="countdown-footer" type="primary" @click="visible = !visible">{{ visible ? '隐藏' : '显示'
               }}考试剩余时间</el-button>
+
+            <h3 style="color: red; margin-bottom: 0px;" v-show="visible">考试剩余时间</h3>
+            <el-countdown v-show="visible" format="HH:mm:ss" :value="timer"
+              value-style="color:red ; font-size:40px ;font-weight:bold" />
+
           </div>
           <!--/el-card-->
         </el-row>
         <el-row>
-          <textarea class="text" wrap="soft"></textarea>
+          <textarea placeholder="草稿区域" class="text" wrap="soft"></textarea>
         </el-row>
       </el-col>
     </el-row>
@@ -83,13 +86,13 @@ export default {
       studentId: questionData.studentId,
       course_id: questionData.course_id,
       studentName: questionData.studentName,
-      courseName: "sb",
+      courseName: "陈光柱子",
       visible: true,
       questions: questionData.questions.map(question => ({
         ...question,
         choice: null // 添加 choice 属性，默认值为 null
       })),
-      value1: Date.now() + 1000 * 60 * 60 * 24 * 2
+      timer: Date.now() + 1000 * 60 * 60 * 24 * 2
     }
   },
   methods: {
@@ -129,11 +132,12 @@ export default {
 
 
 <style scoped>
-#test{
-  width: 1850px;
-  height: 1500px;
-  margin-top: 100px;
+#test {
+  width: 180%;
+  height: 100%;
+  margin-top: 5%;
 }
+
 .el-row {
   margin-bottom: 20px;
 }
@@ -163,6 +167,7 @@ export default {
   height: 450px;
   width: 233px;
   resize: none;
+  border: none;
 }
 
 .p {
@@ -209,6 +214,7 @@ export default {
 }
 
 .el-button {
+  width: 150px;
   margin: 0 5px;
   /* 设置按钮之间的水平间距 */
 }
@@ -227,5 +233,4 @@ export default {
   background-color: #409EFF;
   color: #fff;
 }
-
 </style>
