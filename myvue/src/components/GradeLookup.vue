@@ -3,14 +3,14 @@
         <el-aside width=150px>
             <div class="username">10086</div>
             <!-- <button @click="logout" class="logout">退出</button> -->
-            <el-button type="danger" @click="logout" size="large" id="quit">退出</el-button>
+            <el-button type="danger" @click="$root.logout" size="large" id="quit">退出</el-button>
             <hr>
             <div class="buttons">
-                <el-button type="primary" size="large" id="createPaper">出试卷</el-button>
+                <el-button type="primary" size="large" @click="$root.CreateQuestion" id="createPaper">出试卷</el-button>
                 <br>
-                <el-button type="primary" @click="Togradelookup" size="large" id="lookgrade">查询成绩</el-button>
+                <el-button type="primary" @click="$root.Togradelookup" size="large" id="lookgrade">查询成绩</el-button>
                 <br>
-                <el-button type="primary" @click="Togradelookup" size="large" id="organizeStudent">管理学生</el-button>
+                <el-button type="primary" size="large" id="organizeStudent">管理学生</el-button>
                 <br>
                 <!-- <button class="purple">检查结果</button> -->
             </div>
@@ -1174,7 +1174,6 @@ export default {
     computed: {
         filteredData() {
             return this.examers.filter(item => {
-                // 在姓名、年龄、性别中搜索匹配的数据
                 return Object.values(item).some(value => {
                     return String(value).toLowerCase().includes(this.searchText.toLowerCase());
                 });
@@ -1187,12 +1186,6 @@ export default {
         },
         handleCurrentChange(val) {
             this.currentPage = val;
-        },
-        Togradelookup() {
-            this.$router.push('/gradelookup');
-        },
-        logout() {
-            this.$router.push('/');
         },
         handleSearch(value) {
             this.searchText = value;
@@ -1347,7 +1340,7 @@ interface User {
     font-size: 20px;
 } */
 
-.el-table th{
+.el-table th {
     width: 176px;
     height: 80px;
     padding: 10px;
