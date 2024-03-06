@@ -22,8 +22,8 @@
           </div>
         </el-row>
         <el-row class="rowCenter">
-          <div class="buttons buttonContainer">
-            <el-button type="submit" size="medium" style="text-align:center">提交</el-button>
+          <div class="buttonContainer">
+            <el-button type="success" size="medium" style="text-align:center">提交</el-button>
           </div>
         </el-row>
       </el-col>
