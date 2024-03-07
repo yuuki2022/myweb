@@ -14,18 +14,14 @@
         <el-row gutter="50">
           <div class="buttons">
             <el-scrollbar height="400px">
-              <el-button 
-              v-for="(question, index) in questions" 
-              :key="question.questionId"
-                @click="scrollToQuestion(question.questionId)" 
-                circle 
-                size="mini"
-                :class="{ 'selected': question.choice !== null } " >{{ index + 1 }}</el-button>
+              <el-button v-for="(question, index) in questions" :key="question.questionId"
+                @click="scrollToQuestion(question.questionId)" circle size="mini"
+                :class="{ 'selected': question.choice !== null }">{{ index + 1 }}</el-button>
             </el-scrollbar>
           </div>
         </el-row>
         <el-row class="rowCenter">
-          <div >
+          <div>
             <el-button type="success" size="medium" style="text-align:center" @click="onSubmit">提交</el-button>
           </div>
         </el-row>
@@ -43,10 +39,10 @@
                 <a>{{ index + 1 }}.{{ question.content }}</a>
                 <br>
                 <el-radio-group v-model="question.choice" class="ml-4">
-                  <el-radio value="1" size="large">A.{{ question.answer[0] }}</el-radio>
-                  <el-radio value="2" size="large">B.{{ question.answer[1] }}</el-radio>
-                  <el-radio value="3" size="large">C.{{ question.answer[2] }}</el-radio>
-                  <el-radio value="4" size="large">D.{{ question.answer[3] }}</el-radio>
+                  <el-radio value="0" size="large">A.{{ question.answer[0] }}</el-radio>
+                  <el-radio value="1" size="large">B.{{ question.answer[1] }}</el-radio>
+                  <el-radio value="2" size="large">C.{{ question.answer[2] }}</el-radio>
+                  <el-radio value="3" size="large">D.{{ question.answer[3] }}</el-radio>
                 </el-radio-group>
               </el-card>
             </el-scrollbar>
@@ -60,13 +56,13 @@
           <div
             style="width: 100%; background: #F8F9FB; height:140px ;display: flex;flex-direction: column; align-items: center;">
 
-            <el-button style="margin-top:10px;" class="countdown-footer" type="primary" @click="visible = !visible">{{ visible ? '隐藏' : '显示'
-              }}考试剩余时间</el-button>
+            <el-button style="margin-top:10px;" class="countdown-footer" type="primary" @click="visible = !visible">{{
+        visible ? '隐藏' : '显示'
+      }}考试剩余时间</el-button>
 
-            <h3 style="color: red; margin-bottom: 0px;" v-show="visible"  >考试剩余时间</h3>
+            <h3 style="color: red; margin-bottom: 0px;" v-show="visible">考试剩余时间</h3>
             <el-countdown v-show="visible" format="HH:mm:ss" :value="timer"
-              value-style="color:red ; font-size:40px ;font-weight:bold" 
-              @finish="forceSubmit"/>
+              value-style="color:red ; font-size:40px ;font-weight:bold" @finish="forceSubmit" />
 
           </div>
           <!--/el-card-->
@@ -96,7 +92,7 @@ export default {
         ...question,
         choice: null // 添加 choice 属性，默认值为 null
       })),
-      timer: Date.now() + 1000 * 60 * 60 * 24 * 2
+      timer: Date.now() + 1000 * 4 * 2
     }
   },
 
@@ -109,56 +105,62 @@ export default {
         questionElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     },
-    forceSubmit(){
-      ElMessageBox.alert('考试时间到！', '警告！', {
-    confirmButtonText: '退出考试',
-  })
-  this.submitForm();
-},
-onSubmit(){
-  ElMessageBox.confirm(
-    '请确认是否提交',
-    '确认',
-    {
-      confirmButtonText: '是',
-      cancelButtonText: '取消',
-      type: 'warning',
-    }
-  )
-    .then(() => {
-      this.submitForm();
-    })
-    .catch(() => {
-      ElMessage({
-        type: 'info',
-        message: '取消提交',
-      })
-    })
-},
-submitForm(){
-        // 构建要发送给后端的数据对象
-    const formData = {
-      studentId: this.studentId,
-      studentName: this.studentName,
-      course_id: this.course_id,
-      questions: this.questions.map(question => ({
-        questionId: this.question.questionId,
-        right_answer:this.question.answer[question.choice]
-      }))
-    };
 
-    // 发送数据给后端（这里假设使用 Axios 发送 POST 请求）
-    axios.post('/api/submit', formData)
-      .then(response => {
-        // 处理成功响应
-        console.log(response.data);
+
+    submitForm() {
+      // 构建要发送给后端的数据对象
+      const formData = {
+        studentId: this.studentId,
+        studentName: this.studentName,
+        course_id: this.course_id,
+        questions: this.questions.map(question => ({
+          questionId: question.questionId,
+          right_answer: question.answer[question.choice]
+        }))
+      };
+
+      // 发送数据给后端（这里假设使用 Axios 发送 POST 请求）
+      axios.post('/api/submit', formData)
+        .then(response => {
+          // 处理成功响应
+          console.log(response.data);
+        })
+        .catch(error => {
+          // 处理错误
+          console.error('提交失败', error);
+        });
+    },
+    forceSubmit() {
+      ElMessageBox.alert('考试时间到！', '警告！', {
+        confirmButtonText : '退出考试',
+        // callback:()=>{
+        //   this.$router.push('/');
+        // },
       })
-      .catch(error => {
-        // 处理错误
-        console.error('提交失败', error);
-      });
-},
-    
+      this.submitForm();
+    },
+    onSubmit() {
+      ElMessageBox.confirm(
+        '请确认是否提交',
+        '确认',
+        {
+          confirmButtonText: '是',
+          cancelButtonText: '取消',
+          type: 'warning',
+        }
+      )
+        .then(() => {
+          this.submitForm();
+        })
+        .catch(() => {
+          ElMessage({
+            type: 'info',
+            message: '取消提交',
+          })
+        })
+    },
+
+
     fetchQuestions() {
       axios.get("./文档/jsons/questions.json")
         .then(response => {
@@ -166,19 +168,20 @@ submitForm(){
           this.studentId = response.data.studentId;
           this.course_id = response.data.course_id;
           this.courseName = response.data.courseName;
-          this.questions = response.data.questions;
-          response.questions.map(question=>({
+          //this.questions = response.data.questions;
+          this.questions = response.data.questions.map(question => ({
             ...question,
-            choice:null
+            choice: null
           }))
-          this.timer=Date.now()+response.data.timer;//倒计时时间,response.data.timer单位:毫秒
+          this.timer = Date.now() + response.data.timer;//倒计时时间,response.data.timer单位:毫秒
           console.log();
-         })
-        
+        })
+
         .catch(error => {
           console.error('Error fetching questions:', error);
         });
     }
+
   },
 
   mounted() {
