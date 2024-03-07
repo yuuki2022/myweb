@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.examination.demo.common.Constant;
 import com.examination.demo.model.Admin;
 import com.examination.demo.model.Course;
+import com.examination.demo.model.Paging;
 import com.examination.demo.model.Paper;
 import com.examination.demo.model.Result;
 import com.examination.demo.model.Student;
@@ -40,45 +42,47 @@ public class StudentControl {
     private AdminService adminService;
 
     @GetMapping("/students")
+    @CrossOrigin
     @ResponseBody
-    public String getStudents() {
+    public String getStudents(@RequestParam(defaultValue = "1") Integer pageNum, @RequestParam(defaultValue = "10") Integer pageSize) {
         List<Student> students = studentService.getAllStudent();
         List<Map<String, Object>> studentList = new ArrayList<>();
 
+
         for (Student student : students) {
             Map<String, Object> studentMap = new HashMap<>();
-            studentMap.put("studentId", student.getStudentId());
-            studentMap.put("studentName", student.getStudentName());
-            List<Map<String, Integer>> courses = new ArrayList<>();
-
-            if (student.getCourseList() != null) {
-                for (Course course : student.getCourseList()) {
-                    Map<String, Integer> courseMap = new HashMap<>();
-                    courseMap.put("courseId", course.getCourseId());
-                    courseMap.put("score", 0);
-                    for (Paper paper : student.getPaperList()) {
-                        if (paper.getCourseId() == course.getCourseId()) {
-                            courseMap.put("score", paper.getScore());
-                        }
-                    }
-                    courses.add(courseMap);
-                }
+            studentMap.put("id", student.getStudentId());
+            studentMap.put("name", student.getStudentName());
+            
+            for (Paper paper: student.getPaperList()) {
+                studentMap.put(Constant.course[paper.getCourseId()-1], 100);
+            }
+            if(studentMap.get("net") == null) {
+                studentMap.put("net", null);
+            }
+            if(studentMap.get("os") == null) {
+                studentMap.put("os", null);
+            }
+            if(studentMap.get("compo") == null) {
+                studentMap.put("compo", null);
+            }
+            if(studentMap.get("ds") == null) {
+                studentMap.put("ds", null);
             }
 
-            studentMap.put("courses", courses);
             studentList.add(studentMap);
         }
 
         /////////// 将students转为json格式返回
         ObjectMapper mapper = new ObjectMapper();
 
-        Result<String> responseBody = new Result<>();
+        Result<List<Map<String, Object>>> responseBody = new Result<>();
 
         try {
-            String studentsJson = mapper.writeValueAsString(studentList);
             responseBody.setCode("200");
             responseBody.setMessage("success");
-            responseBody.setData(studentsJson);
+            responseBody.setData(studentList);
+            System.out.println(mapper.writeValueAsString(studentList));
             return mapper.writeValueAsString(responseBody);
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,6 +93,34 @@ public class StudentControl {
         return responseBody.toString();
 
     }
+
+
+    // @GetMapping("/studentsInformation")
+    // @CrossOrigin
+    // @ResponseBody
+    // public String getStudentsInformation(@RequestParam Integer pageNum, @RequestParam Integer pageSize) {
+    //     Paging<Student> students = studentService.findAll(pageNum, pageSize);
+
+
+    //     /////////// 将students转为json格式返回
+    //     ObjectMapper mapper = new ObjectMapper();
+
+    //     Result<String> responseBody = new Result<>();
+
+    //     try {
+    //         String studentsJson = mapper.writeValueAsString(studentList);
+    //         responseBody.setCode("200");
+    //         responseBody.setMessage("success");
+    //         responseBody.setData(studentsJson);
+    //         return mapper.writeValueAsString(responseBody);
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     }
+
+    //     responseBody.setCode("500");
+    //     responseBody.setMessage("error");
+    //     return responseBody.toString();
+    // }
 
     @GetMapping("/student")
     @CrossOrigin
@@ -209,23 +241,13 @@ public class StudentControl {
 
     }
 
-    @PostMapping("/student/insert")
+    @GetMapping("/student/insert")
+    @CrossOrigin
     @ResponseBody
-    public String addOneStudent(@RequestParam String studentId, @RequestParam String studentName,
-            @RequestBody String courseInformation) {
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            @SuppressWarnings("unchecked")
-            List<Integer> courseList = mapper.readValue(courseInformation, List.class);
-            studentService.register(studentId, "123456", studentName);
-            for (Integer courseId : courseList) {
-                studentService.insertCourseStudent(studentId, courseId);
-            }
-        } catch (JsonProcessingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
+    public String addOneStudent(@RequestParam String studentId, @RequestParam String studentName) {
+        
+        studentService.register(studentId, "123456", studentName);
+           
         // TODO: process POST request
 
         Result<String> responseBody = new Result<>();
@@ -236,6 +258,7 @@ public class StudentControl {
     }
 
     @DeleteMapping("/student/delete")
+    @CrossOrigin
     @ResponseBody
     public String deleteStudent(@RequestParam String studentId) {
         studentService.deleteStudent(studentId);

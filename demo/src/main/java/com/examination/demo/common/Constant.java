@@ -1,5 +1,6 @@
 package com.examination.demo.common;
 
+
 public final class Constant {
     final static public String CODE_200 = "200"; // 成功
     final static public String CODE_401 = "401"; // 权限不足
@@ -14,5 +15,8 @@ public final class Constant {
 
     final static public String ACCESS_KEY="LTAI5tHAYwgdURQPKeUTnujL";
     final static public String ACCESS_SECRET="wYMwLquhdhYNlwgpLH8n4ETquLFXmt";
+
+    final static public String[] course = {"net","os","compo","ds"};
+    ////////////////////////////Constant////////////////////////////
 
 }

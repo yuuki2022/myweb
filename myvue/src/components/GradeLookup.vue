@@ -1,7 +1,7 @@
 <template>
     <el-container>
         <el-aside width=150px>
-            <div class="username">10086</div>
+            <div class="username">{{ username }}</div>
             <!-- <button @click="logout" class="logout">退出</button> -->
             <el-button type="danger" @click="$root.logout" size="large" id="quit">退出</el-button>
             <hr>
@@ -21,7 +21,8 @@
             </el-header>
             <el-main>
                 <div class="score">
-                    <el-input v-model="searchText" placeholder="搜索" @input="handleSearch"></el-input>
+                    <el-button type="danger" @click="formVisible = true" size="mini">插入一条学生数据</el-button>
+                    <el-input v-model="searchText" placeholder="搜索" @input="handleSearch" size="mini"></el-input>
                     <el-table :data="examers.slice((currentPage - 1) * pageSize, currentPage * pageSize)"
                         :header-cell-style="{ background: '#D9D9D9' }" border=true stripe>
                         <!-- 表格列 -->
@@ -53,7 +54,7 @@
                         <el-table-column fixed="right" label="操作">
 
                             <template v-slot="scope">
-                                <el-button @click.prevent="deleteRow(scope.$index, tableData)" type="text" size="small">
+                                <el-button @click.prevent="deleteRow(scope.$index, examers)" type="danger" size="small">
                                     移除
                                 </el-button>
                             </template>
@@ -68,1112 +69,83 @@
                 </div>
             </el-main>
         </el-container>
+
+        <el-dialog v-model="formVisible" title="添加一条学生数据" width="500">
+            <el-form :model="form">
+                <el-form-item label="学号" :label-width="formLabelWidth">
+                    <el-input v-model="form.studentId" autocomplete="off" />
+                </el-form-item>
+                <el-form-item label="姓名" :label-width="formLabelWidth">
+                    <el-input v-model="form.studentName" autocomplete="off" />
+                </el-form-item>
+            </el-form>
+
+            <template #footer>
+                <div class="dialog-footer">
+                    <el-button type="primary" @click="dialogFormVisible = false">取消</el-button>
+                    <el-button type="danger" @click="addStudentData">确认</el-button>
+                </div>
+            </template>
+        </el-dialog>
+
+        <el-dialog v-model="visible" :show-close="false" width="500">
+
+            <template #header="{ close, titleId, titleClass }">
+                <div class="my-header">
+                    <h4 :id="titleId" :class="titleClass">您确认需要删除这个学生的信息吗？</h4>
+                    <el-button type="danger" @click="confirmDelete">
+                        <el-icon class="el-icon--left">
+                            <CircleCloseFilled />
+                        </el-icon>
+                        确认
+                    </el-button>
+                    <el-button type="primary" @click="close">
+                        <el-icon class="el-icon--left">
+                            <CircleCloseFilled />
+                        </el-icon>
+                        关闭
+                    </el-button>
+                </div>
+            </template>
+        </el-dialog>
+
     </el-container>
 
 </template>
 
 <script>
-
+import axios from 'axios';
+import { useStore } from 'vuex';
+import { ElMessage } from 'element-plus';
 export default {
     name: "App",
     data() {
+        const store = useStore();
         return {
             currentPage: 1,
             pageSize: 10,
-            examers: [
-                {
-                    id: 1213278912,
-                    name: "曹勇",
-                    net: null,
-                    os: 60,
-                    compo: 23,
-                    ds: 122
-                },
-                {
-                    id: 21278214,
-                    name: "张金亮",
-                    net: 22,
-                    os: null,
-                    compo: 32,
-                    ds: 43
-                },
-                {
-                    id: 871236542,
-                    name: "杨力",
-                    net: 45,
-                    os: 78,
-                    compo: null,
-                    ds: 87
-                },
-                {
-                    id: 365487213,
-                    name: "陈龙",
-                    net: 30,
-                    os: 65,
-                    compo: 40,
-                    ds: null
-                },
-                {
-                    id: 984512367,
-                    name: "刘华",
-                    net: 55,
-                    os: 70,
-                    compo: 25,
-                    ds: 95
-                },
-                {
-                    id: 632587941,
-                    name: "陈小红",
-                    net: null,
-                    os: 45,
-                    compo: 30,
-                    ds: 55
-                },
-                {
-                    id: 745123698,
-                    name: "赵大伟",
-                    net: 20,
-                    os: null,
-                    compo: 50,
-                    ds: 75
-                },
-                {
-                    id: 159874236,
-                    name: "黄敏",
-                    net: 35,
-                    os: 68,
-                    compo: 42,
-                    ds: null
-                },
-                {
-                    id: 487965321,
-                    name: "杨强",
-                    net: 50,
-                    os: 75,
-                    compo: null,
-                    ds: 80
-                },
-                {
-                    id: 236587941,
-                    name: "徐小龙",
-                    net: null,
-                    os: 55,
-                    compo: 35,
-                    ds: 65
-                },
-                {
-                    id: 874123698,
-                    name: "朱小强",
-                    net: 25,
-                    os: null,
-                    compo: 60,
-                    ds: 90
-                },
-                {
-                    id: 745968321,
-                    name: "孙丽丽",
-                    net: 40,
-                    os: 72,
-                    compo: 45,
-                    ds: null
-                },
-                {
-                    id: 632587419,
-                    name: "刘小杰",
-                    net: 60,
-                    os: 80,
-                    compo: null,
-                    ds: 100
-                },
-                {
-                    id: 159874236,
-                    name: "何小雪",
-                    net: null,
-                    os: 58,
-                    compo: 48,
-                    ds: 75
-                },
-                {
-                    id: 487965832,
-                    name: "王刚",
-                    net: 48,
-                    os: null,
-                    compo: 55,
-                    ds: 85
-                },
-                {
-                    id: 236587419,
-                    name: "周小红",
-                    net: 32,
-                    os: 70,
-                    compo: 50,
-                    ds: null
-                },
-                {
-                    id: 745968532,
-                    name: "刘大勇",
-                    net: 55,
-                    os: 78,
-                    compo: null,
-                    ds: 95
-                },
-                {
-                    id: 632587149,
-                    name: "李小刚",
-                    net: null,
-                    os: 62,
-                    compo: 52,
-                    ds: 80
-                },
-                {
-                    id: 159874823,
-                    name: "张小丽",
-                    net: 38,
-                    os: null,
-                    compo: 58,
-                    ds: 70
-                },
-                {
-                    id: 487965218,
-                    name: "王小华",
-                    net: 42,
-                    os: 73,
-                    compo: 60,
-                    ds: null
-                },
-                {
-                    id: 987654321,
-                    name: "刘强",
-                    net: null,
-                    os: 68,
-                    compo: 65,
-                    ds: 110
-                },
-                {
-                    id: 654123789,
-                    name: "张伟",
-                    net: 18,
-                    os: null,
-                    compo: 45,
-                    ds: 65
-                },
-                {
-                    id: 321987654,
-                    name: "王丽",
-                    net: 28,
-                    os: 60,
-                    compo: null,
-                    ds: 85
-                },
-                {
-                    id: 741258963,
-                    name: "刘敏",
-                    net: 65,
-                    os: 82,
-                    compo: 55,
-                    ds: null
-                },
-                {
-                    id: 369258147,
-                    name: "王涛",
-                    net: null,
-                    os: 70,
-                    compo: 62,
-                    ds: 90
-                },
-                {
-                    id: 852369741,
-                    name: "杨明",
-                    net: 38,
-                    os: null,
-                    compo: 70,
-                    ds: 100
-                },
-                {
-                    id: 147852369,
-                    name: "陈伟",
-                    net: 50,
-                    os: 75,
-                    compo: null,
-                    ds: 80
-                },
-                {
-                    id: 963258741,
-                    name: "李娜",
-                    net: null,
-                    os: 55,
-                    compo: 48,
-                    ds: 75
-                },
-                {
-                    id: 654789321,
-                    name: "张晓",
-                    net: 45,
-                    os: null,
-                    compo: 55,
-                    ds: 70
-                },
-                {
-                    id: 321654987,
-                    name: "王刚",
-                    net: 32,
-                    os: 70,
-                    compo: 60,
-                    ds: null
-                },
-                {
-                    id: 987654123,
-                    name: "杨梅",
-                    net: 55,
-                    os: 78,
-                    compo: null,
-                    ds: 95
-                },
-                {
-                    id: 654123987,
-                    name: "赵丽",
-                    net: null,
-                    os: 62,
-                    compo: 52,
-                    ds: 80
-                },
-                {
-                    id: 321987654,
-                    name: "陈小芳",
-                    net: 38,
-                    os: null,
-                    compo: 58,
-                    ds: 70
-                },
-                {
-                    id: 789654321,
-                    name: "孙大勇",
-                    net: 42,
-                    os: 73,
-                    compo: 60,
-                    ds: null
-                },
-                {
-                    id: 456987321,
-                    name: "李小明",
-                    net: null,
-                    os: 68,
-                    compo: 65,
-                    ds: 110
-                },
-                {
-                    id: 123654789,
-                    name: "王小伟",
-                    net: 18,
-                    os: null,
-                    compo: 45,
-                    ds: 65
-                },
-                {
-                    id: 987321654,
-                    name: "刘小丽",
-                    net: 28,
-                    os: 60,
-                    compo: null,
-                    ds: 85
-                },
-                {
-                    id: 654987321,
-                    name: "张伟",
-                    net: 65,
-                    os: 82,
-                    compo: 55,
-                    ds: null
-                },
-                {
-                    id: 321654987,
-                    name: "杨涛",
-                    net: null,
-                    os: 70,
-                    compo: 62,
-                    ds: 90
-                },
-                {
-                    id: 987654321,
-                    name: "王明",
-                    net: 38,
-                    os: null,
-                    compo: 70,
-                    ds: 100
-                },
-                {
-                    id: 654987321,
-                    name: "陈娜",
-                    net: 50,
-                    os: 75,
-                    compo: null,
-                    ds: 80
-                },
-                {
-                    id: 321654987,
-                    name: "李晓",
-                    net: null,
-                    os: 55,
-                    compo: 48,
-                    ds: 75
-                },
-                {
-                    id: 987321654,
-                    name: "王丽",
-                    net: 45,
-                    os: null,
-                    compo: 55,
-                    ds: 70
-                },
-                {
-                    id: 654987321,
-                    name: "孙刚",
-                    net: 32,
-                    os: 70,
-                    compo: 60,
-                    ds: null
-                },
-                {
-                    id: 321654987,
-                    name: "李梅",
-                    net: 55,
-                    os: 78,
-                    compo: null,
-                    ds: 95
-                },
-                {
-                    id: 987321654,
-                    name: "张丽",
-                    net: null,
-                    os: 62,
-                    compo: 52,
-                    ds: 80
-                },
-                {
-                    id: 654987321,
-                    name: "王小芳",
-                    net: 38,
-                    os: null,
-                    compo: 58,
-                    ds: 70
-                },
-                {
-                    id: 321654987,
-                    name: "孙大勇",
-                    net: 42,
-                    os: 73,
-                    compo: 60,
-                    ds: null
-                },
-                {
-                    id: 987321654,
-                    name: "陈小明",
-                    net: null,
-                    os: 68,
-                    compo: 65,
-                    ds: 110
-                },
-                {
-                    id: 654987321,
-                    name: "杨小伟",
-                    net: 18,
-                    os: null,
-                    compo: 45,
-                    ds: 65
-                },
-                {
-                    id: 321654987,
-                    name: "张小丽",
-                    net: 28,
-                    os: 60,
-                    compo: null,
-                    ds: 85
-                },
-                {
-                    id: 987321654,
-                    name: "刘伟",
-                    net: 65,
-                    os: 82,
-                    compo: 55,
-                    ds: null
-                },
-                {
-                    id: 654987321,
-                    name: "李涛",
-                    net: null,
-                    os: 70,
-                    compo: 62,
-                    ds: 90
-                },
-                {
-                    id: 321654987,
-                    name: "王明",
-                    net: 38,
-                    os: null,
-                    compo: 70,
-                    ds: 100
-                },
-                {
-                    id: 987321654,
-                    name: "杨丽",
-                    net: 50,
-                    os: 75,
-                    compo: null,
-                    ds: 80
-                },
-                {
-                    id: 654987321,
-                    name: "孙小杰",
-                    net: null,
-                    os: 55,
-                    compo: 48,
-                    ds: 75
-                },
-                {
-                    id: 321654987,
-                    name: "张小明",
-                    net: 45,
-                    os: null,
-                    compo: 55,
-                    ds: 70
-                },
-                {
-                    id: 987321654,
-                    name: "王刚",
-                    net: 32,
-                    os: 70,
-                    compo: 60,
-                    ds: null
-                },
-                {
-                    id: 654987321,
-                    name: "刘梅",
-                    net: 55,
-                    os: 78,
-                    compo: null,
-                    ds: 95
-                },
-                {
-                    id: 321654987,
-                    name: "杨丽",
-                    net: null,
-                    os: 62,
-                    compo: 52,
-                    ds: 80
-                },
-                {
-                    id: 987321654,
-                    name: "张小芳",
-                    net: 38,
-                    os: null,
-                    compo: 58,
-                    ds: 70
-                },
-                {
-                    id: 654987321,
-                    name: "王大勇",
-                    net: 42,
-                    os: 73,
-                    compo: 60,
-                    ds: null
-                },
-                {
-                    id: 321654987,
-                    name: "刘小明",
-                    net: null,
-                    os: 68,
-                    compo: 65,
-                    ds: 110
-                },
-                {
-                    id: 987321654,
-                    name: "李小伟",
-                    net: 18,
-                    os: null,
-                    compo: 45,
-                    ds: 65
-                },
-                {
-                    id: 654987321,
-                    name: "王小丽",
-                    net: 28,
-                    os: 60,
-                    compo: null,
-                    ds: 85
-                },
-                {
-                    id: 321654987,
-                    name: "陈伟",
-                    net: 65,
-                    os: 82,
-                    compo: 55,
-                    ds: null
-                },
-                {
-                    id: 987321654,
-                    name: "王涛",
-                    net: null,
-                    os: 70,
-                    compo: 62,
-                    ds: 90
-                },
-                {
-                    id: 654987321,
-                    name: "李明",
-                    net: 38,
-                    os: null,
-                    compo: 70,
-                    ds: 100
-                },
-                {
-                    id: 321654987,
-                    name: "张伟",
-                    net: 50,
-                    os: 75,
-                    compo: null,
-                    ds: 80
-                },
-                {
-                    id: 987321654,
-                    name: "李梅",
-                    net: null,
-                    os: 55,
-                    compo: 48,
-                    ds: 75
-                },
-                {
-                    id: 654987321,
-                    name: "王丽",
-                    net: 45,
-                    os: null,
-                    compo: 55,
-                    ds: 70
-                },
-                {
-                    id: 321654987,
-                    name: "刘刚",
-                    net: 32,
-                    os: 70,
-                    compo: 60,
-                    ds: null
-                },
-                {
-                    id: 987321654,
-                    name: "王梅",
-                    net: 55,
-                    os: 78,
-                    compo: null,
-                    ds: 95
-                },
-                {
-                    id: 654987321,
-                    name: "陈丽",
-                    net: null,
-                    os: 62,
-                    compo: 52,
-                    ds: 80
-                },
-                {
-                    id: 321654987,
-                    name: "张小伟",
-                    net: 38,
-                    os: null,
-                    compo: 58,
-                    ds: 70
-                },
-                {
-                    id: 987321654,
-                    name: "李大勇",
-                    net: 42,
-                    os: 73,
-                    compo: 60,
-                    ds: null
-                },
-                {
-                    id: 654987321,
-                    name: "孙小明",
-                    net: null,
-                    os: 68,
-                    compo: 65,
-                    ds: 110
-                },
-                {
-                    id: 321654987,
-                    name: "张小丽",
-                    net: 18,
-                    os: null,
-                    compo: 45,
-                    ds: 65
-                },
-                {
-                    id: 987321654,
-                    name: "王小伟",
-                    net: 28,
-                    os: 60,
-                    compo: null,
-                    ds: 85
-                },
-                {
-                    id: 654987321,
-                    name: "刘伟",
-                    net: 65,
-                    os: 82,
-                    compo: 55,
-                    ds: null
-                },
-                {
-                    id: 321654987,
-                    name: "李涛",
-                    net: null,
-                    os: 70,
-                    compo: 62,
-                    ds: 90
-                },
-                {
-                    id: 987321654,
-                    name: "张明",
-                    net: 38,
-                    os: null,
-                    compo: 70,
-                    ds: 100
-                },
-                {
-                    id: 654987321,
-                    name: "刘丽",
-                    net: 50,
-                    os: 75,
-                    compo: null,
-                    ds: 80
-                },
-                {
-                    id: 321654987,
-                    name: "杨小杰",
-                    net: null,
-                    os: 55,
-                    compo: 48,
-                    ds: 75
-                },
-                {
-                    id: 987321654,
-                    name: "王小明",
-                    net: 45,
-                    os: null,
-                    compo: 55,
-                    ds: 70
-                },
-                {
-                    id: 654987321,
-                    name: "孙刚",
-                    net: 32,
-                    os: 70,
-                    compo: 60,
-                    ds: null
-                },
-                {
-                    id: 321654987,
-                    name: "李梅",
-                    net: 55,
-                    os: 78,
-                    compo: null,
-                    ds: 95
-                },
-                {
-                    id: 987321654,
-                    name: "张丽",
-                    net: null,
-                    os: 62,
-                    compo: 52,
-                    ds: 80
-                },
-                {
-                    id: 654987321,
-                    name: "王小芳",
-                    net: 38,
-                    os: null,
-                    compo: 58,
-                    ds: 70
-                },
-                {
-                    id: 321654987,
-                    name: "刘大勇",
-                    net: 42,
-                    os: 73,
-                    compo: 60,
-                    ds: null
-                },
-                {
-                    id: 987321654,
-                    name: "杨小明",
-                    net: null,
-                    os: 68,
-                    compo: 65,
-                    ds: 110
-                },
-                {
-                    id: 654987321,
-                    name: "王小丽",
-                    net: 18,
-                    os: null,
-                    compo: 45,
-                    ds: 65
-                },
-                {
-                    id: 321654987,
-                    name: "陈伟",
-                    net: 28,
-                    os: 60,
-                    compo: null,
-                    ds: 85
-                },
-                {
-                    id: 987321654,
-                    name: "刘伟",
-                    net: 65,
-                    os: 82,
-                    compo: 55,
-                    ds: null
-                },
-                {
-                    id: 654987321,
-                    name: "李涛",
-                    net: null,
-                    os: 70,
-                    compo: 62,
-                    ds: 90
-                },
-                {
-                    id: 321654987,
-                    name: "张伟",
-                    net: 38,
-                    os: null,
-                    compo: 70,
-                    ds: 100
-                },
-                {
-                    id: 987321654,
-                    name: "李梅",
-                    net: 50,
-                    os: 75,
-                    compo: null,
-                    ds: 80
-                },
-                {
-                    id: 654987321,
-                    name: "王小杰",
-                    net: null,
-                    os: 55,
-                    compo: 48,
-                    ds: 75
-                },
-                {
-                    id: 321654987,
-                    name: "杨小明",
-                    net: 45,
-                    os: null,
-                    compo: 55,
-                    ds: 70
-                },
-                {
-                    id: 987321654,
-                    name: "王刚",
-                    net: 32,
-                    os: 70,
-                    compo: 60,
-                    ds: null
-                },
-                {
-                    id: 654987321,
-                    name: "刘梅",
-                    net: 55,
-                    os: 78,
-                    compo: null,
-                    ds: 95
-                },
-                {
-                    id: 321654987,
-                    name: "杨丽",
-                    net: null,
-                    os: 62,
-                    compo: 52,
-                    ds: 80
-                },
-                {
-                    id: 987321654,
-                    name: "张小芳",
-                    net: 38,
-                    os: null,
-                    compo: 58,
-                    ds: 70
-                },
-                {
-                    id: 654987321,
-                    name: "王大勇",
-                    net: 42,
-                    os: 73,
-                    compo: 60,
-                    ds: null
-                },
-                {
-                    id: 321654987,
-                    name: "刘小明",
-                    net: null,
-                    os: 68,
-                    compo: 65,
-                    ds: 110
-                },
-                {
-                    id: 987321654,
-                    name: "李小伟",
-                    net: 18,
-                    os: null,
-                    compo: 45,
-                    ds: 65
-                },
-                {
-                    id: 654987321,
-                    name: "王小丽",
-                    net: 28,
-                    os: 60,
-                    compo: null,
-                    ds: 85
-                },
-                {
-                    id: 321654987,
-                    name: "陈伟",
-                    net: 65,
-                    os: 82,
-                    compo: 55,
-                    ds: null
-                },
-                {
-                    id: 987321654,
-                    name: "王涛",
-                    net: null,
-                    os: 70,
-                    compo: 62,
-                    ds: 90
-                },
-                {
-                    id: 654987321,
-                    name: "李明",
-                    net: 38,
-                    os: null,
-                    compo: 70,
-                    ds: 100
-                },
-                {
-                    id: 321654987,
-                    name: "张伟",
-                    net: 50,
-                    os: 75,
-                    compo: null,
-                    ds: 80
-                },
-                {
-                    id: 987321654,
-                    name: "李梅",
-                    net: null,
-                    os: 55,
-                    compo: 48,
-                    ds: 75
-                },
-                {
-                    id: 654987321,
-                    name: "王丽",
-                    net: 45,
-                    os: null,
-                    compo: 55,
-                    ds: 70
-                },
-                {
-                    id: 321654987,
-                    name: "刘刚",
-                    net: 32,
-                    os: 70,
-                    compo: 60,
-                    ds: null
-                },
-                {
-                    id: 987321654,
-                    name: "王梅",
-                    net: 55,
-                    os: 78,
-                    compo: null,
-                    ds: 95
-                },
-                {
-                    id: 654987321,
-                    name: "陈丽",
-                    net: null,
-                    os: 62,
-                    compo: 52,
-                    ds: 80
-                },
-                {
-                    id: 321654987,
-                    name: "张小伟",
-                    net: 38,
-                    os: null,
-                    compo: 58,
-                    ds: 70
-                },
-                {
-                    id: 987321654,
-                    name: "李大勇",
-                    net: 42,
-                    os: 73,
-                    compo: 60,
-                    ds: null
-                },
-                {
-                    id: 654987321,
-                    name: "孙小明",
-                    net: null,
-                    os: 68,
-                    compo: 65,
-                    ds: 110
-                },
-                {
-                    id: 321654987,
-                    name: "张小丽",
-                    net: 18,
-                    os: null,
-                    compo: 45,
-                    ds: 65
-                },
-                {
-                    id: 987321654,
-                    name: "王小伟",
-                    net: 28,
-                    os: 60,
-                    compo: null,
-                    ds: 85
-                },
-                {
-                    id: 654987321,
-                    name: "刘伟",
-                    net: 65,
-                    os: 82,
-                    compo: 55,
-                    ds: null
-                },
-                {
-                    id: 321654987,
-                    name: "李涛",
-                    net: null,
-                    os: 70,
-                    compo: 62,
-                    ds: 90
-                },
-                {
-                    id: 987321654,
-                    name: "张伟",
-                    net: 38,
-                    os: null,
-                    compo: 70,
-                    ds: 100
-                },
-                {
-                    id: 654987321,
-                    name: "李梅",
-                    net: 50,
-                    os: 75,
-                    compo: null,
-                    ds: 80
-                },
-                {
-                    id: 321654987,
-                    name: "王小杰",
-                    net: null,
-                    os: 55,
-                    compo: 48,
-                    ds: 75
-                },
-                {
-                    id: 987321654,
-                    name: "杨小明",
-                    net: 45,
-                    os: null,
-                    compo: 55,
-                    ds: 70
-                },
-                {
-                    id: 654987321,
-                    name: "王刚",
-                    net: 32,
-                    os: 70,
-                    compo: 60,
-                    ds: null
-                },
-                {
-                    id: 321654987,
-                    name: "刘梅",
-                    net: 55,
-                    os: 78,
-                    compo: null,
-                    ds: 95
-                },
-                {
-                    id: 987321654,
-                    name: "李丽",
-                    net: null,
-                    os: 62,
-                    compo: 52,
-                    ds: 80
-                },
-                {
-                    id: 654987321,
-                    name: "王小芳",
-                    net: 38,
-                    os: null,
-                    compo: 58,
-                    ds: 70
-                },
-                {
-                    id: 321654987,
-                    name: "刘大勇",
-                    net: 42,
-                    os: 73,
-                    compo: 60,
-                    ds: null
-                },
-                {
-                    id: 987321654,
-                    name: "杨小明",
-                    net: null,
-                    os: 68,
-                    compo: 65,
-                    ds: 110
-                },
-                {
-                    id: 654987321,
-                    name: "王小丽",
-                    net: 18,
-                    os: null,
-                    compo: 45,
-                    ds: 65
-                },
-                {
-                    id: 321654987,
-                    name: "陈伟",
-                    net: 28,
-                    os: 60,
-                    compo: null,
-                    ds: 85
-                }],
+            examers: [],
             searchText: '',
-            // tableData: [
-            //     { name: '张三', age: 30, gender: '男' },
-            //     { name: '李四', age: 25, gender: '女' },
-            //     { name: '王五', age: 35, gender: '男' },
-            //     // 更多数据...
-            // ]
+            username: store.state.userName,
+            visible: false,
+            confirm: false,
+            deleteIndex: '',
+            deleteRows: '',
+            formVisible: false,
+            form: {
+                studentId: '',
+                studentName: '',
+            },
         };
+
+    },
+    created() {
+        this.getStudentsData();
 
     },
 
     computed: {
-    
+
     },
     methods: {
         handleSizeChange(val) {
@@ -1184,10 +156,53 @@ export default {
         },
         handleSearch(value) {
             this.searchText = value;
+        },
+        getStudentsData() {
+            axios.get('http://localhost:8081/students', {
+            }).then(res => {
+                console.log("res", res.data['data'])
+                let student = res.data['data']
+                console.log(student)
+                this.examers = student
+            })
+        },
+        deleteRow(index, rows) {
+            this.deleteIndex = index;
+            this.deleteRows = rows;
+            this.visible = true;
+        },
+        confirmDelete() {
+            this.visible = false;
+            axios.delete('http://localhost:8081/student/delete', {
+                params: {
+                    studentId: this.deleteRows[this.deleteIndex].id
+                }
+            }).then(res => {
+                console.log("res", res)
+                this.getStudentsData()
+            })
+        },
+        addStudentData() {
+            this.formVisible = false
+            console.log(this.form.studentId)
+            console.log(this.form.studentName)
+            axios.get('http://localhost:8081/student/insert', {
+                params: {
+                    studentId: this.form.studentId,
+                    studentName: this.form.studentName
+                }
+            }).then(res => {
+                console.log("res", res)
+                this.getStudentsData()
+                this.formVisible = false
+                ElMessage.success('已经成功添加一条学生数据')
+            })
         }
-    }
 
-};
+    }
+}
+
+
 </script>
 
 
@@ -1260,6 +275,7 @@ interface User {
 
 .el-button {
     width: 100px;
+    text-align: center;
 }
 
 .el-container {

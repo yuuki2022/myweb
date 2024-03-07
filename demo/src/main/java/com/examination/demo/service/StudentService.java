@@ -7,6 +7,7 @@ import com.examination.demo.dataobject.CourseDO;
 import com.examination.demo.dataobject.PaperDO;
 import com.examination.demo.dataobject.StudentDO;
 import com.examination.demo.model.Course;
+import com.examination.demo.model.Paging;
 import com.examination.demo.model.Paper;
 import com.examination.demo.model.Student;
 
@@ -31,6 +32,8 @@ public interface StudentService {
     public void insertCourseStudent(String studentId, Integer courseId);
 
     public List<Student> getAllStudent();
+
+    public Paging<Student> findAll(Integer pageNum,Integer pageSize);
     
     public static Student toModel(StudentDO studentDO){
         Student student = new Student();
