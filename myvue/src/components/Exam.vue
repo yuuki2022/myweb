@@ -165,6 +165,7 @@ submitForm(){
           // 解析JSON数据
           this.studentId = response.data.studentId;
           this.course_id = response.data.course_id;
+          this.courseName = response.data.courseName;
           this.questions = response.data.questions;
           console.log();
         })
