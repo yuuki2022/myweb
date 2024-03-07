@@ -142,8 +142,8 @@ submitForm(){
       studentName: this.studentName,
       course_id: this.course_id,
       questions: this.questions.map(question => ({
-        questionId: question.questionId,
-        right_answer:question.answer[question.choice]
+        questionId: this.question.questionId,
+        right_answer:this.question.answer[question.choice]
       }))
     };
 
