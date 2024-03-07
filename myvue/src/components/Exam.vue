@@ -167,11 +167,12 @@ submitForm(){
           this.course_id = response.data.course_id;
           this.courseName = response.data.courseName;
           this.questions = response.data.questions;
-        //   this.questions.map(question=>({
-        //     choice:null
-        //   }))
-        //   this.timer=Date.now()+response.data.timer;//倒计时时间,response.data.timer单位:毫秒
-        //   console.log();
+          response.questions.map(question=>({
+            ...question,
+            choice:null
+          }))
+          this.timer=Date.now()+response.data.timer;//倒计时时间,response.data.timer单位:毫秒
+          console.log();
          })
         
         .catch(error => {
