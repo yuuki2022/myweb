@@ -26,7 +26,7 @@
         </el-row>
         <el-row class="rowCenter">
           <div >
-            <el-button type="success" size="medium" style="text-align:center">提交</el-button>
+            <el-button type="success" size="medium" style="text-align:center" @click="onSubmit">提交</el-button>
           </div>
         </el-row>
       </el-col>
@@ -63,9 +63,10 @@
             <el-button style="margin-top:10px;" class="countdown-footer" type="primary" @click="visible = !visible">{{ visible ? '隐藏' : '显示'
               }}考试剩余时间</el-button>
 
-            <h3 style="color: red; margin-bottom: 0px;" v-show="visible">考试剩余时间</h3>
+            <h3 style="color: red; margin-bottom: 0px;" v-show="visible"  >考试剩余时间</h3>
             <el-countdown v-show="visible" format="HH:mm:ss" :value="timer"
-              value-style="color:red ; font-size:40px ;font-weight:bold" />
+              value-style="color:red ; font-size:40px ;font-weight:bold" 
+              @finish="forceSubmit"/>
 
           </div>
           <!--/el-card-->
@@ -81,6 +82,7 @@
 <script>
 import axios from 'axios'
 import questionData from '../../../文档/jsons/questions.json'
+import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
   name: 'ExamComponent',
   data() {
@@ -97,6 +99,7 @@ export default {
       timer: Date.now() + 1000 * 60 * 60 * 24 * 2
     }
   },
+
   methods: {
     scrollToQuestion(questionId) {
       // 获取对应的题目元素
@@ -106,9 +109,56 @@ export default {
         questionElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     },
-    SubmitEvent() {
+    forceSubmit(){
+      ElMessageBox.alert('考试时间到！', '警告！', {
+    confirmButtonText: '退出考试',
+  })
+  this.submitForm();
+},
+onSubmit(){
+  ElMessageBox.confirm(
+    '请确认的是否提交',
+    '确认',
+    {
+      confirmButtonText: '是',
+      cancelButtonText: '取消',
+      type: 'warning',
+    }
+  )
+    .then(() => {
+      this.submitForm();
+    })
+    .catch(() => {
+      ElMessage({
+        type: 'info',
+        message: '取消提交',
+      })
+    })
+},
+submitForm(){
+        // 构建要发送给后端的数据对象
+    const formData = {
+      studentId: this.studentId,
+      studentName: this.studentName,
+      course_id: this.course_id,
+      questions: this.questions.map(question => ({
+        questionId: question.questionId,
+        right_answer:question.answer[question.choice]
+      }))
+    };
 
-    },
+    // 发送数据给后端（这里假设使用 Axios 发送 POST 请求）
+    axios.post('/api/submit', formData)
+      .then(response => {
+        // 处理成功响应
+        console.log(response.data);
+      })
+      .catch(error => {
+        // 处理错误
+        console.error('提交失败', error);
+      });
+},
+    
     fetchQuestions() {
       axios.get("./文档/jsons/questions.json")
         .then(response => {
@@ -123,6 +173,7 @@ export default {
         });
     }
   },
+
   mounted() {
     //this.fetchQuestions();
   }
