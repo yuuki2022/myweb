@@ -98,6 +98,7 @@ export default {
             if (testState.value[courseId] === '参加考试') {
                 console.log(courseId)
                 store.commit('setTestCourse', courseId + 1)
+                store.commit('setUserName', studentId.value)
                 router.push('/Exam')
             } else {
                 console.log(courseId)

@@ -16,7 +16,7 @@
             <el-scrollbar height="400px">
               <el-button v-for="(question, index) in questions" :key="question.questionId"
                 @click="scrollToQuestion(question.questionId)" circle size="mini"
-                :class="{ 'selected': question.choice !== null }">{{ index + 1 }}</el-button>
+                :class="{ 'selected': question.choice < 4 }">{{ index + 1 }}</el-button>
             </el-scrollbar>
           </div>
         </el-row>
@@ -77,22 +77,22 @@
 
 <script>
 import axios from 'axios'
-import questionData from '../../../文档/jsons/questions.json'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import {useStore} from 'vuex'
 export default {
   name: 'ExamComponent',
   data() {
+    const store = useStore()
     return {
-      studentId: questionData.studentId,
-      course_id: questionData.course_id,
-      studentName: questionData.studentName,
-      courseName: "陈光柱子",
+      store,
+      studentId: store.state.userName,
+      courseId: store.state.testCourse,
+      studentName: '',
+      courseName: store.state.course[this.courseId],
       visible: true,
-      questions: questionData.questions.map(question => ({
-        ...question,
-        choice: null // 添加 choice 属性，默认值为 null
-      })),
-      timer: Date.now() + 1000 * 4 * 2
+      questions: '',
+      questionData: '',
+      timer: Date.now() + 3000 * 4 * 2
     }
   },
 
@@ -112,22 +112,26 @@ export default {
       const formData = {
         studentId: this.studentId,
         studentName: this.studentName,
-        course_id: this.course_id,
+        courseId: this.courseId,
         questions: this.questions.map(question => ({
           questionId: question.questionId,
-          right_answer: question.answer[question.choice]
+          rightAnswer: question.answer[question.choice]
         }))
       };
-
+      //////////////发一个post请求包含参数和body
+      console.log(formData);
       // 发送数据给后端（这里假设使用 Axios 发送 POST 请求）
-      axios.post('/api/submit', formData)
+      axios.post('http://localhost:8081/submitPaper', formData)
         .then(response => {
           // 处理成功响应
-          console.log(response.data);
+          console.log(response.data['message']);
+          this.$router.push('/Student');
         })
         .catch(error => {
           // 处理错误
           console.error('提交失败', error);
+          ElMessage.error('提交失败');
+          this.$router.push('/Student');
         });
     },
     forceSubmit() {
@@ -135,7 +139,7 @@ export default {
       { showClose: false,
         confirmButtonText : '退出考试',
         callback:()=>{
-          this.$router.push('/');
+          this.$router.push('/Student');
         },
       })
     this.submitForm();
@@ -163,30 +167,27 @@ export default {
 
 
   fetchQuestions() {
-    axios.get("./文档/jsons/questions.json")
-      .then(response => {
-        // 解析JSON数据
-        this.studentId = response.data.studentId;
-        this.course_id = response.data.course_id;
-        this.courseName = response.data.courseName;
-        //this.questions = response.data.questions;
-        this.questions = response.data.questions.map(question => ({
-          ...question,
-          choice: null
-        }))
-        this.timer = Date.now() + response.data.timer;//倒计时时间,response.data.timer单位:毫秒
-        console.log();
-      })
-
-      .catch(error => {
-        console.error('Error fetching questions:', error);
-      });
+    axios.get("http://localhost:8081/getPaper", {
+      params: {
+        studentId: this.store.state.userName,
+        courseId: this.store.state.testCourse
+      }
+    }).then(res => {
+      console.log("res111",res)
+      this.questionData = res.data
+      console.log(this.questionData)
+      this.studentName = this.questionData.studentName
+      this.questions = this.questionData.questions.map(question => ({
+        ...question,
+        choice: 100 // 添加 choice 属性，默认值为 null
+      }))
+    })
   }
 
 },
 
 mounted() {
-  //this.fetchQuestions();
+  this.fetchQuestions();
 }
 
 

@@ -39,6 +39,6 @@ public interface PaperDAO {
     @Select("select paper_id as paperId, course_id as courseId, student_id as studentId, score from paper where student_id = #{studentId}")
     List<PaperDO> getPaperByStudentId(@Param("studentId")String studentId);
 
-    @Select("select * from paper where student_id = #{studentId} and course_id = #{courseId}")
+    @Select("select paper_id as paperId, course_id as courseId, student_id as studentId, score from paper where student_id = #{studentId} and course_id = #{courseId}")
     PaperDO getPaperByStudentIdAndCourseId(String studentId, Integer courseId);
 } 

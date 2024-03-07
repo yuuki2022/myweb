@@ -205,8 +205,7 @@ public class StudentControl {
     @CrossOrigin
     @ResponseBody
     public String getStudentExams(@RequestParam String studentId) {
-        System.out.println("学生的学号是");
-        System.out.println(studentId);
+    
         String studentName = studentService.getStudentById(studentId).getStudentName();
         List<Paper> exams = paperService.getPaperByStudentId(studentId);
 
