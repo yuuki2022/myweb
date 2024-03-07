@@ -5,7 +5,7 @@
         <div class="student-info">
             <p style="font-size: 20px;">{{ studentId }}</p>
             <p id="studentId">{{ studentName }}</p>
-            <el-button @click="exit" type="danger" id="exit-button">退出</el-button>
+            <el-button @click="$root.logout" type="danger" id="exit-button">退出</el-button>
         </div>
 
 

@@ -9,13 +9,11 @@
               <h2 style="margin-bottom: 5px;">{{ studentName }}</h2>
               <h4>{{ studentId }}</h4>
             </el-col>
-
           </div>
         </el-row>
-        <el-row gutter="20">
-          <div class="buttonContainer buttons">
+        <el-row gutter="50">
+          <div class="buttons">
             <el-scrollbar height="400px">
-              <br>
               <el-button v-for="(question, index) in questions" :key="question.questionId"
                 @click="scrollToQuestion(question.questionId)" circle size="mini"
                 :class="{ 'selected': question.choice !== null }">{{ index + 1 }}</el-button>
@@ -23,8 +21,8 @@
           </div>
         </el-row>
         <el-row class="rowCenter">
-          <div class="buttonContainer">
-            <el-button type="success" size="medium" style="text-align:center">提交</el-button>
+          <div>
+            <el-button type="success" size="medium" style="text-align:center" @click="onSubmit">提交</el-button>
           </div>
         </el-row>
       </el-col>
@@ -41,10 +39,10 @@
                 <a>{{ index + 1 }}.{{ question.content }}</a>
                 <br>
                 <el-radio-group v-model="question.choice" class="ml-4">
-                  <el-radio value="1" size="large">A.{{ question.answer[0] }}</el-radio>
-                  <el-radio value="2" size="large">B.{{ question.answer[1] }}</el-radio>
-                  <el-radio value="3" size="large">C.{{ question.answer[2] }}</el-radio>
-                  <el-radio value="4" size="large">D.{{ question.answer[3] }}</el-radio>
+                  <el-radio value="0" size="large">A.{{ question.answer[0] }}</el-radio>
+                  <el-radio value="1" size="large">B.{{ question.answer[1] }}</el-radio>
+                  <el-radio value="2" size="large">C.{{ question.answer[2] }}</el-radio>
+                  <el-radio value="3" size="large">D.{{ question.answer[3] }}</el-radio>
                 </el-radio-group>
               </el-card>
             </el-scrollbar>
@@ -58,12 +56,13 @@
           <div
             style="width: 100%; background: #F8F9FB; height:140px ;display: flex;flex-direction: column; align-items: center;">
 
-            <el-button style="margin-top:10px;" class="countdown-footer" type="primary" @click="visible = !visible">{{ visible ? '隐藏' : '显示'
-              }}考试剩余时间</el-button>
+            <el-button style="margin-top:10px;" class="countdown-footer" type="primary" @click="visible = !visible">{{
+        visible ? '隐藏' : '显示'
+      }}考试剩余时间</el-button>
 
             <h3 style="color: red; margin-bottom: 0px;" v-show="visible">考试剩余时间</h3>
             <el-countdown v-show="visible" format="HH:mm:ss" :value="timer"
-              value-style="color:red ; font-size:40px ;font-weight:bold" />
+              value-style="color:red ; font-size:40px ;font-weight:bold" @finish="forceSubmit" />
 
           </div>
           <!--/el-card-->
@@ -79,6 +78,7 @@
 <script>
 import axios from 'axios'
 import questionData from '../../../文档/jsons/questions.json'
+import { ElMessage, ElMessageBox } from 'element-plus'
 export default {
   name: 'ExamComponent',
   data() {
@@ -92,9 +92,10 @@ export default {
         ...question,
         choice: null // 添加 choice 属性，默认值为 null
       })),
-      timer: Date.now() + 1000 * 60 * 60 * 24 * 2
+      timer: Date.now() + 1000 * 4 * 2
     }
   },
+
   methods: {
     scrollToQuestion(questionId) {
       // 获取对应的题目元素
@@ -104,23 +105,85 @@ export default {
         questionElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     },
-    SubmitEvent() {
 
+
+    submitForm() {
+      // 构建要发送给后端的数据对象
+      const formData = {
+        studentId: this.studentId,
+        studentName: this.studentName,
+        course_id: this.course_id,
+        questions: this.questions.map(question => ({
+          questionId: question.questionId,
+          right_answer: question.answer[question.choice]
+        }))
+      };
+
+      // 发送数据给后端（这里假设使用 Axios 发送 POST 请求）
+      axios.post('/api/submit', formData)
+        .then(response => {
+          // 处理成功响应
+          console.log(response.data);
+        })
+        .catch(error => {
+          // 处理错误
+          console.error('提交失败', error);
+        });
     },
+    forceSubmit() {
+      ElMessageBox.alert('考试时间到！', '警告！', {
+        confirmButtonText : '退出考试',
+        // callback:()=>{
+        //   this.$router.push('/');
+        // },
+      })
+      this.submitForm();
+    },
+    onSubmit() {
+      ElMessageBox.confirm(
+        '请确认是否提交',
+        '确认',
+        {
+          confirmButtonText: '是',
+          cancelButtonText: '取消',
+          type: 'warning',
+        }
+      )
+        .then(() => {
+          this.submitForm();
+        })
+        .catch(() => {
+          ElMessage({
+            type: 'info',
+            message: '取消提交',
+          })
+        })
+    },
+
+
     fetchQuestions() {
       axios.get("./文档/jsons/questions.json")
         .then(response => {
           // 解析JSON数据
           this.studentId = response.data.studentId;
           this.course_id = response.data.course_id;
-          this.questions = response.data.questions;
+          this.courseName = response.data.courseName;
+          //this.questions = response.data.questions;
+          this.questions = response.data.questions.map(question => ({
+            ...question,
+            choice: null
+          }))
+          this.timer = Date.now() + response.data.timer;//倒计时时间,response.data.timer单位:毫秒
           console.log();
         })
+
         .catch(error => {
           console.error('Error fetching questions:', error);
         });
     }
+
   },
+
   mounted() {
     //this.fetchQuestions();
   }
@@ -199,6 +262,7 @@ export default {
   align-items: center;
   /* 垂直居中对齐 */
   background: #F2F6FE;
+
 }
 
 .button-container {
@@ -215,7 +279,7 @@ export default {
 
 .el-button {
   width: 150px;
-  margin: 0 5px;
+  margin: 3px 5px 3px 12px;
   /* 设置按钮之间的水平间距 */
 }
 
