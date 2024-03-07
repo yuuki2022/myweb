@@ -21,8 +21,14 @@
             </el-header>
             <el-main>
                 <div class="score">
-                    <el-button type="danger" @click="formVisible = true" size="mini">插入一条学生数据</el-button>
-                    <el-input v-model="searchText" placeholder="搜索" @input="handleSearch" size="mini"></el-input>
+
+                    <div style="display: flex; align-items: center;">
+                        <el-input v-model="searchText" placeholder="搜索" @input="handleSearch" size="mini"></el-input>
+                        <el-button type="danger" style="width: fit-content;" @click="formVisible = true"
+                            size="mini">插入一条学生数据</el-button>
+                    </div>
+
+
                     <el-table :data="examers.slice((currentPage - 1) * pageSize, currentPage * pageSize)"
                         :header-cell-style="{ background: '#D9D9D9' }" border=true stripe>
                         <!-- 表格列 -->
