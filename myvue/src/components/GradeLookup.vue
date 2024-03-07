@@ -82,7 +82,7 @@
 
             <template #footer>
                 <div class="dialog-footer">
-                    <el-button type="primary" @click="dialogFormVisible = false">取消</el-button>
+                    <el-button type="primary" @click="formVisible = false">取消</el-button>
                     <el-button type="danger" @click="addStudentData">确认</el-button>
                 </div>
             </template>
