@@ -131,62 +131,63 @@ export default {
         });
     },
     forceSubmit() {
-      ElMessageBox.alert('考试时间到！', '警告！', {
+      ElMessageBox.alert('考试时间到！', '警告！',
+      { showClose: false,
         confirmButtonText : '退出考试',
-        // callback:()=>{
-        //   this.$router.push('/');
-        // },
+        callback:()=>{
+          this.$router.push('/');
+        },
       })
-      this.submitForm();
-    },
-    onSubmit() {
-      ElMessageBox.confirm(
-        '请确认是否提交',
-        '确认',
-        {
-          confirmButtonText: '是',
-          cancelButtonText: '取消',
-          type: 'warning',
-        }
-      )
-        .then(() => {
-          this.submitForm();
+    this.submitForm();
+  },
+  onSubmit() {
+    ElMessageBox.confirm(
+      '请确认是否提交',
+      '确认',
+      {
+        confirmButtonText: '是',
+        cancelButtonText: '取消',
+        type: 'warning',
+      }
+    )
+      .then(() => {
+        this.submitForm();
+      })
+      .catch(() => {
+        ElMessage({
+          type: 'info',
+          message: '取消提交',
         })
-        .catch(() => {
-          ElMessage({
-            type: 'info',
-            message: '取消提交',
-          })
-        })
-    },
-
-
-    fetchQuestions() {
-      axios.get("./文档/jsons/questions.json")
-        .then(response => {
-          // 解析JSON数据
-          this.studentId = response.data.studentId;
-          this.course_id = response.data.course_id;
-          this.courseName = response.data.courseName;
-          //this.questions = response.data.questions;
-          this.questions = response.data.questions.map(question => ({
-            ...question,
-            choice: null
-          }))
-          this.timer = Date.now() + response.data.timer;//倒计时时间,response.data.timer单位:毫秒
-          console.log();
-        })
-
-        .catch(error => {
-          console.error('Error fetching questions:', error);
-        });
-    }
-
+      })
   },
 
-  mounted() {
-    //this.fetchQuestions();
+
+  fetchQuestions() {
+    axios.get("./文档/jsons/questions.json")
+      .then(response => {
+        // 解析JSON数据
+        this.studentId = response.data.studentId;
+        this.course_id = response.data.course_id;
+        this.courseName = response.data.courseName;
+        //this.questions = response.data.questions;
+        this.questions = response.data.questions.map(question => ({
+          ...question,
+          choice: null
+        }))
+        this.timer = Date.now() + response.data.timer;//倒计时时间,response.data.timer单位:毫秒
+        console.log();
+      })
+
+      .catch(error => {
+        console.error('Error fetching questions:', error);
+      });
   }
+
+},
+
+mounted() {
+  //this.fetchQuestions();
+}
 
 
 }
