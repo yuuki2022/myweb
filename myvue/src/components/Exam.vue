@@ -117,7 +117,7 @@ export default {
 },
 onSubmit(){
   ElMessageBox.confirm(
-    '请确认的是否提交',
+    '请确认是否提交',
     '确认',
     {
       confirmButtonText: '是',
