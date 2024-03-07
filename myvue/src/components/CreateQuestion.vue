@@ -144,6 +144,11 @@ const submitCreateQuestion = () => {
     }).then(res => {
        console.log(res)
        ElMessage.success("题目已进入题库")
+       course.value = ''
+       question.value = ''
+       answer.value = ['', '', '', '']
+       rightAnswer.value = ''
+       hard.value = ''
     }).catch(err => {
         console.log(err)
     })
