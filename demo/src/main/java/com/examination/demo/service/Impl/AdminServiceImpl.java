@@ -1,5 +1,8 @@
 package com.examination.demo.service.Impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,6 +63,19 @@ public class AdminServiceImpl implements AdminService{
     public void deleteStudent(String adminName) {
         adminDAO.deleteStudent(adminName);
         //adminDAO.delete(Wrappers.<AdminDO>lambdaQuery().eq(AdminDO::getAdminName, adminName));
+    }
+
+    @Override
+    public List<Admin> getAllAdmin() {
+        List<AdminDO> adminDOList = adminDAO.getAllAdmin();
+        List<Admin> adminList = new ArrayList<>();
+        for (AdminDO adminDO : adminDOList) {
+            Admin admin = new Admin();
+            admin.setAdminName(adminDO.getAdminName());
+            admin.setRole(adminDO.getRole());
+            adminList.add(admin);
+        }
+        return adminList;
     }
 
 }

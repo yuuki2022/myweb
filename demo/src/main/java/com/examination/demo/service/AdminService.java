@@ -1,5 +1,7 @@
 package com.examination.demo.service;
 
+import java.util.List;
+
 import com.examination.demo.model.Admin;
 
 public interface AdminService {
@@ -13,4 +15,6 @@ public interface AdminService {
     public void updatePassword(String adminName, String saltPassword);
 
     public void deleteStudent(String adminName);
+
+    public List<Admin> getAllAdmin();
 }

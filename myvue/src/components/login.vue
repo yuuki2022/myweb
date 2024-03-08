@@ -14,10 +14,11 @@
   </div>
 </template>
 
-<script>
+<script lang="js">
 import axios from 'axios';
 import { ElMessage } from 'element-plus'
 import { useStore } from 'vuex'
+import CryptoJS from 'crypto-js';
 
 
 export default {
@@ -30,14 +31,14 @@ export default {
   },
   setup() {
     const store = useStore()
-
+    console.log(CryptoJS.SHA256('123456').toString())
     return { store }
   },
   methods: {
     submitForm() {
     axios.post(`${this.store.state.path}authentication`, {
       adminName: this.account,
-      saltPassword: this.password
+      saltPassword: CryptoJS.SHA256(this.password).toString()
     })
     .then(res => {
       console.log(res)

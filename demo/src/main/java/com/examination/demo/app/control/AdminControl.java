@@ -1,5 +1,7 @@
 package com.examination.demo.app.control;
 
+import java.util.List;
+
 import org.apache.catalina.mapper.Mapper;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,6 +77,8 @@ public class AdminControl {
         return mapper.writeValueAsString(result);
     }
 
+
+
     @PostMapping("/admin/register")
     @CrossOrigin
     @ResponseBody
@@ -100,6 +104,7 @@ public class AdminControl {
         return mapper.writeValueAsString(result);
     }
 
+
     @Delete("/admin/delete")
     @ResponseBody
     public String deleteAdmin(@RequestParam String adminName){
@@ -112,6 +117,9 @@ public class AdminControl {
         return result.toString();
 
     }
+
+
+   
 
 
     

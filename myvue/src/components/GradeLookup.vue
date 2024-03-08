@@ -103,13 +103,13 @@
                         <el-icon class="el-icon--left">
                             <CircleCloseFilled />
                         </el-icon>
-                        确认
+                    确认
                     </el-button>
                     <el-button type="primary" @click="close">
                         <el-icon class="el-icon--left">
                             <CircleCloseFilled />
                         </el-icon>
-                        关闭
+                    关闭
                     </el-button>
                 </div>
             </template>
@@ -123,6 +123,7 @@
 import axios from 'axios';
 import { useStore } from 'vuex';
 import { ElMessage } from 'element-plus';
+import CryptoJS from 'crypto-js';
 export default {
     name: "App",
     data() {
@@ -150,6 +151,7 @@ export default {
         this.getStudentsData();
         console.log(this.store.state.path)
         console.log(`${this.store.state.path}students`)
+        console.log(this.store.state.userName)
 
     },
 
@@ -198,7 +200,8 @@ export default {
             axios.get(this.store.state.path+'student/insert', {
                 params: {
                     studentId: this.form.studentId,
-                    studentName: this.form.studentName
+                    saltPassword: CryptoJS.SHA256("123456").toString(),
+                    studentName: this.form.studentName,
                 }
             }).then(res => {
                 console.log("res", res)

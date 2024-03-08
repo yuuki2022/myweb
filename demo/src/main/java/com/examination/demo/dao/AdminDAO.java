@@ -1,5 +1,7 @@
 package com.examination.demo.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -26,4 +28,7 @@ public interface AdminDAO {
 
     @Delete("delete from admin where admin_name = #{adminName}")
     void deleteStudent(String adminName);
+
+    @Select("select * from admin")
+    List<AdminDO> getAllAdmin();
 }

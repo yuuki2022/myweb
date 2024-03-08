@@ -83,7 +83,8 @@ export default {
             optionB: '',
             optionC: '',
             optionD: '',
-            answer: ''
+            answer: '',
+
         }
     },
     methods: {
@@ -131,7 +132,9 @@ let hard = ref('')
 let question = ref('')
 
 let answer = ref(['', '', '', ''])
-let username = ref(store.state.username)
+let username = ref('')
+username.value = store.state.userName
+
 
 const submitCreateQuestion = () => {
 

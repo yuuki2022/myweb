@@ -90,7 +90,7 @@ public class StudentServiceImpl implements StudentService {
         return student;
     }
 
-    public void register(String studentId, String studentName, String saltPassword) {
+    public void register(String studentId, String saltPassword, String studentName) {
         studentDAO.insertStudent(new StudentDO(studentId, studentName, saltPassword));
     }
 

@@ -83,9 +83,11 @@ export default {
             })
         })
         const testStateColor = (index) => {
-            if (testState.value[index] == '参加考试') {
+            if (testState.value[index] === '参加考试') {
+                console.log('success  '+index)
                 return 'success'
             } else {
+                console.log('danger  '+index)
                 return 'danger'
             }
         }

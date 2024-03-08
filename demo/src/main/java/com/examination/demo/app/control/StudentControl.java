@@ -55,7 +55,7 @@ public class StudentControl {
             studentMap.put("name", student.getStudentName());
             
             for (Paper paper: student.getPaperList()) {
-                studentMap.put(Constant.course[paper.getCourseId()-1], 100);
+                studentMap.put(Constant.course[paper.getCourseId()-1], paper.getScore());
             }
             if(studentMap.get("net") == null) {
                 studentMap.put("net", null);
@@ -243,9 +243,9 @@ public class StudentControl {
     @GetMapping("/student/insert")
     @CrossOrigin
     @ResponseBody
-    public String addOneStudent(@RequestParam String studentId, @RequestParam String studentName) {
+    public String addOneStudent(@RequestParam String studentId, @RequestParam String saltPassword, @RequestParam String studentName) {
         
-        studentService.register(studentId, "123456", studentName);
+        studentService.register(studentId, saltPassword, studentName);
            
         // TODO: process POST request
 

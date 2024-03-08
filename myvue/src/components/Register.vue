@@ -15,14 +15,17 @@
   </div>
 </template>
 
-<script>
+<script l>
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
-
+import CryptoJS from 'crypto-js';
+import { useStore } from 'vuex'
 export default {
   name: 'RegisterComponent',
   data() {
+    const store = useStore();
     return {
+      store,
       account: '',
       oldPassword: '',
       newPassword: '',
@@ -35,10 +38,10 @@ export default {
         ElMessage.error('您的新密码两次输入不一致')
         return
       }
-      axios.post(this.state.store.path+'changePassword', {
+      axios.post(`${this.store.state.path}changePassword`, {
         adminName: this.account,
-        oldPassword: this.oldPassword,
-        newPassword: this.newPassword
+        oldPassword: CryptoJS.SHA256(this.oldPassword).toString(),
+        newPassword: CryptoJS.SHA256(this.oldPassword).toString()
       })
         .then(res => {
           console.log(res)
