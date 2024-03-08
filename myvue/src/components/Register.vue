@@ -34,7 +34,7 @@ export default {
         ElMessage.error('您的新密码两次输入不一致')
         return
       }
-      axios.post('http://localhost:8081/changePassword', {
+      axios.post(this.state.store.path+'changePassword', {
         adminName: this.account,
         oldPassword: this.oldPassword,
         newPassword: this.newPassword

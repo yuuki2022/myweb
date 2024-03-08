@@ -10,7 +10,8 @@ export default createStore({
             "数据结构":4,
         },
         course:['参加考试','计算机网络','计算机操作系统','计算机组成原理','数据结构'],
-        testCourse:''
+        testCourse:'',
+        path: 'http://127.0.0.1:8081/'
     },
     mutations:{
         setUserName(state, userName){

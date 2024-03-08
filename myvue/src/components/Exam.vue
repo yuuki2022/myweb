@@ -121,7 +121,7 @@ export default {
       //////////////发一个post请求包含参数和body
       console.log(formData);
       // 发送数据给后端（这里假设使用 Axios 发送 POST 请求）
-      axios.post('http://localhost:8081/submitPaper', formData)
+      axios.post(this.store.state.path+'submitPaper', formData)
         .then(response => {
           // 处理成功响应
           console.log(response.data['message']);
@@ -167,15 +167,13 @@ export default {
 
 
   fetchQuestions() {
-    axios.get("http://localhost:8081/getPaper", {
+    axios.get(this.store.state.path+"getPaper", {
       params: {
         studentId: this.store.state.userName,
         courseId: this.store.state.testCourse
       }
     }).then(res => {
-      console.log("res111",res)
       this.questionData = res.data
-      console.log(this.questionData)
       this.studentName = this.questionData.studentName
       this.questions = this.questionData.questions.map(question => ({
         ...question,

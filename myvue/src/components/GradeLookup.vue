@@ -128,6 +128,7 @@ export default {
     data() {
         const store = useStore();
         return {
+            store, //vuex
             currentPage: 1,
             pageSize: 10,
             examers: [],
@@ -147,6 +148,8 @@ export default {
     },
     created() {
         this.getStudentsData();
+        console.log(this.store.state.path)
+        console.log(`${this.store.state.path}students`)
 
     },
 
@@ -164,7 +167,7 @@ export default {
             this.searchText = value;
         },
         getStudentsData() {
-            axios.get('http://localhost:8081/students', {
+            axios.get(`${this.store.state.path}students`, {
             }).then(res => {
                 console.log("res", res.data['data'])
                 let student = res.data['data']
@@ -179,7 +182,7 @@ export default {
         },
         confirmDelete() {
             this.visible = false;
-            axios.delete('http://localhost:8081/student/delete', {
+            axios.delete(this.store.state.path+'student/delete', {
                 params: {
                     studentId: this.deleteRows[this.deleteIndex].id
                 }
@@ -192,7 +195,7 @@ export default {
             this.formVisible = false
             console.log(this.form.studentId)
             console.log(this.form.studentName)
-            axios.get('http://localhost:8081/student/insert', {
+            axios.get(this.store.state.path+'student/insert', {
                 params: {
                     studentId: this.form.studentId,
                     studentName: this.form.studentName

@@ -29,11 +29,12 @@ export default {
   },
   setup() {
     const store = useStore()
+
     return { store }
   },
   methods: {
     submitForm() {
-    axios.post('http://localhost:8081/authentication', {
+    axios.post(`${this.store.state.path}authentication`, {
       adminName: this.account,
       saltPassword: this.password
     })

@@ -60,7 +60,7 @@ export default {
 
         onMounted(() => {
             console.log(store)
-            axios.get('http://localhost:8081/student/exams', {
+            axios.get(store.state.path+'student/exams', {
                 params: {
                     studentId: store.state.userName
                 }

@@ -135,7 +135,7 @@ let username = ref(store.state.username)
 
 const submitCreateQuestion = () => {
 
-    axios.post('http://localhost:8081/createQuestion', {
+    axios.post(`${store.state.path}createQuestion`, {
         courseId: course.value,
         content: question.value,
         answer:[answer.value[0], answer.value[1], answer.value[2], answer.value[3]],
