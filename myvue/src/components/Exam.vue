@@ -135,9 +135,9 @@ export default {
         });
     },
     forceSubmit() {
-      ElMessageBox.alert('考试时间到！', '警告！',
+      ElMessageBox.alert('考试时间到，已自动交卷', '警告！',
       { showClose: false,
-        confirmButtonText : '退出考试',
+        confirmButtonText : '确认',
         callback:()=>{
           this.$router.push('/Student');
         },
