@@ -1,4 +1,5 @@
 <template>
+  <div class="background"></div>
   <div id="login">
     <h1>密码重设</h1>
     <form @submit.prevent="submitForm">
@@ -63,6 +64,28 @@ p {
 
 }
 
+.background {
+  background-image: url('../assets/img/login_backgroundimg.JPG');
+  background-size: 100% 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  /*背景图片透明 */
+}
+
+
+a{
+  color: blue;
+  text-decoration: none;
+}
+a:hover{
+  color: red;
+  text-decoration: underline;
+}
+
 h1 {
   margin-left: auto;
   padding: 0;
@@ -80,7 +103,7 @@ form {
   height: 93.556%;
   border-radius: 30px;
   margin: 0 auto;
-  border: 3px solid #000;
+  border: 3px #000;
   /*所有元素垂直居中*/
   display: flex;
   flex-direction: column;
@@ -88,7 +111,7 @@ form {
   align-items: center;
   padding: 0%;
   background-color: #F5F5F3;
-
+  opacity: 0.9;
 }
 
 input {
