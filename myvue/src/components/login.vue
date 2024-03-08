@@ -6,7 +6,7 @@
       <input type="text" placeholder="账号" id="account" v-model="account">
       <input type="password" placeholder="密码" id="password" v-model="password">
       <br>
-      <button type="submit">登录</button> 
+      <button type="submit">登录</button>
       <br>
       <p><a href="./register">重设密码</a></p>
     </form>
@@ -16,7 +16,7 @@
 <script>
 import axios from 'axios';
 import { ElMessage } from 'element-plus'
-import {useStore} from 'vuex'
+import { useStore } from 'vuex'
 
 
 export default {
@@ -33,51 +33,63 @@ export default {
   },
   methods: {
     submitForm() {
-    axios.post('http://localhost:8081/authentication', {
-      adminName: this.account,
-      saltPassword: this.password
-    })
-    .then(res => {
-      console.log(res)
-      if (res.data['code'] === '200') {
-        if (res.data['message'] === 'student') {
-          ElMessage.success('学生登录成功')
-          this.store.commit('setUserName', this.account)
-          this.$router.push('/Student')
-        } else {
-          ElMessage.success('管理员登录成功')
-          this.store.commit('setUserName', this.account)
-          this.$router.push('/GradeLookup')
-        }
-      } else {
-        ElMessage.error(res.data['message'])
-      }
-    })
-  }
+      axios.post('http://localhost:8081/authentication', {
+        adminName: this.account,
+        saltPassword: this.password
+      })
+        .then(res => {
+          console.log(res)
+          if (res.data['code'] === '200') {
+            if (res.data['message'] === 'student') {
+              ElMessage.success('学生登录成功')
+              this.store.commit('setUserName', this.account)
+              this.$router.push('/Student')
+            } else {
+              ElMessage.success('管理员登录成功')
+              this.store.commit('setUserName', this.account)
+              this.$router.push('/GradeLookup')
+            }
+          } else {
+            ElMessage.error(res.data['message'])
+          }
+        })
+    }
   }
 }
 </script>
 
 <style scoped>
 /*将form整体页面居中*/
-p{
+p {
   /*取消p标签的默认样式*/
   margin: 0;
   padding: 0;
 
 }
-h1{
+
+html {
+  height: 100vh;
+  width: 100vh;
+  background-image: url('@/components/img/login_backgroundimg.JPG');
+  background-size: contain;
+  background-position: center;
+}
+
+h1 {
   margin-left: auto;
   padding: 0;
 }
 
-#login{ 
+#login {
   margin-top: 25%;
   margin-left: 70%;
   width: 50.667%;
   height: 45.556%;
 
 }
+
+
+
 form {
   width: 90.667%;
   height: 90.556%;
@@ -90,9 +102,10 @@ form {
   justify-content: center;
   align-items: center;
   padding: 0%;
-  background-color:  #F5F5F3;
+  background-color: #F5F5F3;
 
 }
+
 input {
   width: 85%;
   height: 15%;
@@ -103,15 +116,18 @@ input {
   /*设置字体大小 */
   font-size: 20px;
 }
-#account{
+
+#account {
   margin-bottom: 3%;
 }
-#password{
+
+#password {
   margin-bottom: 3%;
 }
+
 button {
   height: 15%;
-  border-radius:10px;
+  border-radius: 10px;
   border: 1px solid #000;
   text-align: center;
   /*设置字体大小 */
@@ -119,15 +135,16 @@ button {
   background-color: #D9D9D9;
   width: 40%;
 }
-button:hover{
+
+button:hover {
   background-color: #BEBEBE;
 }
-button:active{
+
+button:active {
   background-color: #A9A9A9;
 }
 
-p{
+p {
   margin-top: 3%;
 }
-
 </style>
