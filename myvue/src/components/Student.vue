@@ -16,22 +16,22 @@
             <div class="subject-list">
                 <div class="subject-item">
                     <span style="font-size: 25px;">计算机网络</span>
-                    <el-button class="exam-button" :class="buttonClass(0)" style="font-size: 16px;"
+                    <el-button class="exam-button"  :type="buttonClass(0)" style="font-size: 16px;"
                         @click="handleClick(0)">{{ testState[0] }}</el-button>
                 </div>
                 <div class="subject-item">
                     <span style="font-size: 25px;">计算机操作系统</span>
-                    <el-button class="exam-button" :class="buttonClass(1)" style="font-size: 16px;"
+                    <el-button class="exam-button"  :type="buttonClass(1)" style="font-size: 16px;"
                         @click="handleClick(1)">{{ testState[1] }}</el-button>
                 </div>
                 <div class="subject-item">
                     <span style="font-size: 25px;">计算机组成原理</span>
-                    <el-button class="exam-button" :class="buttonClass(2)" style="font-size: 16px;"
+                    <el-button class="exam-button"  :type="buttonClass(2)" style="font-size: 16px;"
                         @click="handleClick(2)">{{ testState[2] }}</el-button>
                 </div>
                 <div class="subject-item">
                     <span style="font-size: 25px;">数据结构</span>
-                    <el-button class="exam-button" :class="buttonClass(3)" style="font-size: 16px;"
+                    <el-button class="exam-button"  :type="buttonClass(3)" style="font-size: 16px;"
                         @click="handleClick(3)">{{ testState[3] }}</el-button>
                 </div>
             </div>
@@ -84,14 +84,14 @@ export default {
         })
 
         const buttonClass = (index) => {
-            if(!isNaN(testState.value[index]) && testState.value[index] >= 60){
-                return  'success-button'
+            if (!isNaN(testState.value[index]) && testState.value[index] >= 60) {
+                return 'success'
             }
-            else if(!isNaN(testState.value[index]) && testState.value[index] < 60){
-                return  'danger-button'
+            else if (!isNaN(testState.value[index]) && testState.value[index] < 60) {
+                return 'danger'
             }
-            else{
-                return 'primary-button'
+            else {
+                return 'primary'
             }
         }
         const exitQuit = () => {
@@ -118,18 +118,19 @@ export default {
 
 
 <style scoped>
-
-.success-button {
-    background-color: #67C23A !important;
+/* .success-button {
+    color: #67C23A !important;
 }
 
 .primary-button {
-    background-color: #409EFF !important;
+    color: #409EFF !important;
+
 }
 
 .danger-button {
-    background-color: #FC1610 !important;
-}
+    color: #FC1610 !important;
+} */
+
 p {
     /*取消p标签的默认样式*/
     margin: 0;
@@ -209,8 +210,8 @@ p {
 }
 
 .exam-button {
-    background-color: #40CD70;
-    color: white;
+    /* background-color: #40CD70; */
+    /* color: white; */
     padding: 10px 5px;
     border: none;
     cursor: pointer;

@@ -18,7 +18,7 @@ export default createStore({
       "数据结构",
     ],
     testCourse: "",
-    path: "http://127.0.0.1:8081/",
+    path: "http://192.168.18.144:8081/",
   },
   mutations: {
     setUserName(state, userName) {
