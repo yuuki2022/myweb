@@ -24,39 +24,46 @@ import CryptoJS from 'crypto-js';
 export default {
   name: 'LoginComponent',
   data() {
+    const store = useStore()
     return {
+      store,
       account: '',
       password: ''
     }
   },
-  setup() {
-    const store = useStore()
-    console.log(CryptoJS.SHA256('123456').toString())
-    return { store }
+
+
+  mounted() {
+    this.store.commit('setRole', 'visitor')
+    // store.state.username = ''
+    this.store.commit('setUserName', '')
   },
+  
   methods: {
     submitForm() {
-    axios.post(`${this.store.state.path}authentication`, {
-      adminName: this.account,
-      saltPassword: CryptoJS.SHA256(this.password).toString()
-    })
-    .then(res => {
-      console.log(res)
-      if (res.data['code'] === '200') {
-        if (res.data['message'] === 'student') {
-          ElMessage.success('学生登录成功')
-          this.store.commit('setUserName', this.account)
-          this.$router.push('/Student')
-        } else {
-          ElMessage.success('管理员登录成功')
-          this.store.commit('setUserName', this.account)
-          this.$router.push('/GradeLookup')
-        }
-      } else {
-        ElMessage.error(res.data['message'])
-      }
-    })
-  }
+      axios.post(`${this.store.state.path}authentication`, {
+        adminName: this.account,
+        saltPassword: CryptoJS.SHA256(this.password).toString()
+      })
+        .then(res => {
+          console.log(res)
+          if (res.data['code'] === '200') {
+            if (res.data['message'] === 'student') {
+              ElMessage.success('学生登录成功')
+              this.store.commit('setUserName', this.account)
+              this.store.commit('setRole', 'student')
+              this.$router.push('/Student')
+            } else {
+              ElMessage.success('管理员登录成功')
+              this.store.commit('setUserName', this.account)
+              this.store.commit('setRole', 'admin')
+              this.$router.push('/GradeLookup')
+            }
+          } else {
+            ElMessage.error(res.data['message'])
+          }
+        })
+    }
   }
 }
 </script>
@@ -86,14 +93,15 @@ p {
 html {
   height: 100vh;
   width: 100vh;
-  
+
 }
 
-a{
+a {
   color: blue;
   text-decoration: none;
 }
-a:hover{
+
+a:hover {
   color: red;
   text-decoration: underline;
 }
@@ -118,7 +126,7 @@ form {
   height: 90.556%;
   border-radius: 30px;
   margin: 0 auto;
-  border: 3px  #000;
+  border: 3px #000;
   /*所有元素垂直居中*/
   display: flex;
   flex-direction: column;

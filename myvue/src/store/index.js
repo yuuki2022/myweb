@@ -3,6 +3,7 @@ import createPersistedState from "vuex-persistedstate";
 
 export default createStore({
   state: {
+    role: 'visitor',
     userName: "",
     courseIds: {
       计算机网络: 1,
@@ -27,6 +28,9 @@ export default createStore({
     setTestCourse(state, testCourse) {
       state.testCourse = testCourse;
     },
+    setRole(state, newRole) {
+      state.role = newRole;
+    }
   },
   actions: {},
   modules: {},
