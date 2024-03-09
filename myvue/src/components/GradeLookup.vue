@@ -24,12 +24,12 @@
 
                     <div style="display: flex; align-items: center;">
                         <el-input v-model="searchText" placeholder="搜索" @input="handleSearch" size="mini"></el-input>
-                        <el-button type="danger" style="width: fit-content;" @click="formVisible = true"
+                        <el-button type="primary" style="width: fit-content;" @click="formVisible = true"
                             size="mini">插入一条学生数据</el-button>
                     </div>
 
 
-                    <el-table :data="examers.slice((currentPage - 1) * pageSize, currentPage * pageSize)"
+                    <el-table :data="filteredData.slice((currentPage - 1) * pageSize, currentPage * pageSize)"
                         :header-cell-style="{ background: '#D9D9D9' }" border=true stripe>
                         <!-- 表格列 -->
                         <el-table-column prop="id" label="考生号" class="id"></el-table-column>
@@ -124,7 +124,8 @@
                 @change="handleCheckAllChange">全选</el-checkbox>
             <div style="margin: 15px 0;"></div>
             <el-checkbox-group v-model="checkedCourses" @change="handleCoursesCheckedChange">
-                <el-checkbox v-for="course, index in courses" :label="course" :key="`${index + 1}`">{{ course }}</el-checkbox>
+                <el-checkbox v-for="course, index in courses" :label="course" :key="`${index + 1}`">{{ course
+                    }}</el-checkbox>
             </el-checkbox-group>
             <template #footer>
                 <div class="dialog-footer">
@@ -181,6 +182,14 @@ export default {
     },
 
     computed: {
+        filteredData() {
+            return this.examers.filter(item => {
+                // 在姓名、年龄、性别中搜索匹配的数据
+                return Object.values(item).some(value => {
+                    return String(value).toLowerCase().includes(this.searchText.toLowerCase());
+                });
+            });
+        }
 
     },
     methods: {
@@ -254,7 +263,7 @@ export default {
 
         updateCourses() {
             console.log(this.checkedCourses)
-            console.log("updateCourses: ",this.deleteRows[this.deleteIndex].id)
+            console.log("updateCourses: ", this.deleteRows[this.deleteIndex].id)
             if (this.checkedCourses.length === 0) {
                 ElMessage.error('请至少选择一门课程')
                 return

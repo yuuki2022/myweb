@@ -38,7 +38,7 @@ export default {
     // store.state.username = ''
     this.store.commit('setUserName', '')
   },
-  
+
   methods: {
     submitForm() {
       axios.post(`${this.store.state.path}authentication`, {
@@ -79,13 +79,17 @@ p {
 
 .background {
   background-image: url('../assets/img/login_backgroundimg.JPG');
-  background-size: 100% 100%;
+  /* background-size: 100% 100%; */
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
+  /* background-size: cover; */
+  background-size: 100% 100%; /* 高度自适应，宽度保持比例 */
+  background-repeat: no-repeat;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
   /*背景图片透明 */
 
 }
