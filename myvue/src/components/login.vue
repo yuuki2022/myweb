@@ -9,7 +9,7 @@
       <br>
       <button type="submit">登录</button>
       <br>
-      <p><a href="./register">重设密码</a></p>
+      <p><u><a href="./register">重设密码</a></u></p>
     </form>
   </div>
 </template>

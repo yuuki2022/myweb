@@ -9,7 +9,7 @@
       <input type="password" placeholder="新密码" id="newPassword" v-model="newPassword">
       <input type="password" placeholder="确认新密码" id="ensureNewPassword" v-model="ensureNewPassword">
       <button type="submit">确认</button>
-      <p><a href="./">返回登录</a></p>
+      <p><u><a href="./">返回登录</a></u></p>
 <br>
     </form>
   </div>

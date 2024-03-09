@@ -24,7 +24,7 @@
 
                     <div style="display: flex; align-items: center;">
                         <el-input v-model="searchText" placeholder="搜索" @input="handleSearch" size="mini"></el-input>
-                        <el-button type="danger" style="width: fit-content;" @click="formVisible = true"
+                        <el-button type="primary" style="width: fit-content;" @click="formVisible = true"
                             size="mini">插入一条学生数据</el-button>
                     </div>
 
@@ -88,8 +88,8 @@
 
             <template #footer>
                 <div class="dialog-footer">
-                    <el-button type="primary" @click="formVisible = false">取消</el-button>
-                    <el-button type="danger" @click="addStudentData">确认</el-button>
+                    <el-button type="primary" plain @click="formVisible = false">取消</el-button>
+                    <el-button type="success" @click="addStudentData">确认</el-button>
                 </div>
             </template>
         </el-dialog>
