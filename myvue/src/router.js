@@ -64,11 +64,18 @@ router.beforeEach((to, from, next) => {
     // 如果用户是管理员并且试图访问 Exam 或 GradeLookup 页面，重定向到 CreateQuestion 页面
     ElMessage.error('你无法访问学生页面');
     next({ name: 'gradelookup' });
-  } else {
+  }else if(from.name === 'student' && to.name === 'Exam' && store.state.testCourse === 0){
+    ElMessage.error('请使用正确方式进入考试！！');
+    next({ name: 'student' });
+  }
+  else {
     // 否则，允许路由
     next();
   }
 });
+
+
+
 
 
 export default router;

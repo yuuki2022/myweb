@@ -133,6 +133,8 @@ export default {
           ElMessage.error('提交失败');
           this.$router.push('/Student');
         });
+
+        this.store.commit('setTestCourse', 0);
     },
     forceSubmit() {
       ElMessageBox.alert('考试时间到，已自动交卷', '警告！',

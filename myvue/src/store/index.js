@@ -18,8 +18,8 @@ export default createStore({
       "计算机组成原理",
       "数据结构",
     ],
-    testCourse: "",
-    path: "http://192.168.18.144:8081/",
+    testCourse: 0,
+    path: "http://127.0.0.1:8081/",
   },
   mutations: {
     setUserName(state, userName) {
