@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,15 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.examination.demo.common.Constant;
 import com.examination.demo.model.Admin;
-import com.examination.demo.model.Course;
-import com.examination.demo.model.Paging;
 import com.examination.demo.model.Paper;
 import com.examination.demo.model.Result;
 import com.examination.demo.model.Student;
 import com.examination.demo.service.AdminService;
 import com.examination.demo.service.PaperService;
 import com.examination.demo.service.StudentService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.PostMapping;

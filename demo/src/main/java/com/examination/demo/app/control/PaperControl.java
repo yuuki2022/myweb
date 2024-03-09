@@ -2,17 +2,15 @@ package com.examination.demo.app.control;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -87,7 +85,7 @@ public class PaperControl {
         Map<String, Object> map = mapper.readValue(answerJson, Map.class);
         String studentId = (String) map.get("studentId");
         Integer courseId = (Integer) map.get("courseId");
-        List<Map<String,Object>> temp = (List<Map<String,Object>>)map.get("questions");
+        List<Map<String, Object>> temp = (List<Map<String, Object>>) map.get("questions");
 
         List<Question> answersList = temp.stream().map(e -> {
             Question question = new Question();
@@ -154,28 +152,59 @@ public class PaperControl {
 
     }
 
+    @GetMapping("/student/updatePaper")
+    @ResponseBody
+    @CrossOrigin
+    public String updatePaper(@RequestParam String studentId, @RequestParam Integer net, @RequestParam Integer os,
+            @RequestParam Integer compo, @RequestParam Integer ds) {
+        List<Integer> courseList = new ArrayList<>();
+        if (net != 0) {
+            courseList.add(net);
+        }
+        if (os != 0) {
+            courseList.add(os);
+        }
+        if (compo != 0) {
+            courseList.add(compo);
+        }
+        if (ds != 0) {
+            courseList.add(ds);
+        }
+
+        for (Integer courseId : courseList) {
+            Integer paperId = paperService.getPaperByStudentIdAndCourseId(studentId, courseId).getPaperId();
+            paperService.deletePaper(paperId);
+        }
+
+        Result<String> result = new Result<>();
+        result.setCode("200");
+        result.setMessage("success");
+        return result.toString();
+
+    }
+
     // @SuppressWarnings("unchecked")
     // @GetMapping("/deletePaper")
     // @CrossOrigin
     // @ResponseBody
     // public String deletePaper(@RequestBody String paperJson) {
-    //     ObjectMapper mapper = new ObjectMapper();
-    
-    //     List<Integer> paperIds;
-    //     try {
-    //         paperIds = mapper.readValue(paperJson, List.class);
-    //         for (Integer paperId : paperIds) {
-    //             Integer 
-    //             paperService.deletePaper(paperId);
-    //         }
-    //     } catch (JsonProcessingException e) {
-    //         // TODO Auto-generated catch block
-    //         e.printStackTrace();
-    //     }
-        
-    //     Result<String> result = new Result<>();
-    //     result.setCode("200");
-    //     result.setMessage("success");
-    //     return result.toString();
+    // ObjectMapper mapper = new ObjectMapper();
+
+    // List<Integer> paperIds;
+    // try {
+    // paperIds = mapper.readValue(paperJson, List.class);
+    // for (Integer paperId : paperIds) {
+    // Integer
+    // paperService.deletePaper(paperId);
+    // }
+    // } catch (JsonProcessingException e) {
+    // // TODO Auto-generated catch block
+    // e.printStackTrace();
+    // }
+
+    // Result<String> result = new Result<>();
+    // result.setCode("200");
+    // result.setMessage("success");
+    // return result.toString();
     // }
 }

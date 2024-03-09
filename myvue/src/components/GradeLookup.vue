@@ -24,7 +24,7 @@
 
                     <div style="display: flex; align-items: center;">
                         <el-input v-model="searchText" placeholder="搜索" @input="handleSearch" size="mini"></el-input>
-                        <el-button type="primary" style="width: fit-content;" @click="formVisible = true"
+                        <el-button type="danger" style="width: fit-content;" @click="formVisible = true"
                             size="mini">插入一条学生数据</el-button>
                     </div>
 
@@ -57,10 +57,13 @@
                                 {{ row.ds || '未参加考试' }}
                             </template>
                         </el-table-column>
-                        <el-table-column fixed="right" label="操作">
+                        <el-table-column fixed="right" label="操作" width="300">
 
                             <template v-slot="scope">
-                                <el-button @click.prevent="deleteRow(scope.$index, examers)" type="danger" size="small">
+                                <el-button @click.prevent="updateRow(scope.$index, examers)" type="primary" size="mini">
+                                    修改
+                                </el-button>
+                                <el-button @click.prevent="deleteRow(scope.$index, examers)" type="danger" size="mini">
                                     移除
                                 </el-button>
                             </template>
@@ -103,14 +106,30 @@
                         <el-icon class="el-icon--left">
                             <CircleCloseFilled />
                         </el-icon>
-                    确认
+                        确认
                     </el-button>
                     <el-button type="primary" @click="close">
                         <el-icon class="el-icon--left">
                             <CircleCloseFilled />
                         </el-icon>
-                    关闭
+                        关闭
                     </el-button>
+                </div>
+            </template>
+        </el-dialog>
+
+
+        <el-dialog v-model="upDateVisible" title="更正成绩" width="35%">
+            <el-checkbox :indeterminate="isIndeterminate" v-model="checkAll"
+                @change="handleCheckAllChange">全选</el-checkbox>
+            <div style="margin: 15px 0;"></div>
+            <el-checkbox-group v-model="checkedCourses" @change="handleCoursesCheckedChange">
+                <el-checkbox v-for="course, index in courses" :label="course" :key="`${index + 1}`">{{ course }}</el-checkbox>
+            </el-checkbox-group>
+            <template #footer>
+                <div class="dialog-footer">
+                    <el-button type="primary" plain @click="upDateVisible = false">取消</el-button>
+                    <el-button type="success" @click="updateCourses">确认</el-button>
                 </div>
             </template>
         </el-dialog>
@@ -128,6 +147,7 @@ export default {
     name: "App",
     data() {
         const store = useStore();
+        const courseOptions = ['计算机网络', '计算机操作系统', '计算机组成原理', '数据结构'];
         return {
             store, //vuex
             currentPage: 1,
@@ -144,6 +164,11 @@ export default {
                 studentId: '',
                 studentName: '',
             },
+            courses: courseOptions,
+            upDateVisible: false,
+            checkAll: false,
+            isIndeterminate: true,
+            checkedCourses: [],
         };
 
     },
@@ -159,6 +184,11 @@ export default {
 
     },
     methods: {
+        updateRow(index, rows) {
+            this.deleteIndex = index;
+            this.deleteRows = rows;
+            this.upDateVisible = true
+        },
         handleSizeChange(val) {
             this.pageSize = val;
         },
@@ -182,9 +212,10 @@ export default {
             this.deleteRows = rows;
             this.visible = true;
         },
+
         confirmDelete() {
             this.visible = false;
-            axios.delete(this.store.state.path+'student/delete', {
+            axios.delete(this.store.state.path + 'student/delete', {
                 params: {
                     studentId: this.deleteRows[this.deleteIndex].id
                 }
@@ -197,7 +228,7 @@ export default {
             this.formVisible = false
             console.log(this.form.studentId)
             console.log(this.form.studentName)
-            axios.get(this.store.state.path+'student/insert', {
+            axios.get(this.store.state.path + 'student/insert', {
                 params: {
                     studentId: this.form.studentId,
                     saltPassword: CryptoJS.SHA256("123456").toString(),
@@ -209,8 +240,40 @@ export default {
                 this.formVisible = false
                 ElMessage.success('已经成功添加一条学生数据')
             })
-        }
+        },
 
+        handleCheckAllChange(val) {
+            this.checkedCourses = val ? this.courses : [];
+            this.isIndeterminate = false;
+        },
+        handleCheckedCoursesChange(value) {
+            let checkedCount = value.length;
+            this.checkAll = checkedCount === this.courses.length;
+            this.isIndeterminate = checkedCount > 0 && checkedCount < this.courses.length;
+        },
+
+        updateCourses() {
+            console.log(this.checkedCourses)
+            console.log("updateCourses: ",this.deleteRows[this.deleteIndex].id)
+            if (this.checkedCourses.length === 0) {
+                ElMessage.error('请至少选择一门课程')
+                return
+            }
+            axios.get(`${this.store.state.path}student/updatePaper`, {
+                params: {
+                    studentId: this.deleteRows[this.deleteIndex].id,
+                    net: this.checkedCourses.includes('计算机网络') ? 1 : 0,
+                    os: this.checkedCourses.includes('计算机操作系统') ? 2 : 0,
+                    compo: this.checkedCourses.includes('计算机组成原理') ? 3 : 0,
+                    ds: this.checkedCourses.includes('数据结构') ? 4 : 0,
+                }
+            }).then(res => {
+                console.log("res", res)
+                this.getStudentsData()
+                this.upDateVisible = false
+                ElMessage.success('已经成功更正成绩')
+            })
+        }
     }
 }
 

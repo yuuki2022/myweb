@@ -88,7 +88,7 @@ export default {
       studentId: store.state.userName,
       courseId: store.state.testCourse,
       studentName: '',
-      courseName: store.state.course[this.courseId],
+      courseName: store.state.course[store.state.testCourse],
       visible: true,
       questions: '',
       questionData: '',
