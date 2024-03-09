@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -152,4 +153,29 @@ public class PaperControl {
         return responseBody.toString();
 
     }
+
+    // @SuppressWarnings("unchecked")
+    // @GetMapping("/deletePaper")
+    // @CrossOrigin
+    // @ResponseBody
+    // public String deletePaper(@RequestBody String paperJson) {
+    //     ObjectMapper mapper = new ObjectMapper();
+    
+    //     List<Integer> paperIds;
+    //     try {
+    //         paperIds = mapper.readValue(paperJson, List.class);
+    //         for (Integer paperId : paperIds) {
+    //             Integer 
+    //             paperService.deletePaper(paperId);
+    //         }
+    //     } catch (JsonProcessingException e) {
+    //         // TODO Auto-generated catch block
+    //         e.printStackTrace();
+    //     }
+        
+    //     Result<String> result = new Result<>();
+    //     result.setCode("200");
+    //     result.setMessage("success");
+    //     return result.toString();
+    // }
 }

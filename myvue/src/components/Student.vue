@@ -16,22 +16,22 @@
             <div class="subject-list">
                 <div class="subject-item">
                     <span style="font-size: 25px;">计算机网络</span>
-                    <el-button class="exam-button" type="testStateColor(0)" style="font-size: 16px;"
+                    <el-button class="exam-button" :class="buttonClass(0)" style="font-size: 16px;"
                         @click="handleClick(0)">{{ testState[0] }}</el-button>
                 </div>
                 <div class="subject-item">
                     <span style="font-size: 25px;">计算机操作系统</span>
-                    <el-button class="exam-button" type="testStateColor(1)" style="font-size: 16px;"
+                    <el-button class="exam-button" :class="buttonClass(1)" style="font-size: 16px;"
                         @click="handleClick(1)">{{ testState[1] }}</el-button>
                 </div>
                 <div class="subject-item">
                     <span style="font-size: 25px;">计算机组成原理</span>
-                    <el-button class="exam-button" type="testStateColor(2)" style="font-size: 16px;"
+                    <el-button class="exam-button" :class="buttonClass(2)" style="font-size: 16px;"
                         @click="handleClick(2)">{{ testState[2] }}</el-button>
                 </div>
                 <div class="subject-item">
                     <span style="font-size: 25px;">数据结构</span>
-                    <el-button class="exam-button" type="testStateColor(3)" style="font-size: 16px;"
+                    <el-button class="exam-button" :class="buttonClass(3)" style="font-size: 16px;"
                         @click="handleClick(3)">{{ testState[3] }}</el-button>
                 </div>
             </div>
@@ -60,7 +60,7 @@ export default {
 
         onMounted(() => {
             console.log(store)
-            axios.get(store.state.path+'student/exams', {
+            axios.get(store.state.path + 'student/exams', {
                 params: {
                     studentId: store.state.userName
                 }
@@ -82,13 +82,16 @@ export default {
 
             })
         })
-        const testStateColor = (index) => {
-            if (testState.value[index] === '参加考试') {
-                console.log('success  '+index)
-                return 'success'
-            } else {
-                console.log('danger  '+index)
-                return 'danger'
+
+        const buttonClass = (index) => {
+            if(!isNaN(testState.value[index]) && testState.value[index] >= 60){
+                return  'success-button'
+            }
+            else if(!isNaN(testState.value[index]) && testState.value[index] < 60){
+                return  'danger-button'
+            }
+            else{
+                return 'primary-button'
             }
         }
         const exitQuit = () => {
@@ -107,7 +110,7 @@ export default {
             }
         }
 
-        return { studentId, studentName, exitQuit, store, testState, handleClick, testStateColor }
+        return { studentId, studentName, exitQuit, store, testState, handleClick, buttonClass }
     },
 }
 
@@ -115,6 +118,18 @@ export default {
 
 
 <style scoped>
+
+.success-button {
+    background-color: #67C23A !important;
+}
+
+.primary-button {
+    background-color: #409EFF !important;
+}
+
+.danger-button {
+    background-color: #FC1610 !important;
+}
 p {
     /*取消p标签的默认样式*/
     margin: 0;
