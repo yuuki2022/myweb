@@ -10,8 +10,8 @@
                 <br>
                 <el-button type="primary" @click="$root.Togradelookup" size="large" id="lookgrade">查询成绩</el-button>
                 <br>
-                <el-button type="primary" size="large" id="organizeStudent">管理学生</el-button>
-                <br>
+                <!-- <el-button type="primary" size="large" id="organizeStudent">管理学生</el-button>
+                <br> -->
                 <!-- <button class="purple">检查结果</button> -->
             </div>
         </el-aside>
