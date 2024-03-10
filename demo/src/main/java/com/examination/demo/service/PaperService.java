@@ -41,6 +41,9 @@ public interface PaperService {
 
     public static Paper toModel(PaperDO paperDO){
         Paper paper = new Paper();
+        if(paperDO == null){
+            return null;
+        }
         paper.setPaperId(paperDO.getPaperId());
         paper.setCourseId(paperDO.getCourseId());
         paper.setStudentId(paperDO.getStudentId());

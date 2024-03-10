@@ -277,6 +277,10 @@ export default {
                     ds: this.checkedCourses.includes('数据结构') ? 4 : 0,
                 }
             }).then(res => {
+                if(res.data['code'] === '400'){
+                    ElMessage.error(res.data['message'])
+                    return 
+                }
                 console.log("res", res)
                 this.getStudentsData()
                 this.upDateVisible = false

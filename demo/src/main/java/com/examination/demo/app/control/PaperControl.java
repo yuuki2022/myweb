@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.catalina.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -156,8 +157,9 @@ public class PaperControl {
     @ResponseBody
     @CrossOrigin
     public String updatePaper(@RequestParam String studentId, @RequestParam Integer net, @RequestParam Integer os,
-            @RequestParam Integer compo, @RequestParam Integer ds) {
+            @RequestParam Integer compo, @RequestParam Integer ds) throws JsonProcessingException {
         List<Integer> courseList = new ArrayList<>();
+        ObjectMapper mapper = new ObjectMapper();
         if (net != 0) {
             courseList.add(net);
         }
@@ -172,6 +174,13 @@ public class PaperControl {
         }
 
         for (Integer courseId : courseList) {
+            Paper paper = paperService.getPaperByStudentIdAndCourseId(studentId, courseId);
+            if (paper == null) {
+                Result<String> result = new Result<>();
+                result.setCode("400");
+                result.setMessage("不能修改未参加考试的成绩");
+                return mapper.writeValueAsString(result);
+            }
             Integer paperId = paperService.getPaperByStudentIdAndCourseId(studentId, courseId).getPaperId();
             paperService.deletePaper(paperId);
         }
