@@ -204,17 +204,8 @@ export default {
         handleCurrentChange(val) {
             this.currentPage = val;
         },
-        handleSearch(value) {
-            ///////////////删除value的前后空格
-        
-            this.searchText = value;
-            if(this.searchText === ''){
-                this.getStudentsData()
-            }
-            else{
-                this.examers = this.examers.filter(item => item.name.includes(this.searchText) || item.id.includes(this.searchText))   
-            }
-        
+        handleSearch() {
+            console.log(this.searchText);
         },
         getStudentsData() {
             axios.get(`${this.store.state.path}students`, {
