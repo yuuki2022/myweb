@@ -23,7 +23,7 @@
                 <div class="score">
 
                     <div style="display: flex; align-items: center;">
-                        <el-input v-model="searchText" placeholder="搜索" @input="handleSearch" size="mini"></el-input>
+                        <el-input v-model="searchText" placeholder="搜索" @keyup.enter="handleSearch"  size="mini"></el-input>
                         <el-button type="primary" style="width: fit-content;" @click="formVisible = true"
                             size="mini">插入一条学生数据</el-button>
                     </div>
@@ -205,7 +205,16 @@ export default {
             this.currentPage = val;
         },
         handleSearch(value) {
+            ///////////////删除value的前后空格
+        
             this.searchText = value;
+            if(this.searchText === ''){
+                this.getStudentsData()
+            }
+            else{
+                this.examers = this.examers.filter(item => item.name.includes(this.searchText) || item.id.includes(this.searchText))   
+            }
+        
         },
         getStudentsData() {
             axios.get(`${this.store.state.path}students`, {
