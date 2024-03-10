@@ -145,6 +145,7 @@ public class StudentControl {
     @ResponseBody
     public String postMethodName(@RequestBody String changInformation) {
         System.out.println(changInformation);
+        
         // TODO: process POST request
         ///////////// changeInformation是一个json对象，转为map
         ObjectMapper mapper = new ObjectMapper();

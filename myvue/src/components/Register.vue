@@ -41,7 +41,7 @@ export default {
       axios.post(`${this.store.state.path}changePassword`, {
         adminName: this.account,
         oldPassword: CryptoJS.SHA256(this.oldPassword).toString(),
-        newPassword: CryptoJS.SHA256(this.oldPassword).toString()
+        newPassword: CryptoJS.SHA256(this.newPassword).toString()
       })
         .then(res => {
           console.log(res)
